@@ -13,6 +13,8 @@ namespace Wtiau.Health.Web.Models.ViewModels
         public string Form_Name { get; set; }
         [Display(Name = "تعداد سوال")]
         public int Form_QuestionCount { get; set; }
+        [Display(Name = "تعداد سوال")]
+        public int Form_StepCount { get; set; }
         [Display(Name = "تاریخ ایجاد")]
         public string Form_CreateDate { get; set; }
 

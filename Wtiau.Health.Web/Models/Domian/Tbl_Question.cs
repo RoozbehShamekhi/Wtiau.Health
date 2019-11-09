@@ -22,11 +22,12 @@ namespace Wtiau.Health.Web.Models.Domian
     
         public int Question_ID { get; set; }
         public System.Guid Question_Guid { get; set; }
-        public int Question_StepID { get; set; }
+        public int Question_FSID { get; set; }
         public string Question_Titel { get; set; }
         public int Question_TypeCodeID { get; set; }
     
         public virtual Tbl_Code Tbl_Code { get; set; }
+        public virtual Tbl_FormStep Tbl_FormStep { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Response> Tbl_Response { get; set; }
     }

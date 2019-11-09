@@ -26,11 +26,28 @@ namespace Wtiau.Health.Web.Controllers
                 Form_Name = x.Form_Name,
                 Form_QuestionCount = x.Form_TotalQuestion,
                 Form_CreateDate = x.Form_CreateDate.ToString(),
-
-
+                Form_StepCount = x.Form_StepCount
             }).ToList();
 
             return View(_student);
         }
+
+        [HttpGet]
+        public ActionResult CreateForm()
+        {
+
+
+            return PartialView();
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateForm(Model_FormCreate model)
+        {
+
+            return View();
+        }
+
+
     }
 }

@@ -1323,6 +1323,7 @@
     <Compile Include="Models\Repository\Rep_User.cs" />
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
+    <Compile Include="Models\ViewModels\Model_FormCreate.cs" />
     <Compile Include="Models\ViewModels\Model_FormList.cs" />
     <Compile Include="Models\ViewModels\Model_Login.cs" />
     <Compile Include="Models\ViewModels\Model_PortalLogin.cs" />
@@ -1367,6 +1368,7 @@
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Form\Index.cshtml" />
+    <Content Include="Views\Form\CreateForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,54 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_FormCreate
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="modal-main">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Course, htmlAttributes: new { @class = "control-label" })
+
+            <div class="input-group">
+                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.Course, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Course, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Form_Display, htmlAttributes: new { @class = "control-label" })
+
+            <div class="input-group">
+                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.Form_Display, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Form_Display, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Form_Name, htmlAttributes: new { @class = "control-label" })
+
+            <div class="input-group">
+                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.Form_Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Form_Name, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="">
+        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
+        <button class="btn btn-success modal-btn-Dual pull-right " type="submit" name="btn-Delete">تایید</button>
+    </div>
+}
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

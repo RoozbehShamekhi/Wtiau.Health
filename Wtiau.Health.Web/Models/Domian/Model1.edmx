@@ -140,7 +140,7 @@
           </Key>
           <Property Name="Question_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Question_Guid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Question_StepID" Type="int" Nullable="false" />
+          <Property Name="Question_FSID" Type="int" Nullable="false" />
           <Property Name="Question_Titel" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Question_TypeCodeID" Type="int" Nullable="false" />
         </EntityType>
@@ -341,6 +341,18 @@
             </Principal>
             <Dependent Role="Tbl_Question">
               <PropertyRef Name="Question_TypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_FormStep">
+          <End Role="Tbl_FormStep" Type="Self.Tbl_FormStep" Multiplicity="1" />
+          <End Role="Tbl_Question" Type="Self.Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_FormStep">
+              <PropertyRef Name="FS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_FSID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -551,6 +563,10 @@
             <End Role="Tbl_Code" EntitySet="Tbl_Code" />
             <End Role="Tbl_Question" EntitySet="Tbl_Question" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_FormStep" Association="Self.FK_Tbl_Question_Tbl_FormStep">
+            <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tbl_Response_Tbl_Question" Association="Self.FK_Tbl_Response_Tbl_Question">
             <End Role="Tbl_Question" EntitySet="Tbl_Question" />
             <End Role="Tbl_Response" EntitySet="Tbl_Response" />
@@ -699,6 +715,10 @@
             <End Role="Tbl_From" EntitySet="Tbl_From" />
             <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_FormStep" Association="HealthModel.FK_Tbl_Question_Tbl_FormStep">
+            <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tbl_From_Tbl_Login" Association="HealthModel.FK_Tbl_From_Tbl_Login">
             <End Role="Tbl_Login" EntitySet="Tbl_Login" />
             <End Role="Tbl_From" EntitySet="Tbl_From" />
@@ -823,6 +843,7 @@
           <Property Name="FS_Display" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FS_FormID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tbl_From" Relationship="HealthModel.FK_Tbl_FormStep_Tbl_From" FromRole="Tbl_FormStep" ToRole="Tbl_From" />
+          <NavigationProperty Name="Tbl_Question" Relationship="HealthModel.FK_Tbl_Question_Tbl_FormStep" FromRole="Tbl_FormStep" ToRole="Tbl_Question" />
         </EntityType>
         <EntityType Name="Tbl_From">
           <Key>
@@ -879,10 +900,11 @@
           </Key>
           <Property Name="Question_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Question_Guid" Type="Guid" Nullable="false" />
-          <Property Name="Question_StepID" Type="Int32" Nullable="false" />
+          <Property Name="Question_FSID" Type="Int32" Nullable="false" />
           <Property Name="Question_Titel" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Question_TypeCodeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tbl_Code" Relationship="HealthModel.FK_Tbl_Question_Tbl_Code" FromRole="Tbl_Question" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_FormStep" Relationship="HealthModel.FK_Tbl_Question_Tbl_FormStep" FromRole="Tbl_Question" ToRole="Tbl_FormStep" />
           <NavigationProperty Name="Tbl_Response" Relationship="HealthModel.FK_Tbl_Response_Tbl_Question" FromRole="Tbl_Question" ToRole="Tbl_Response" />
         </EntityType>
         <EntityType Name="Tbl_Response">
@@ -1197,6 +1219,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_Question_Tbl_FormStep">
+          <End Type="HealthModel.Tbl_FormStep" Role="Tbl_FormStep" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Question" Role="Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_FormStep">
+              <PropertyRef Name="FS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_FSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tbl_From_Tbl_Login">
           <End Type="HealthModel.Tbl_Login" Role="Tbl_Login" Multiplicity="1" />
           <End Type="HealthModel.Tbl_From" Role="Tbl_From" Multiplicity="*" />
@@ -1397,7 +1431,7 @@
               <MappingFragment StoreEntitySet="Tbl_Question">
                 <ScalarProperty Name="Question_TypeCodeID" ColumnName="Question_TypeCodeID" />
                 <ScalarProperty Name="Question_Titel" ColumnName="Question_Titel" />
-                <ScalarProperty Name="Question_StepID" ColumnName="Question_StepID" />
+                <ScalarProperty Name="Question_FSID" ColumnName="Question_FSID" />
                 <ScalarProperty Name="Question_Guid" ColumnName="Question_Guid" />
                 <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
               </MappingFragment>
