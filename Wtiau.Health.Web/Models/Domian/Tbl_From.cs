@@ -32,6 +32,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.DateTime Form_CreateDate { get; set; }
         public System.DateTime Form_Modify { get; set; }
         public int Form_StepCount { get; set; }
+        public bool Form_IsDelete { get; set; }
     
         public virtual Tbl_Course Tbl_Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

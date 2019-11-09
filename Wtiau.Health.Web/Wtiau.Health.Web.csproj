@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -44,15 +45,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -113,6 +118,7 @@
     <Content Include="Content\Css\MyCss\Dashboard.css" />
     <Content Include="Content\Css\MyCss\defaults.css" />
     <Content Include="Content\Css\MyCss\Login.css" />
+    <Content Include="Content\Css\MyCss\Portal.css" />
     <Content Include="Content\Css\MyCss\styles.css" />
     <Content Include="Content\Fonts\font awesome\css\fontawesome-all.min.css" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.svg" />
@@ -121,6 +127,8 @@
     <Content Include="Content\Fonts\font awesome\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\abstract-user-flat-3.png" />
+    <Content Include="Content\Images\bg.jpg" />
+    <Content Include="Content\Images\logo-uni.png" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap-theme.css" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap-theme.min.css" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap.css" />
@@ -137,12 +145,7 @@
     <Content Include="Content\Plugins\MdBootstrapPersianDateTimePicker\jquery.Bootstrap-PersianDateTimePicker.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.carousel.min.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.theme.default.min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.eot" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.ttf" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.woff" />
@@ -187,6 +190,7 @@
     <Content Include="Models\Domian\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Data\Excel\شماره دانشجویی و کد ملی بدون مقطع.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -213,7 +217,6 @@
     <Content Include="Scripts\MyScripts\CKEditor_Config.js" />
     <Content Include="Scripts\MyScripts\DataTabels_Config.js" />
     <Content Include="Scripts\MyScripts\FilePond_Config.js" />
-    <Content Include="Scripts\MyScripts\main.js" />
     <Content Include="Scripts\MyScripts\Select2_Config.js" />
     <Content Include="Scripts\MyScripts\toastr_config.js" />
     <Content Include="Scripts\Plugins\Boostrap3\bootstrap.js" />
@@ -1233,8 +1236,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Dashboard.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PortalController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1262,7 +1270,7 @@
     <Compile Include="Models\Domian\Tbl_Code.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Domian\Tbl_CodeGroop.cs">
+    <Compile Include="Models\Domian\Tbl_CodeGroup.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_College.cs">
@@ -1308,10 +1316,18 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\Enum.cs" />
+    <Compile Include="Models\Plugins\Microsoft_Excel.cs" />
     <Compile Include="Models\Plugins\PersianDateExtensionMethods.cs" />
     <Compile Include="Models\Repository\Rep_CodeGroup.cs" />
+    <Compile Include="Models\Repository\Rep_Student.cs" />
     <Compile Include="Models\Repository\Rep_User.cs" />
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
+    <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
+    <Compile Include="Models\ViewModels\Model_FormList.cs" />
+    <Compile Include="Models\ViewModels\Model_Login.cs" />
+    <Compile Include="Models\ViewModels\Model_PortalLogin.cs" />
+    <Compile Include="Models\ViewModels\Model_Register.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1341,6 +1357,16 @@
     <Content Include="Views\Shared\_Modal.cshtml" />
     <Content Include="Views\Shared\_Nav.cshtml" />
     <Content Include="Views\Shared\_Toster.cshtml" />
+    <Content Include="Views\Shared\_Dashboard.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Setting\Index.cshtml" />
+    <Content Include="Views\Account\PortalLogin.cshtml" />
+    <Content Include="Views\Shared\_Portal.cshtml" />
+    <Content Include="Views\Portal\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1349,12 +1375,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Pages\" />
     <Folder Include="Content\Reports\" />
     <Folder Include="Models\Attribute\" />
     <Folder Include="Models\MetaData\" />
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="Scripts\Plugins\ckfinder\bin\Debug\" />
     <Folder Include="Scripts\Plugins\ckfinder\bin\Release\" />
     <Folder Include="Scripts\Plugins\ckfinder\plugins\fileeditor\bin\Debug\" />
@@ -1398,7 +1422,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

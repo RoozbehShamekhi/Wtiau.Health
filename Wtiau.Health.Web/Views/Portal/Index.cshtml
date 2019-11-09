@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Portal.cshtml";
+}
+
+
+<div class="panel panel-default" style="margin: 0 auto;max-width:1000px;">
+    <div class="panel-body">
+
+
+        <div class="start-content" style="text-align:justify; line-height: 25px;">
+            <p>
+                دانشجوی گرامی
+            </p>
+            <p>
+                حضور شما را در دانشگاه آزاد اسلامی واحد تهران غرب ، گرامی می داریم .
+            </p>
+            <p>
+                دانشجوی گرامی، فرم های حاضر به منظور تشکیل پرونده سلامت شما تشکیل شده است. با توجه به اینکه اطلاعاتی که شما در این پرسشنامه وارد می نمایید معیار اولیه برای تعیین سلامت جسمی و روانی شما می باشد، لذا موارد زیر را در نظر داشته ‌باشید :
+            </p>
+            <p>
+                1. تمام سوالات سامانه به نحوی طراحی شده اند که قابلیت راستی آزمایی در پاسخ های ارائه شده از سوی شما وجود دارد لذا با دقت نظر در این خصوص اقدام نمایید.
+            </p>
+            <p>
+                2. پس از تکمیل این فرم و به منظور بررسی های پزشکی، لازم است هر دانشجو زمانی را بسته به محل حضور پزشکان انتخاب کرده و در روز و ساعت مشخص شده، با همراه داشتن پرینت پرسشنامه که در پایان به شما ارائه می گردد، به آن محل مراجعه نماید.
+            </p>
+
+        </div><!-- .start-content -->
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-6 panel setting-col" style="line-height:40px;">
+                <div class="pull-left setting-col-titel">
+                    <i class="glyphicon glyphicon-list-alt setting-col-titel-icon"></i>
+                    اطلاعات فردی
+                </div>
+
+                <div class="pull-right ">
+                    <a class="btn btn-primary btn-sm glyphicon glyphicon-print " href="@Url.Action("LibraryList","Setting")"></a>
+                    <a class="btn btn-success btn-sm glyphicon glyphicon-ok" href="@Url.Action("LibraryList","Setting")"></a>
+                </div>
+            </div>
+
+            <div class="col-md-6 panel setting-col" style="line-height:40px;">
+                <div class="pull-left setting-col-titel">
+                    <i class="glyphicon glyphicon-list-alt setting-col-titel-icon"></i>
+                    فرم شناسنامه سلامت
+                </div>
+
+                <div class="pull-right ">
+                    <a class="btn btn-primary btn-sm glyphicon glyphicon-print " href="@Url.Action("LibraryList","Setting")"></a>
+                    <a class="btn btn-success btn-sm glyphicon glyphicon-ok" href="@Url.Action("LibraryList","Setting")"></a>
+                </div>
+            </div>
+
+            <div class="col-md-6 panel setting-col" style="line-height:40px;">
+                <div class="pull-left setting-col-titel">
+                    <i class="glyphicon glyphicon-list-alt setting-col-titel-icon"></i>
+                    <span>پرسشنامه سلامت عمومی</span>
+                </div>
+
+                <div class="pull-right ">
+                    <a class="btn btn-primary btn-sm glyphicon glyphicon-print " href="@Url.Action("LibraryList","Setting")"></a>
+                    <a class="btn btn-success btn-sm glyphicon glyphicon-ok" href="@Url.Action("LibraryList","Setting")"></a>
+                </div>
+            </div>
+
+            <div class="col-md-6 panel setting-col" style="line-height:40px;">
+                <div class="pull-left setting-col-titel">
+                    <i class=" glyphicon glyphicon-calendar  setting-col-titel-icon"></i>
+                    نوبت گیری
+                </div>
+
+                <div class="pull-right ">
+                    <a class="btn btn-primary btn-sm glyphicon glyphicon-print " href="@Url.Action("LibraryList","Setting")"></a>
+                    <a class="btn btn-success btn-sm glyphicon glyphicon-ok" href="@Url.Action("LibraryList","Setting")"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

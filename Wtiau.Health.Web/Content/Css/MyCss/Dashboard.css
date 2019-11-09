@@ -291,38 +291,48 @@ body {
 
 
 /*********************************************** Form **********************************************/
-.esl-btn{
-    border-radius:0px;
+.wtiau-btn {
+    border-radius: 0px;
 }
-.esl-btn-success {
+.wtiau-btn-success {
     background: #3ecf8e;
     color: #fff;
 }
-    .esl-btn-success:hover {
+    .wtiau-btn-success:hover {
         background: #35996c;
         color: #fff;
     }
-.esl-btn-s {
+
+.wtiau-btn-wtiau {
+    background: #3ecf8e;
+    color: #fff;
+}
+
+    .wtiau-btn-wtiau:hover {
+        background: #35996c;
+        color: #fff;
+    }
+.wtiau-btn-s {
     padding: 0px;
     font-size: 14px;
     font-weight: bold;
 }
-.esl-btn-sm {
+.wtiau-btn-sm {
     padding: 5px;
     font-size: 14px;
     font-weight: bold;
 }
-.esl-btn-L {
+.wtiau-btn-L {
     padding: 10px;
     font-size: 14px;
     font-weight: bold;
 }
-.esl-btn-LX {
-    padding: 15px;
+.wtiau-btn-LX {
+    wtiaupadding: 15px;
     font-size: 14px;
     font-weight: bold;
 }
-.esl-btn-LXX {
+.wtiau-btn-LXX {
     padding: 20px;
     font-size: 14px;
     font-weight: bold;
@@ -330,100 +340,53 @@ body {
 
 /****************************************** Login/Register *****************************************/
 .login {
-    color:#3ecf8e;
+    color: whitesmoke;
 }
 .Login-img {
     padding:15px;
 }
 
-.Login-btn-group {
-    list-style: none;
-    padding: 0;
-}
-
-    .Login-btn-group :after {
-        content: "";
-        display: inline;
-        clear: both;
-    }
 
 
-    .Login-btn-group li a {
-        display: block;
-        text-decoration: none;
-        padding: 10px;
-        background: rgba(160, 179, 176, .25);
-        color: #3ecf8e;
-        font-size: 14px;
-        font-weight:bold;
-        float: left;
-        width: 50%;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.5s ease;
-    }
-
-        .Login-btn-group li a:hover {
-            background: #35996c;
-            color: #fff;
-        }
-
-    .Login-btn-group .active a {
-        background: #3ecf8e;
-        color: #fff;
-    }
-
-.Login-content > div:last-child {
-    display: none;
-}
-
-
-    .login-items > .form-group > input {
-        font-size: 14px;
-        display: block;
-        width: 100%;
-        padding: 5px 10px;
-        background: none;
-        background-image: none;
-        border: 1px solid #a0b3b0;
-        color: #fff;
-        border-radius: 0;
-        transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .login-items > .form-group > input {
-        outline: 0;
-        border-color: #1ab188;
-    }
-
-.Login-btn-gender label {
-    display: block;
-    text-decoration: none;
-    padding: 10px;
-    background: rgba(160, 179, 176, .25);
-    color: #3ecf8e;
+.login-items > .form-group > input {
     font-size: 14px;
-    font-weight: bold;
-    float: left;
-    width: 50%;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.5s ease;
-    border-radius: 0%;
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    background: none;
+    background-image: none;
+    border: 1px solid #8285e9;
+    color: #fff;
+    border-radius: 0;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-    .Login-btn-gender label:hover {
-        background: #35996c;
-        color: #fff;
-    }
+.login-items > .form-group > input {
+    outline: 0;
+    border-color: #8285e9;
+}
 
-    .Login-btn-gender label.active {
-        background: #3ecf8e;
-        color: #fff;
-    }
+
+/************************************************ Login ***********************************************/
+.form-login {
+    margin-top: 15vh;
+    margin-bottom: 10vh;
+    max-width: 500px;
+}
+
+.login-logo {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.login-button {
+    margin-bottom: 20px;
+}
+
 /*********************************************** Setting **********************************************/
 .setting-panel {
-    min-height: 495px;
+    min-height: 400px;
 }
 
 .setting-panel-btn {

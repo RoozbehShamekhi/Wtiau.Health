@@ -26,10 +26,11 @@ namespace Wtiau.Health.Web.Models.Domian
         public string Login_Email { get; set; }
         public string Login_Name { get; set; }
         public string Login_Family { get; set; }
-        public string Login_Hash { get; set; }
-        public string Login_Salt { get; set; }
+        public string Login_PasswordHash { get; set; }
+        public string Login_PasswordSalt { get; set; }
         public System.DateTime Login_CreateDate { get; set; }
         public System.DateTime Login_Modify { get; set; }
+        public string Login_Mobile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_From> Tbl_From { get; set; }

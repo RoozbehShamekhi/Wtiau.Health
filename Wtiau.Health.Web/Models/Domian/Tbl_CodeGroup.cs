@@ -12,10 +12,10 @@ namespace Wtiau.Health.Web.Models.Domian
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_CodeGroop
+    public partial class Tbl_CodeGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_CodeGroop()
+        public Tbl_CodeGroup()
         {
             this.Tbl_Code = new HashSet<Tbl_Code>();
         }

@@ -18,7 +18,12 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.Guid Student_Guid { get; set; }
         public string Student_Code { get; set; }
         public string Student_NationalCode { get; set; }
-        public int Student_SIID { get; set; }
+        public Nullable<int> Student_SIID { get; set; }
+        public bool Student_Form1 { get; set; }
+        public bool Student_Form2 { get; set; }
+        public bool Student_TakeTurn { get; set; }
+        public bool Student_Info { get; set; }
+        public bool Student_IsDelete { get; set; }
     
         public virtual Tbl_StudentInfo Tbl_StudentInfo { get; set; }
     }

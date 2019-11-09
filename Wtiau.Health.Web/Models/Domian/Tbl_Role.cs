@@ -23,7 +23,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public int Role_ID { get; set; }
         public System.Guid Role_Guid { get; set; }
         public string Role_Name { get; set; }
-        public string Role_Diplay { get; set; }
+        public string Role_Display { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Login> Tbl_Login { get; set; }

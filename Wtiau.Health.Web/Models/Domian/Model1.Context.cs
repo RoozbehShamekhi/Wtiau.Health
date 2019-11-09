@@ -28,7 +28,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tbl_Branch> Tbl_Branch { get; set; }
         public virtual DbSet<Tbl_Code> Tbl_Code { get; set; }
-        public virtual DbSet<Tbl_CodeGroop> Tbl_CodeGroop { get; set; }
+        public virtual DbSet<Tbl_CodeGroup> Tbl_CodeGroup { get; set; }
         public virtual DbSet<Tbl_College> Tbl_College { get; set; }
         public virtual DbSet<Tbl_Course> Tbl_Course { get; set; }
         public virtual DbSet<Tbl_FormAnswer> Tbl_FormAnswer { get; set; }

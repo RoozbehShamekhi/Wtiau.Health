@@ -9,10 +9,10 @@ namespace Wtiau.Health.Web.Models.Repository
 {
     public static class Rep_UserRole
     {
-        //private static readonly ESLEntities db = new ESLEntities();
-        //public static string Get_RoleNameWithID(int id)
-        //{
-        //    return db.Tbl_Role.Where(a => a.Role_ID == id).SingleOrDefault().Role_Name;
-        //}
+        private static readonly HealthEntities db = new HealthEntities();
+        public static string Get_RoleNameWithID(int id)
+        {
+            return db.Tbl_Role.Where(a => a.Role_ID == id).SingleOrDefault().Role_Name;
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public int Response_Order { get; set; }
         public int ResponseTitel { get; set; }
         public int Response_QuestionID { get; set; }
+        public int Response_Hint { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_FormAnswerResponse> Tbl_FormAnswerResponse { get; set; }
