@@ -24,7 +24,6 @@ namespace Wtiau.Health.Web.Models.Domian
         public int Form_ID { get; set; }
         public System.Guid Form_Guid { get; set; }
         public string Form_Name { get; set; }
-        public int Form_CreatorID { get; set; }
         public int Form_CourseID { get; set; }
         public string Form_Display { get; set; }
         public int Form_TotalQuestion { get; set; }
@@ -39,6 +38,5 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual ICollection<Tbl_FormAnswer> Tbl_FormAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_FormStep> Tbl_FormStep { get; set; }
-        public virtual Tbl_Login Tbl_Login { get; set; }
     }
 }

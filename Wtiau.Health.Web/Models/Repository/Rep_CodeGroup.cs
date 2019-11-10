@@ -61,6 +61,10 @@ namespace Wtiau.Health.Web.Models.Repository
         {
             return db.Tbl_Code.Where(x => x.Code_Guid.Equals(guid)).SingleOrDefault().Code_Name;
         }
+        public static string Get_CodeNameWithID(int id)
+        {
+            return db.Tbl_Code.Where(x => x.Code_ID == id).SingleOrDefault().Code_Name;
+        }
 
         public static Guid Get_CodeGUIDWithName(string name)
         {

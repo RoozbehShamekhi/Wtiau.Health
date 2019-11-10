@@ -1241,6 +1241,7 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1322,11 +1323,14 @@
     <Compile Include="Models\Repository\Rep_Student.cs" />
     <Compile Include="Models\Repository\Rep_User.cs" />
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
+    <Compile Include="Models\ViewModels\Modal_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
     <Compile Include="Models\ViewModels\Model_FormCreate.cs" />
     <Compile Include="Models\ViewModels\Model_FormList.cs" />
+    <Compile Include="Models\ViewModels\Model_FormStepAdd.cs" />
     <Compile Include="Models\ViewModels\Model_Login.cs" />
     <Compile Include="Models\ViewModels\Model_PortalLogin.cs" />
+    <Compile Include="Models\ViewModels\Model_QusetionList.cs" />
     <Compile Include="Models\ViewModels\Model_Register.cs" />
     <Compile Include="Models\ViewModels\Model_StudentList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1369,6 +1373,9 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Form\Index.cshtml" />
     <Content Include="Views\Form\CreateForm.cshtml" />
+    <Content Include="Views\Form\AddStep.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\Question\QuestionAdd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

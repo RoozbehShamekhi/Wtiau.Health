@@ -14,12 +14,6 @@ namespace Wtiau.Health.Web.Models.Domian
     
     public partial class Tbl_Login
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Login()
-        {
-            this.Tbl_From = new HashSet<Tbl_From>();
-        }
-    
         public int Login_ID { get; set; }
         public System.Guid Login_Guid { get; set; }
         public int Login_RoleID { get; set; }
@@ -32,8 +26,6 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.DateTime Login_Modify { get; set; }
         public string Login_Mobile { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_From> Tbl_From { get; set; }
         public virtual Tbl_Role Tbl_Role { get; set; }
     }
 }

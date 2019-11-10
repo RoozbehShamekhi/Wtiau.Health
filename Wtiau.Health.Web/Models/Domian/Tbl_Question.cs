@@ -25,6 +25,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public int Question_FSID { get; set; }
         public string Question_Titel { get; set; }
         public int Question_TypeCodeID { get; set; }
+        public bool Question_Lie { get; set; }
     
         public virtual Tbl_Code Tbl_Code { get; set; }
         public virtual Tbl_FormStep Tbl_FormStep { get; set; }

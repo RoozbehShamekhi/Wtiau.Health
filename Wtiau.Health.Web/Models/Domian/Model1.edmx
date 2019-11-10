@@ -99,7 +99,6 @@
           <Property Name="Form_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Form_Guid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Form_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Form_CreatorID" Type="int" Nullable="false" />
           <Property Name="Form_CourseID" Type="int" Nullable="false" />
           <Property Name="Form_Display" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Form_TotalQuestion" Type="int" Nullable="false" />
@@ -143,6 +142,7 @@
           <Property Name="Question_FSID" Type="int" Nullable="false" />
           <Property Name="Question_Titel" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Question_TypeCodeID" Type="int" Nullable="false" />
+          <Property Name="Question_Lie" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Response">
           <Key>
@@ -154,6 +154,7 @@
           <Property Name="ResponseTitel" Type="int" Nullable="false" />
           <Property Name="Response_QuestionID" Type="int" Nullable="false" />
           <Property Name="Response_Hint" Type="int" Nullable="false" />
+          <Property Name="Response_IsTrue" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Role">
           <Key>
@@ -302,18 +303,6 @@
           <ReferentialConstraint>
             <Principal Role="Tbl_Course">
               <PropertyRef Name="Course_ID" />
-            </Principal>
-            <Dependent Role="Tbl_From">
-              <PropertyRef Name="Form_CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_From_Tbl_Login">
-          <End Role="Tbl_Login" Type="Self.Tbl_Login" Multiplicity="1" />
-          <End Role="Tbl_From" Type="Self.Tbl_From" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Login">
-              <PropertyRef Name="Login_ID" />
             </Principal>
             <Dependent Role="Tbl_From">
               <PropertyRef Name="Form_CourseID" />
@@ -551,10 +540,6 @@
             <End Role="Tbl_Course" EntitySet="Tbl_Course" />
             <End Role="Tbl_From" EntitySet="Tbl_From" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tbl_From_Tbl_Login" Association="Self.FK_Tbl_From_Tbl_Login">
-            <End Role="Tbl_Login" EntitySet="Tbl_Login" />
-            <End Role="Tbl_From" EntitySet="Tbl_From" />
-          </AssociationSet>
           <AssociationSet Name="FK_Tbl_Login_Tbl_Role" Association="Self.FK_Tbl_Login_Tbl_Role">
             <End Role="Tbl_Role" EntitySet="Tbl_Role" />
             <End Role="Tbl_Login" EntitySet="Tbl_Login" />
@@ -719,10 +704,6 @@
             <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
             <End Role="Tbl_Question" EntitySet="Tbl_Question" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tbl_From_Tbl_Login" Association="HealthModel.FK_Tbl_From_Tbl_Login">
-            <End Role="Tbl_Login" EntitySet="Tbl_Login" />
-            <End Role="Tbl_From" EntitySet="Tbl_From" />
-          </AssociationSet>
           <AssociationSet Name="FK_Tbl_Login_Tbl_Role" Association="HealthModel.FK_Tbl_Login_Tbl_Role">
             <End Role="Tbl_Role" EntitySet="Tbl_Role" />
             <End Role="Tbl_Login" EntitySet="Tbl_Login" />
@@ -852,7 +833,6 @@
           <Property Name="Form_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Form_Guid" Type="Guid" Nullable="false" />
           <Property Name="Form_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Form_CreatorID" Type="Int32" Nullable="false" />
           <Property Name="Form_CourseID" Type="Int32" Nullable="false" />
           <Property Name="Form_Display" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Form_TotalQuestion" Type="Int32" Nullable="false" />
@@ -864,7 +844,6 @@
           <NavigationProperty Name="Tbl_Course" Relationship="HealthModel.FK_Tbl_From_Tbl_Course" FromRole="Tbl_From" ToRole="Tbl_Course" />
           <NavigationProperty Name="Tbl_FormAnswer" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_From" FromRole="Tbl_From" ToRole="Tbl_FormAnswer" />
           <NavigationProperty Name="Tbl_FormStep" Relationship="HealthModel.FK_Tbl_FormStep_Tbl_From" FromRole="Tbl_From" ToRole="Tbl_FormStep" />
-          <NavigationProperty Name="Tbl_Login" Relationship="HealthModel.FK_Tbl_From_Tbl_Login" FromRole="Tbl_From" ToRole="Tbl_Login" />
         </EntityType>
         <EntityType Name="Tbl_Group">
           <Key>
@@ -891,7 +870,6 @@
           <Property Name="Login_CreateDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Login_Modify" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Login_Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tbl_From" Relationship="HealthModel.FK_Tbl_From_Tbl_Login" FromRole="Tbl_Login" ToRole="Tbl_From" />
           <NavigationProperty Name="Tbl_Role" Relationship="HealthModel.FK_Tbl_Login_Tbl_Role" FromRole="Tbl_Login" ToRole="Tbl_Role" />
         </EntityType>
         <EntityType Name="Tbl_Question">
@@ -903,6 +881,7 @@
           <Property Name="Question_FSID" Type="Int32" Nullable="false" />
           <Property Name="Question_Titel" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Question_TypeCodeID" Type="Int32" Nullable="false" />
+          <Property Name="Question_Lie" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_Code" Relationship="HealthModel.FK_Tbl_Question_Tbl_Code" FromRole="Tbl_Question" ToRole="Tbl_Code" />
           <NavigationProperty Name="Tbl_FormStep" Relationship="HealthModel.FK_Tbl_Question_Tbl_FormStep" FromRole="Tbl_Question" ToRole="Tbl_FormStep" />
           <NavigationProperty Name="Tbl_Response" Relationship="HealthModel.FK_Tbl_Response_Tbl_Question" FromRole="Tbl_Question" ToRole="Tbl_Response" />
@@ -917,6 +896,7 @@
           <Property Name="ResponseTitel" Type="Int32" Nullable="false" />
           <Property Name="Response_QuestionID" Type="Int32" Nullable="false" />
           <Property Name="Response_Hint" Type="Int32" Nullable="false" />
+          <Property Name="Response_IsTrue" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_FormAnswerResponse" Relationship="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_Response" FromRole="Tbl_Response" ToRole="Tbl_FormAnswerResponse" />
           <NavigationProperty Name="Tbl_Question" Relationship="HealthModel.FK_Tbl_Response_Tbl_Question" FromRole="Tbl_Response" ToRole="Tbl_Question" />
         </EntityType>
@@ -1231,18 +1211,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tbl_From_Tbl_Login">
-          <End Type="HealthModel.Tbl_Login" Role="Tbl_Login" Multiplicity="1" />
-          <End Type="HealthModel.Tbl_From" Role="Tbl_From" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Login">
-              <PropertyRef Name="Login_ID" />
-            </Principal>
-            <Dependent Role="Tbl_From">
-              <PropertyRef Name="Form_CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Tbl_Login_Tbl_Role">
           <End Type="HealthModel.Tbl_Role" Role="Tbl_Role" Multiplicity="1" />
           <End Type="HealthModel.Tbl_Login" Role="Tbl_Login" Multiplicity="*" />
@@ -1392,7 +1360,6 @@
                 <ScalarProperty Name="Form_TotalQuestion" ColumnName="Form_TotalQuestion" />
                 <ScalarProperty Name="Form_Display" ColumnName="Form_Display" />
                 <ScalarProperty Name="Form_CourseID" ColumnName="Form_CourseID" />
-                <ScalarProperty Name="Form_CreatorID" ColumnName="Form_CreatorID" />
                 <ScalarProperty Name="Form_Name" ColumnName="Form_Name" />
                 <ScalarProperty Name="Form_Guid" ColumnName="Form_Guid" />
                 <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
@@ -1429,6 +1396,7 @@
           <EntitySetMapping Name="Tbl_Question">
             <EntityTypeMapping TypeName="HealthModel.Tbl_Question">
               <MappingFragment StoreEntitySet="Tbl_Question">
+                <ScalarProperty Name="Question_Lie" ColumnName="Question_Lie" />
                 <ScalarProperty Name="Question_TypeCodeID" ColumnName="Question_TypeCodeID" />
                 <ScalarProperty Name="Question_Titel" ColumnName="Question_Titel" />
                 <ScalarProperty Name="Question_FSID" ColumnName="Question_FSID" />
@@ -1440,6 +1408,7 @@
           <EntitySetMapping Name="Tbl_Response">
             <EntityTypeMapping TypeName="HealthModel.Tbl_Response">
               <MappingFragment StoreEntitySet="Tbl_Response">
+                <ScalarProperty Name="Response_IsTrue" ColumnName="Response_IsTrue" />
                 <ScalarProperty Name="Response_Hint" ColumnName="Response_Hint" />
                 <ScalarProperty Name="Response_QuestionID" ColumnName="Response_QuestionID" />
                 <ScalarProperty Name="ResponseTitel" ColumnName="ResponseTitel" />

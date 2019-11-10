@@ -49,5 +49,12 @@ namespace Wtiau.Health.Web.Models.Repository
             var q = db.Tbl_Login.Where(x => x.Login_Guid == guid).SingleOrDefault();
             return new SelectListItem() { Value = q.Login_Guid.ToString(), Text = q.Login_Name + " " + q.Login_Family};
         }
+
+        public int Get_IDByUserName(string Username)
+        {
+            var id = db.Tbl_Login.Where(a => a.Login_Email == Username || a.Login_Mobile == Username).SingleOrDefault().Login_ID;
+
+            return (int)id;
+        }
     }
 }
