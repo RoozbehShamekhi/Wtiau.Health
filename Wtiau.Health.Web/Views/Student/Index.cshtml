@@ -22,11 +22,10 @@
 
     <div class="panel-body table-body" style="overflow-x:auto;">
 
-        <table id="DateTable" class="table  table-bordered table-striped table-secondary" style="width:100%;">
+        <table id="StudentsDataTable" class="table  table-bordered table-striped table-secondary" style="width:100%;">
 
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Student_Code)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Student_National)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Student_Name)</th>
@@ -35,55 +34,9 @@
                     <th scope="col">@Html.DisplayNameFor(model => model.Student_Form2)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Student_Turn)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Student_Info)</th>
-                    <th scope="col" data-orderable="false">کنترل</th>
+                    <th scope="col">کنترل</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @{
-                    int x = 0;
-                }
-
-                @foreach (var item in Model)
-                {
-                    x++;
-
-                    <tr>
-                        <td scope="row">@x</td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Code) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_National) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Name) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Family) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Form1) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Form2) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Turn) </span>
-                        </td>
-                        <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Student_Info) </span>
-                        </td>
-
-                        <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Details", "Exam", new { id = item.ID })"> </a>
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="Edit(@item.ID)"> </a>
-                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="Delete(@item.ID)"> </a>
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
 
         </table>
 
@@ -132,6 +85,68 @@
                 $('#myModalBody').html(result);
             });
         }
+
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+           $('#StudentsDataTable').DataTable({
+                "ajax": {
+                    "url": "/Student/GetStudents",
+                    "type": "POST",
+                    "datatype": "json",
+                },
+                "columns": [
+                    { "data": "Student_Code", "name": "Student_Code" },
+                    { "data": "Student_National", "name": "Student_National" },
+                    { "data": "Student_Name", "name": "Student_Name" },
+                    { "data": "Student_Family", "name": "Student_Family" },
+                    { "data": "Student_Form1", "name": "Student_Form1" },
+                    { "data": "Student_Form2", "name": "Student_Form2" },
+                    { "data": "Student_Turn", "name": "Student_Turn" },
+                    { "data": "Student_Info", "name": "Student_Info" },
+                    {
+                        "data": "ID", "render": function (data) {
+                            return "<a class='btn btn-info btn-sm glyphicon glyphicon-list' href='@Url.Action("Details", "Exam")/" + data + "'></a>&nbsp;" +
+                                   "<a class='btn btn-warning btn-sm glyphicon glyphicon-pencil' onclick='Edit(" + data + ")'></a>&nbsp;" +
+                                   "<a class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='Delete(" + data + ")'></a>&nbsp;";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px"
+                    }
+                ],
+                "serverSide": true,
+                "order": [0, "asc"],
+                "processing": true,
+                "language": {
+                    "sEmptyTable": "هیچ داده ای در جدول وجود ندارد",
+                    "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "sInfoEmpty": "نمایش 0 تا 0 از 0 رکورد",
+                    "sInfoFiltered": "(فیلتر شده از _MAX_ رکورد)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ",",
+                    "sLengthMenu": "_MENU_",
+                    "sLoadingRecords": "در حال بارگزاری...",
+                    "sProcessing": "در حال پردازش...",
+                    "sSearch": "",
+                    "sSearchPlaceholder": "جستجو",
+                    "sZeroRecords": "رکوردی با این مشخصات پیدا نشد",
+                    "oPaginate": {
+                        "sFirst": "ابتدا",
+                        "sLast": "انتها",
+                        "sNext": "بعدی",
+                        "sPrevious": "قبلی"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": فعال سازی نمایش به صورت صعودی",
+                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                    }
+                },
+                "scrollX": true
+            });
+        });
 
     </script>
 }

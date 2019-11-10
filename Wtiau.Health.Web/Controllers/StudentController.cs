@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web;
@@ -17,7 +18,6 @@ namespace Wtiau.Health.Web.Controllers
     public class StudentController : Controller
     {
         HealthEntities db = new HealthEntities();
-        // GET: Student
 
         [HttpGet]
         public ActionResult Index()
@@ -82,6 +82,53 @@ namespace Wtiau.Health.Web.Controllers
                 TempData["TosterMassage"] = "خطا";
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult GetStudents()
+        {
+            int start = Convert.ToInt32(Request["start"]);
+            int length = Convert.ToInt32(Request["length"]);
+            string searchValue = Request["search[value]"];
+            string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
+            string sortDirection = Request["order[0][dir]"];
+
+            var _student = db.Tbl_Student.Where(x => x.Student_IsDelete == false).Select(x => new Model_StudentList
+            {
+                ID = x.Student_ID,
+                Student_Code = x.Student_Code,
+                Student_National = x.Student_NationalCode,
+                Student_Form1 = x.Student_Form1,
+                Student_Form2 = x.Student_Form1,
+                Student_Turn = x.Student_TakeTurn,
+                Student_Name = x.Student_SIID.HasValue ? "نا معلوم" : x.Tbl_StudentInfo.SI_Name,
+                Student_Family = x.Student_SIID.HasValue ? "نا معلوم" : x.Tbl_StudentInfo.SI_Family,
+                Student_Info = x.Student_SIID.HasValue
+
+            }).ToList();
+
+            int totalRows = _student.Count;
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                _student = _student.Where(x => x.ID.ToString().ToLower().Contains(searchValue.ToLower()) ||
+                                               x.Student_Code.ToLower().Contains(searchValue.ToLower()) ||
+                                               x.Student_National.ToLower().Contains(searchValue.ToLower()) ||
+                                               x.Student_Form1.ToString().ToLower().Contains(searchValue.ToLower()) ||
+                                               x.Student_Form2.ToString().ToLower().Contains(searchValue.ToLower()) ||
+                                               x.Student_Turn.ToString().ToLower().Contains(searchValue.ToLower()) ||
+                                               (string.IsNullOrEmpty(x.Student_Name) ? false : x.Student_Name.ToLower().Contains(searchValue.ToLower())) ||
+                                               (string.IsNullOrEmpty(x.Student_Family) ? false : x.Student_Family.ToLower().Contains(searchValue.ToLower())) ||
+                                               x.Student_Info.ToString().ToLower().Contains(searchValue.ToLower())).ToList();
+            }
+
+            int totalRowsAfterFiltering = _student.Count;
+
+            _student = _student.OrderBy(sortColumnName + " " + sortDirection).ToList();
+
+            _student = _student.Skip(start).Take(length).ToList();
+
+            return Json(new { data = _student, draw = Request["draw"], recordsTotal = totalRows, recordsFiltered = totalRowsAfterFiltering }, JsonRequestBehavior.AllowGet);
         }
 
     }
