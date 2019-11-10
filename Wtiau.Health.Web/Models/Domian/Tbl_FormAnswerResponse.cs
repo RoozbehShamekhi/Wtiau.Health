@@ -18,6 +18,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.Guid FAR_Guid { get; set; }
         public int FAR__FAID { get; set; }
         public int FAR_ResponseID { get; set; }
+        public bool FAR_IsDelete { get; set; }
     
         public virtual Tbl_FormAnswer Tbl_FormAnswer { get; set; }
         public virtual Tbl_Response Tbl_Response { get; set; }

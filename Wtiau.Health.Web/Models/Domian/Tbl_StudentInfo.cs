@@ -28,17 +28,18 @@ namespace Wtiau.Health.Web.Models.Domian
         public string SI_Phone { get; set; }
         public string SI_Mobile { get; set; }
         public int SI_GenderCodeID { get; set; }
-        public int SI_BarthYearCodeID { get; set; }
+        public int SI_BirthYearCodeID { get; set; }
         public int SI_NationalCodeID { get; set; }
         public int SI_BloodCodeID { get; set; }
         public int SI_InsuranceCodeID { get; set; }
         public int SI_GradeCodeID { get; set; }
         public int SI_HomeTypeCodeID { get; set; }
-        public int SI_MaritaCodeID { get; set; }
+        public int SI_MarriageCodeID { get; set; }
         public int SI_CollegeID { get; set; }
         public int SI_BranchID { get; set; }
-        public string SI_BathLocation { get; set; }
+        public string SI_BirthdayLocation { get; set; }
         public string SI_BeforeUniversity { get; set; }
+        public bool SI_IsDelete { get; set; }
     
         public virtual Tbl_Branch Tbl_Branch { get; set; }
         public virtual Tbl_Code Tbl_Code { get; set; }

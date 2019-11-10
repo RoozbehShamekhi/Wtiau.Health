@@ -24,6 +24,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.Guid Role_Guid { get; set; }
         public string Role_Name { get; set; }
         public string Role_Display { get; set; }
+        public bool Role_IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Login> Tbl_Login { get; set; }

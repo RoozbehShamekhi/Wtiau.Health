@@ -16,9 +16,9 @@ namespace Wtiau.Health.Web.Models.Domian
     {
         public int Student_ID { get; set; }
         public System.Guid Student_Guid { get; set; }
+        public Nullable<int> Student_SIID { get; set; }
         public string Student_Code { get; set; }
         public string Student_NationalCode { get; set; }
-        public Nullable<int> Student_SIID { get; set; }
         public bool Student_Form1 { get; set; }
         public bool Student_Form2 { get; set; }
         public bool Student_TakeTurn { get; set; }

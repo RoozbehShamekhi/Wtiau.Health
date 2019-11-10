@@ -24,6 +24,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.Guid University_Guid { get; set; }
         public string University_Name { get; set; }
         public string University_Display { get; set; }
+        public bool University_IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_College> Tbl_College { get; set; }

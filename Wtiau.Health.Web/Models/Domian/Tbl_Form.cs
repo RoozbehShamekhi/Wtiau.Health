@@ -12,13 +12,14 @@ namespace Wtiau.Health.Web.Models.Domian
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_From
+    public partial class Tbl_Form
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_From()
+        public Tbl_Form()
         {
             this.Tbl_FormAnswer = new HashSet<Tbl_FormAnswer>();
             this.Tbl_FormStep = new HashSet<Tbl_FormStep>();
+            this.Tbl_Question = new HashSet<Tbl_Question>();
         }
     
         public int Form_ID { get; set; }
@@ -26,11 +27,9 @@ namespace Wtiau.Health.Web.Models.Domian
         public string Form_Name { get; set; }
         public int Form_CourseID { get; set; }
         public string Form_Display { get; set; }
-        public int Form_TotalQuestion { get; set; }
-        public bool Form_Active { get; set; }
+        public bool Form_IsActive { get; set; }
         public System.DateTime Form_CreateDate { get; set; }
-        public System.DateTime Form_Modify { get; set; }
-        public int Form_StepCount { get; set; }
+        public System.DateTime Form_ModifyDate { get; set; }
         public bool Form_IsDelete { get; set; }
     
         public virtual Tbl_Course Tbl_Course { get; set; }
@@ -38,5 +37,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual ICollection<Tbl_FormAnswer> Tbl_FormAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_FormStep> Tbl_FormStep { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Question> Tbl_Question { get; set; }
     }
 }

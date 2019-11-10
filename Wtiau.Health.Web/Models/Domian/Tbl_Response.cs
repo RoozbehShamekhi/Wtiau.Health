@@ -22,11 +22,12 @@ namespace Wtiau.Health.Web.Models.Domian
     
         public int Response_ID { get; set; }
         public System.Guid Response_Guid { get; set; }
-        public int Response_Order { get; set; }
-        public int ResponseTitel { get; set; }
         public int Response_QuestionID { get; set; }
+        public string Response_Title { get; set; }
         public int Response_Hint { get; set; }
+        public int Response_Order { get; set; }
         public bool Response_IsTrue { get; set; }
+        public bool Response_IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_FormAnswerResponse> Tbl_FormAnswerResponse { get; set; }

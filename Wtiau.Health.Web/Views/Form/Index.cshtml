@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_FormList>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "لیست پرسش نامه ها";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+
 
 <div class="panel panel-body panel-default  navigation">
 
@@ -12,7 +13,7 @@
     </div>
 
     <div class="pull-right">
-        <a href="#" onclick="Create()"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
+        <a href="javascript:void(0)" onclick="Create()"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
     </div>
 
 </div>
@@ -30,6 +31,7 @@
                     <th scope="col">@Html.DisplayNameFor(model => model.Form_QuestionCount)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Form_StepCount)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Form_CreateDate)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Form_IsActive)</th>
                     <th scope="col" data-orderable="false">کنترل</th>
                 </tr>
             </thead>
@@ -57,11 +59,17 @@
                         <td scope="row">
                             <span> @Html.DisplayFor(modelItem => item.Form_CreateDate) </span>
                         </td>
+                        <td scope="row">
+                            <span> @( item.Form_IsActive ? "فعال" : "غیر فعال" ) </span>
+                        </td>
 
                         <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("index", "Question", new { id = item.ID })"> </a>
-                            <a class="btn btn-success btn-sm glyphicon glyphicon-plus" onclick="AddStep(@item.ID)"> </a>
-                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="Delete(@item.ID)"> </a>
+                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "Question", new { id = item.ID })"> </a>
+                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" href="javascript:void(0)" onclick="Edit(@item.ID)"> </a>
+                            <a class="btn btn-primary btn-sm glyphicon glyphicon-th-list" href="@Url.Action("Index", "Step", new { id = item.ID })"> </a>
+                            <a class="btn btn-success btn-sm glyphicon glyphicon-plus" href="javascript:void(0)" onclick="AddStep(@item.ID)"> </a>
+                            <a class="btn wtiau-btn-wtiau btn-sm glyphicon glyphicon-ok" href="javascript:void(0)" onclick="SetActiveness(@item.ID)"> </a>
+                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" href="javascript:void(0)" onclick="Delete(@item.ID)"> </a>
                         </td>
                     </tr>
                 }
@@ -77,17 +85,31 @@
 
 @Html.Partial("_Modal")
 
+
 @section Modal {
+
     <script>
 
         function Delete(id) {
             $.ajax({
-                url: "/Dashboard/Exam/Delete/" + id,
+                url: "/Form/DeleteForm/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('حدف آزمون');
+                $('#myModalLabel').html('حدف پرسش نامه');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Edit(id) {
+            $.ajax({
+                url: "/Form/EditForm/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('ویرایش پرسش نامه');
                 $('#myModalBody').html(result);
             });
         }
@@ -116,5 +138,18 @@
             });
         }
 
+        function SetActiveness(id) {
+            $.ajax({
+                url: "/Form/SetActiveness/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('فعال سازی');
+                $('#myModalBody').html(result);
+            });
+        }
+
     </script>
+
 }

@@ -24,8 +24,9 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.Guid FA_Guid { get; set; }
         public int FA_StudentID { get; set; }
         public int FA_FormID { get; set; }
+        public bool FA_IsDelete { get; set; }
     
-        public virtual Tbl_From Tbl_From { get; set; }
+        public virtual Tbl_Form Tbl_Form { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_FormAnswerResponse> Tbl_FormAnswerResponse { get; set; }
     }

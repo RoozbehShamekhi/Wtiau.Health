@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 
-namespace ESL.Common.Plugins
+namespace Wtiau.Health.Web.Models.Plugins
 {
     public static class PersianDateExtensionMethods
     {

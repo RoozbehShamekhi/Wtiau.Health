@@ -22,9 +22,9 @@ namespace Wtiau.Health.Web.Models.Domian
     
         public int College_ID { get; set; }
         public System.Guid College_Guid { get; set; }
+        public int College_UniversityID { get; set; }
         public string College_Name { get; set; }
         public string College_Display { get; set; }
-        public int College_UniversityID { get; set; }
     
         public virtual Tbl_University Tbl_University { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

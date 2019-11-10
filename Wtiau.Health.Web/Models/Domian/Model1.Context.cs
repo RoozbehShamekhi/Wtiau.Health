@@ -31,10 +31,10 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual DbSet<Tbl_CodeGroup> Tbl_CodeGroup { get; set; }
         public virtual DbSet<Tbl_College> Tbl_College { get; set; }
         public virtual DbSet<Tbl_Course> Tbl_Course { get; set; }
+        public virtual DbSet<Tbl_Form> Tbl_Form { get; set; }
         public virtual DbSet<Tbl_FormAnswer> Tbl_FormAnswer { get; set; }
         public virtual DbSet<Tbl_FormAnswerResponse> Tbl_FormAnswerResponse { get; set; }
         public virtual DbSet<Tbl_FormStep> Tbl_FormStep { get; set; }
-        public virtual DbSet<Tbl_From> Tbl_From { get; set; }
         public virtual DbSet<Tbl_Group> Tbl_Group { get; set; }
         public virtual DbSet<Tbl_Login> Tbl_Login { get; set; }
         public virtual DbSet<Tbl_Question> Tbl_Question { get; set; }

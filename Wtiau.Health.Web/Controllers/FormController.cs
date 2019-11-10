@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Wtiau.Health.Web.Models.Domian;
 using Wtiau.Health.Web.Models.ViewModels;
@@ -11,47 +12,43 @@ namespace Wtiau.Health.Web.Controllers
     public class FormController : Controller
     {
         HealthEntities db = new HealthEntities();
-        // GET: Form
+
         public ActionResult Index()
         {
-            var _student = db.Tbl_From.Where(x => x.Form_IsDelete == false).Select(x => new Model_FormList
+            var _Student = db.Tbl_Form.Where(x => x.Form_IsDelete == false).Select(x => new Model_FormList
             {
                 ID = x.Form_ID,
                 Form_Name = x.Form_Name,
-                Form_QuestionCount = x.Form_TotalQuestion,
+                Form_QuestionCount = x.Tbl_Question.Where(xx => xx.Question_IsDelete == false).ToList().Count,
                 Form_CreateDate = x.Form_CreateDate.ToString(),
-                Form_StepCount = x.Form_StepCount
+                Form_StepCount = x.Tbl_FormStep.Where(xx => xx.FS_IsDelete == false).ToList().Count,
+                Form_IsActive = x.Form_IsActive
             }).ToList();
 
 
-            return View(_student);
+            return View(_Student);
         }
 
         [HttpGet]
         public ActionResult CreateForm()
         {
-
-
             return PartialView();
         }
-
 
         [HttpPost]
         public ActionResult CreateForm(Model_FormCreate model)
         {
-            Tbl_From _From = new Tbl_From();
-            _From.Form_Name = model.Form_Name;
-            _From.Form_Display = model.Form_Display;
-            _From.Form_Active = true;
-            _From.Form_Guid = Guid.NewGuid();
-            _From.Form_IsDelete = false;
-            _From.Form_Modify = DateTime.Now;
-            _From.Form_CreateDate = DateTime.Now;
-            _From.Form_StepCount = 0;
-            _From.Form_TotalQuestion = 0;
-            _From.Tbl_Course = db.Tbl_Course.Where(a => a.Course_Guid.ToString() == model.Course.ToString()).SingleOrDefault();
+            Tbl_Form _Form = new Tbl_Form();
+            _Form.Form_Name = model.Form_Name;
+            _Form.Form_Display = model.Form_Display;
+            _Form.Form_IsActive = true;
+            _Form.Form_Guid = Guid.NewGuid();
+            _Form.Form_IsDelete = false;
+            _Form.Form_ModifyDate = DateTime.Now;
+            _Form.Form_CreateDate = DateTime.Now;
+            _Form.Tbl_Course = db.Tbl_Course.Where(a => a.Course_Guid.ToString() == model.Course.ToString()).SingleOrDefault();
 
-            db.Tbl_From.Add(_From);
+            db.Tbl_Form.Add(_Form);
 
             if (Convert.ToBoolean(db.SaveChanges() > 0))
             {
@@ -69,6 +66,129 @@ namespace Wtiau.Health.Web.Controllers
 
                 return RedirectToAction("Index");
             }
+        }
+
+        public ActionResult EditForm(int id)
+        {
+            var q = db.Tbl_Form.Where(x => x.Form_ID == id).SingleOrDefault();
+
+            if (q != null)
+            {
+                Model_FormEdit model = new Model_FormEdit()
+                {
+                    ID = q.Form_ID,
+                    Form_Name = q.Form_Name,
+                    Course = q.Tbl_Course.Course_Guid.ToString(),
+                    Form_Display = q.Form_Display,
+                };
+
+                return PartialView(model);
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditForm(Model_FormEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                Tbl_Form q = db.Tbl_Form.Where(x => x.Form_ID == model.ID).SingleOrDefault();
+
+                if (q != null)
+                {
+                    q.Form_Name = model.Form_Name;
+                    q.Form_Display = model.Form_Display;
+                    q.Form_CourseID = db.Tbl_Course.Where(x => x.Course_Guid.ToString() == model.Course).SingleOrDefault().Course_ID;
+
+                    db.Entry(q).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام نشده";
+
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult DeleteForm(int? id)
+        {
+            if (id != null)
+            {
+                Model_MessageModal model = new Model_MessageModal();
+
+                var q = db.Tbl_Form.Where(x => x.Form_ID == id).SingleOrDefault();
+
+                if (q != null)
+                {
+                    model.ID = id.Value;
+                    model.Name = q.Form_Name;
+                    model.Description = "آیا از حذف پرسش نامه مورد نظر اطمینان دارید ؟";
+
+                    return PartialView(model);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteForm(Model_MessageModal model)
+        {
+            if (ModelState.IsValid)
+            {
+                var q = db.Tbl_Form.Where(x => x.Form_ID == model.ID).SingleOrDefault();
+
+                if (q != null)
+                {
+                    q.Form_IsDelete = true;
+
+                    db.Entry(q).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام نشده";
+
+                        return HttpNotFound();
+                    }
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         [HttpGet]
@@ -81,11 +201,10 @@ namespace Wtiau.Health.Web.Controllers
             return PartialView();
         }
 
-
         [HttpPost]
         public ActionResult AddStep(Model_FormStepAdd model)
         {
-            Tbl_FormStep _step = new Tbl_FormStep()
+            Tbl_FormStep _Step = new Tbl_FormStep()
             {
                 FS_Display = model.Display,
                 FS_Name = model.Name,
@@ -95,14 +214,7 @@ namespace Wtiau.Health.Web.Controllers
                 
             };
 
-            Tbl_From _From = db.Tbl_From.Where(a => a.Form_ID == model.ID).SingleOrDefault();
-
-            _From.Form_StepCount++;
-
-
-            db.Entry(_From).State = EntityState.Modified;
-
-            db.Tbl_FormStep.Add(_step);
+            db.Tbl_FormStep.Add(_Step);
 
             if (Convert.ToBoolean(db.SaveChanges() > 0))
             {
@@ -122,10 +234,63 @@ namespace Wtiau.Health.Web.Controllers
             }
         }
 
+        public ActionResult SetActiveness(int id)
+        {
+            var q = db.Tbl_Form.Where(x => x.Form_ID == id).SingleOrDefault();
+
+            if (q != null)
+            {
+                Model_SetActiveness model = new Model_SetActiveness()
+                {
+                    ID = id,
+                    Activeness = q.Form_IsActive
+                };
+
+                return PartialView(model);
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetActiveness(Model_SetActiveness model)
+        {
+            if (ModelState.IsValid)
+            {
+                var q = db.Tbl_Form.Where(x => x.Form_ID == model.ID).SingleOrDefault();
+
+                if (q != null)
+                {
+                    q.Form_IsActive = model.Activeness;
+
+                    db.Entry(q).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام نشده";
+
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
 
         public JsonResult Get_CourseList(string searchTerm)
         {
-            var q = db.Tbl_Course.ToList();
+            var q = db.Tbl_Course.Where(x => x.Course_IsDelete == false).ToList();
 
             if (searchTerm != null)
             {
@@ -136,8 +301,5 @@ namespace Wtiau.Health.Web.Controllers
 
             return Json(md, JsonRequestBehavior.AllowGet);
         }
-
-
-
     }
 }

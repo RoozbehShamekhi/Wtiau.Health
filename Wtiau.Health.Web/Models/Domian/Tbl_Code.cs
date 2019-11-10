@@ -33,6 +33,8 @@ namespace Wtiau.Health.Web.Models.Domian
         public int Code_CGID { get; set; }
         public string Code_Name { get; set; }
         public string Code_Display { get; set; }
+        public bool Code_IsActive { get; set; }
+        public bool Code_IsDelete { get; set; }
     
         public virtual Tbl_CodeGroup Tbl_CodeGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

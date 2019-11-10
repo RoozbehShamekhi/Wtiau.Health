@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wtiau.Health.Web</RootNamespace>
     <AssemblyName>Wtiau.Health.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +62,7 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
     </Reference>
@@ -76,8 +78,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -103,13 +103,13 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure">
@@ -117,6 +117,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\font.css" />
     <Content Include="Content\Css\MyCss\Dashboard.css" />
     <Content Include="Content\Css\MyCss\defaults.css" />
@@ -148,6 +152,8 @@
     <Content Include="Content\Plugins\MdBootstrapPersianDateTimePicker\jquery.Bootstrap-PersianDateTimePicker.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.carousel.min.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.theme.default.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.eot" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.ttf" />
@@ -194,6 +200,15 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="App_Data\Excel\شماره دانشجویی و کد ملی بدون مقطع.xlsx" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -205,6 +220,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -1245,7 +1262,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\StepController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1283,6 +1302,9 @@
     <Compile Include="Models\Domian\Tbl_Course.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Domian\Tbl_Form.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Domian\Tbl_FormAnswer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1290,9 +1312,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_FormStep.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Domian\Tbl_From.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Group.cs">
@@ -1329,12 +1348,19 @@
     <Compile Include="Models\ViewModels\Modal_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
     <Compile Include="Models\ViewModels\Model_FormCreate.cs" />
+    <Compile Include="Models\ViewModels\Model_FormEdit.cs" />
     <Compile Include="Models\ViewModels\Model_FormList.cs" />
     <Compile Include="Models\ViewModels\Model_FormStepAdd.cs" />
+    <Compile Include="Models\ViewModels\Model_FormStepList.cs" />
     <Compile Include="Models\ViewModels\Model_Login.cs" />
+    <Compile Include="Models\ViewModels\Model_MessageModal.cs" />
     <Compile Include="Models\ViewModels\Model_PortalLogin.cs" />
+    <Compile Include="Models\ViewModels\Model_QuestionEdit.cs" />
     <Compile Include="Models\ViewModels\Model_QusetionList.cs" />
     <Compile Include="Models\ViewModels\Model_Register.cs" />
+    <Compile Include="Models\ViewModels\Model_ResponseAdd.cs" />
+    <Compile Include="Models\ViewModels\Model_ResponseList.cs" />
+    <Compile Include="Models\ViewModels\Model_SetActiveness.cs" />
     <Compile Include="Models\ViewModels\Model_StudentList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1378,7 +1404,17 @@
     <Content Include="Views\Form\CreateForm.cshtml" />
     <Content Include="Views\Form\AddStep.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
-    <Content Include="Views\Question\QuestionAdd.cshtml" />
+    <Content Include="Views\Question\QuestionCreate.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Response\Index.cshtml" />
+    <Content Include="Views\Response\ResponseAdd.cshtml" />
+    <Content Include="Views\Step\Index.cshtml" />
+    <Content Include="Views\Form\EditForm.cshtml" />
+    <Content Include="Views\Form\DeleteForm.cshtml" />
+    <Content Include="Views\Form\SetActiveness.cshtml" />
+    <Content Include="Views\Question\QuestionEdit.cshtml" />
+    <Content Include="Views\Question\QuestionDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

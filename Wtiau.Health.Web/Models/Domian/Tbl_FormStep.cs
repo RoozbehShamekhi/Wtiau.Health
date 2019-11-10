@@ -22,12 +22,13 @@ namespace Wtiau.Health.Web.Models.Domian
     
         public int FS_ID { get; set; }
         public System.Guid FS_Guid { get; set; }
+        public int FS_FormID { get; set; }
         public string FS_Name { get; set; }
         public int FS_Order { get; set; }
         public string FS_Display { get; set; }
-        public int FS_FormID { get; set; }
+        public bool FS_IsDelete { get; set; }
     
-        public virtual Tbl_From Tbl_From { get; set; }
+        public virtual Tbl_Form Tbl_Form { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Question> Tbl_Question { get; set; }
     }

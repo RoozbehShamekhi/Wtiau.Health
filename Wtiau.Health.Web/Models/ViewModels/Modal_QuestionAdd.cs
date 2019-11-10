@@ -9,13 +9,17 @@ namespace Wtiau.Health.Web.Models.ViewModels
     public class Modal_QuestionAdd
     {
         public int ID { get; set; }
+
         [Display(Name = "عنوان سوال")]
         [DataType(DataType.MultilineText)]
-        public string Name { get; set; }
+        public string Title { get; set; }
+
         [Display(Name = "نوع سوال")]
-        public string type { get; set; }
+        public string Type { get; set; }
+
         [Display(Name = "مرحله")]
-        public string step { get; set; }
+        public string Step { get; set; }
+
         [Display(Name = " ")]
         public bool Lie { get; set; }
 

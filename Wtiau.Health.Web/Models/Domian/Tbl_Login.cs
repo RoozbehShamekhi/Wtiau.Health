@@ -25,6 +25,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.DateTime Login_CreateDate { get; set; }
         public System.DateTime Login_Modify { get; set; }
         public string Login_Mobile { get; set; }
+        public bool Login_IsDelete { get; set; }
     
         public virtual Tbl_Role Tbl_Role { get; set; }
     }

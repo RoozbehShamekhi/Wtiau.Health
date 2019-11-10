@@ -24,6 +24,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public System.Guid CG_Guid { get; set; }
         public string CG_Name { get; set; }
         public string CG_Display { get; set; }
+        public bool CG_IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Code> Tbl_Code { get; set; }
