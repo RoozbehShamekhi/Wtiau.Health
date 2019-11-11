@@ -9,6 +9,7 @@ namespace Wtiau.Health.Web.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
+        [Authorize(Roles ="Admin,SuperAdmin")]
         public ActionResult Index()
         {
             return View();

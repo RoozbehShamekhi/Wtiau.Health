@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Wtiau.Health.Web.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class SettingController : Controller
     {
         // GET: Setting

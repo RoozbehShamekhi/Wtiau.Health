@@ -1,0 +1,58 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_Form
+
+@{
+    ViewBag.Title = "ShowForm";
+    Layout = "~/Views/Shared/_Portal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="panel panel-default" style="margin: 0 auto;max-width:1000px;">
+        <div class="panel-body">
+
+            <h4>@Model.Name</h4>
+            <hr />
+
+
+
+
+            @foreach (var S in Model.Steps)
+            {
+
+                @S.Name
+                <br />
+                int i = 0;
+                foreach (var Q in S.Questions)
+                {
+                    @Q.Titel
+                    i++;
+                    <br />
+
+                    foreach (var R in Q.Responses)
+                    {
+                        <input type="radio" name="Q+@i.ToString() " value="@R.Value" />
+                        @R.Text
+
+
+                    }
+                    <br />
+                }
+
+                <br />
+                <br />
+                <br />
+            }
+
+        </div>
+    </div>
+    <div class="">
+        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
+        <button class="btn btn-success modal-btn-Dual pull-right " type="submit" name="btn-Delete">تایید</button>
+    </div>
+    <div class="clearfix"></div>
+
+
+}

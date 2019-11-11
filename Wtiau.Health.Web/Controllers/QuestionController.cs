@@ -14,6 +14,7 @@ using System.Net;
 
 namespace Wtiau.Health.Web.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class QuestionController : Controller
     {
         HealthEntities db = new HealthEntities();

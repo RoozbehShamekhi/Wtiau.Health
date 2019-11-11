@@ -117,10 +117,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\font.css" />
     <Content Include="Content\Css\MyCss\Dashboard.css" />
     <Content Include="Content\Css\MyCss\defaults.css" />
@@ -152,7 +148,6 @@
     <Content Include="Content\Plugins\MdBootstrapPersianDateTimePicker\jquery.Bootstrap-PersianDateTimePicker.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.carousel.min.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.theme.default.min.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.eot" />
@@ -204,10 +199,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\Model1.Context.tt">
@@ -220,8 +211,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -1261,6 +1250,7 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
+    <Compile Include="Controllers\PortalFormsController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
@@ -1347,6 +1337,7 @@
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
     <Compile Include="Models\ViewModels\Modal_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
+    <Compile Include="Models\ViewModels\Model_Form.cs" />
     <Compile Include="Models\ViewModels\Model_FormCreate.cs" />
     <Compile Include="Models\ViewModels\Model_FormEdit.cs" />
     <Compile Include="Models\ViewModels\Model_FormList.cs" />
@@ -1415,6 +1406,7 @@
     <Content Include="Views\Form\SetActiveness.cshtml" />
     <Content Include="Views\Question\QuestionEdit.cshtml" />
     <Content Include="Views\Question\QuestionDelete.cshtml" />
+    <Content Include="Views\PortalForms\ShowForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

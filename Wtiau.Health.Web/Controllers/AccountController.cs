@@ -106,6 +106,7 @@ namespace Wtiau.Health.Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles ="SuperAdmin")]
         [HttpGet]
         public ActionResult Register()
         {
@@ -116,7 +117,7 @@ namespace Wtiau.Health.Web.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         public ActionResult Register(Model_Register model)
         {

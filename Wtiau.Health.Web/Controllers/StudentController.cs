@@ -15,6 +15,7 @@ using Wtiau.Health.Web.Models.ViewModels;
 
 namespace Wtiau.Health.Web.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin,DataEntry")]
     public class StudentController : Controller
     {
         HealthEntities db = new HealthEntities();

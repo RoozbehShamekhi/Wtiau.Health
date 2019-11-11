@@ -13,6 +13,7 @@ using System.Data.Entity;
 
 namespace Wtiau.Health.Web.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class ResponseController : Controller
     {
         HealthEntities db = new HealthEntities();

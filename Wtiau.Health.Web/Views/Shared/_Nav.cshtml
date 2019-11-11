@@ -8,7 +8,7 @@
     if (User.Identity.IsAuthenticated)
     {
 
-        if (User.IsInRole("Admin")|| User.IsInRole("SuperAdmin"))
+        if (User.IsInRole("Admin")||User.IsInRole("SuperAdmin"))
         {
             Rep_User info = new Rep_User();
             Model_AccountInfo infoModel = new Model_AccountInfo();
