@@ -187,29 +187,29 @@
     <Content Include="Content\Plugins\jQuery.Select2\select2-bootstrap.scss" />
     <Content Include="Content\Plugins\jQuery.toastr\toastr.less" />
     <Content Include="Content\Plugins\jQuery.toastr\toastr.scss" />
-    <EntityDeploy Include="Models\Domian\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Domian\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="App_Data\Excel\شماره دانشجویی و کد ملی بدون مقطع.xlsx" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Models\Domian\WTIAU-Health.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WTIAU-Health.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Domian\WTIAU-Health.edmx.diagram">
+      <DependentUpon>WTIAU-Health.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Models\Domian\Model1.Context.tt">
+    <Content Include="Models\Domian\WTIAU-Health.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>WTIAU-Health.edmx</DependentUpon>
+      <LastGenOutput>WTIAU-Health.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Domian\Model1.tt">
+    <Content Include="Models\Domian\WTIAU-Health.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>WTIAU-Health.edmx</DependentUpon>
+      <LastGenOutput>WTIAU-Health.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1259,74 +1259,83 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Domian\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Domian\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Domian\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Domian\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Branch.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Code.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_CodeGroup.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_College.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Course.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Form.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_FormAnswer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_FormAnswerResponse.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_FormStep.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Group.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Login.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Question.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Response.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Student.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_StudentInfo.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\Tbl_TakeTurn.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\Tbl_Turn.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\Tbl_TurnTimeSheet.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_University.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\WTIAU-Health.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WTIAU-Health.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\WTIAU-Health.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\WTIAU-Health.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\Enum.cs" />
     <Compile Include="Models\Plugins\Microsoft_Excel.cs" />
