@@ -149,7 +149,7 @@
           <Property Name="Question_Guid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Question_FSID" Type="int" Nullable="false" />
           <Property Name="Question_FormID" Type="int" Nullable="false" />
-          <Property Name="Question_Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Question_Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Question_TypeCodeID" Type="int" Nullable="false" />
           <Property Name="Question_Lie" Type="bit" Nullable="false" />
           <Property Name="Question_IsDelete" Type="bit" Nullable="false" />
@@ -216,6 +216,40 @@
           <Property Name="SI_BirthdayLocation" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SI_BeforeUniversity" Type="nvarchar(max)" />
           <Property Name="SI_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TakeTurn">
+          <Key>
+            <PropertyRef Name="TT_ID" />
+          </Key>
+          <Property Name="TT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TT_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TT_StudentID" Type="int" Nullable="false" />
+          <Property Name="TT_TTSID" Type="int" Nullable="false" />
+          <Property Name="TT_IsPresent" Type="bit" Nullable="false" />
+          <Property Name="TT_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Turn">
+          <Key>
+            <PropertyRef Name="Turn_ID" />
+          </Key>
+          <Property Name="Turn_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Turn_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Turn_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Turn_Description" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Turn_IsActive" Type="bit" Nullable="false" />
+          <Property Name="Turn_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TurnTimeSheet">
+          <Key>
+            <PropertyRef Name="TTS_ID" />
+          </Key>
+          <Property Name="TTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TTS_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TTS_TurnID" Type="int" Nullable="false" />
+          <Property Name="TTS_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TTS_MaxSize" Type="int" Nullable="false" />
+          <Property Name="TTS_IsActive" Type="bit" Nullable="false" />
+          <Property Name="TTS_IsDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_University">
           <Key>
@@ -515,6 +549,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="1" />
+          <End Role="Tbl_TakeTurn" Type="Self.Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+          <End Role="Tbl_TurnTimeSheet" Type="Self.Tbl_TurnTimeSheet" Multiplicity="1" />
+          <End Role="Tbl_TakeTurn" Type="Self.Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_TTSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TurnTimeSheet_Tbl_Turn">
+          <End Role="Tbl_Turn" Type="Self.Tbl_Turn" Multiplicity="1" />
+          <End Role="Tbl_TurnTimeSheet" Type="Self.Tbl_TurnTimeSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Turn">
+              <PropertyRef Name="Turn_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_TurnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HealthModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Branch" EntityType="Self.Tbl_Branch" Schema="dbo" store:Type="Tables" />
@@ -533,6 +603,9 @@
           <EntitySet Name="Tbl_Role" EntityType="Self.Tbl_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Student" EntityType="Self.Tbl_Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_StudentInfo" EntityType="Self.Tbl_StudentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_TakeTurn" EntityType="Self.Tbl_TakeTurn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Turn" EntityType="Self.Tbl_Turn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_TurnTimeSheet" EntityType="Self.Tbl_TurnTimeSheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_University" EntityType="Self.Tbl_University" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Tbl_Branch_Tbl_Group" Association="Self.FK_Tbl_Branch_Tbl_Group">
             <End Role="Tbl_Group" EntitySet="Tbl_Group" />
@@ -630,6 +703,18 @@
             <End Role="Tbl_College" EntitySet="Tbl_College" />
             <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_Student" Association="Self.FK_Tbl_TakeTurn_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" Association="Self.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TurnTimeSheet_Tbl_Turn" Association="Self.FK_Tbl_TurnTimeSheet_Tbl_Turn">
+            <End Role="Tbl_Turn" EntitySet="Tbl_Turn" />
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -653,6 +738,9 @@
           <EntitySet Name="Tbl_Role" EntityType="HealthModel.Tbl_Role" />
           <EntitySet Name="Tbl_Student" EntityType="HealthModel.Tbl_Student" />
           <EntitySet Name="Tbl_StudentInfo" EntityType="HealthModel.Tbl_StudentInfo" />
+          <EntitySet Name="Tbl_TakeTurn" EntityType="HealthModel.Tbl_TakeTurn" />
+          <EntitySet Name="Tbl_Turn" EntityType="HealthModel.Tbl_Turn" />
+          <EntitySet Name="Tbl_TurnTimeSheet" EntityType="HealthModel.Tbl_TurnTimeSheet" />
           <EntitySet Name="Tbl_University" EntityType="HealthModel.Tbl_University" />
           <AssociationSet Name="FK_Tbl_Branch_Tbl_Group" Association="HealthModel.FK_Tbl_Branch_Tbl_Group">
             <End Role="Tbl_Group" EntitySet="Tbl_Group" />
@@ -749,6 +837,18 @@
           <AssociationSet Name="FK_Tbl_Student_Tbl_StudentInfo" Association="HealthModel.FK_Tbl_Student_Tbl_StudentInfo">
             <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
             <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_Student" Association="HealthModel.FK_Tbl_TakeTurn_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" Association="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TurnTimeSheet_Tbl_Turn" Association="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn">
+            <End Role="Tbl_Turn" EntitySet="Tbl_Turn" />
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
@@ -923,7 +1023,7 @@
           <Property Name="Question_Guid" Type="Guid" Nullable="false" />
           <Property Name="Question_FSID" Type="Int32" Nullable="false" />
           <Property Name="Question_FormID" Type="Int32" Nullable="false" />
-          <Property Name="Question_Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Question_Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Question_TypeCodeID" Type="Int32" Nullable="false" />
           <Property Name="Question_Lie" Type="Boolean" Nullable="false" />
           <Property Name="Question_IsDelete" Type="Boolean" Nullable="false" />
@@ -973,6 +1073,7 @@
           <Property Name="Student_Info" Type="Boolean" Nullable="false" />
           <Property Name="Student_IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_Student" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_TakeTurn" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_TakeTurn" />
         </EntityType>
         <EntityType Name="Tbl_StudentInfo">
           <Key>
@@ -1009,6 +1110,45 @@
           <NavigationProperty Name="Tbl_Code7" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code7" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
           <NavigationProperty Name="Tbl_College" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_College" FromRole="Tbl_StudentInfo" ToRole="Tbl_College" />
           <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_StudentInfo" ToRole="Tbl_Student" />
+        </EntityType>
+        <EntityType Name="Tbl_TakeTurn">
+          <Key>
+            <PropertyRef Name="TT_ID" />
+          </Key>
+          <Property Name="TT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TT_Guid" Type="Guid" Nullable="false" />
+          <Property Name="TT_StudentID" Type="Int32" Nullable="false" />
+          <Property Name="TT_TTSID" Type="Int32" Nullable="false" />
+          <Property Name="TT_IsPresent" Type="Boolean" Nullable="false" />
+          <Property Name="TT_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" FromRole="Tbl_TakeTurn" ToRole="Tbl_Student" />
+          <NavigationProperty Name="Tbl_TurnTimeSheet" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" FromRole="Tbl_TakeTurn" ToRole="Tbl_TurnTimeSheet" />
+        </EntityType>
+        <EntityType Name="Tbl_Turn">
+          <Key>
+            <PropertyRef Name="Turn_ID" />
+          </Key>
+          <Property Name="Turn_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Turn_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Turn_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Turn_Description" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Turn_IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Turn_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_TurnTimeSheet" Relationship="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn" FromRole="Tbl_Turn" ToRole="Tbl_TurnTimeSheet" />
+        </EntityType>
+        <EntityType Name="Tbl_TurnTimeSheet">
+          <Key>
+            <PropertyRef Name="TTS_ID" />
+          </Key>
+          <Property Name="TTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TTS_Guid" Type="Guid" Nullable="false" />
+          <Property Name="TTS_TurnID" Type="Int32" Nullable="false" />
+          <Property Name="TTS_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TTS_MaxSize" Type="Int32" Nullable="false" />
+          <Property Name="TTS_IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="TTS_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_TakeTurn" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" FromRole="Tbl_TurnTimeSheet" ToRole="Tbl_TakeTurn" />
+          <NavigationProperty Name="Tbl_Turn" Relationship="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn" FromRole="Tbl_TurnTimeSheet" ToRole="Tbl_Turn" />
         </EntityType>
         <EntityType Name="Tbl_University">
           <Key>
@@ -1309,6 +1449,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_Student">
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_TakeTurn" Role="Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+          <End Type="HealthModel.Tbl_TurnTimeSheet" Role="Tbl_TurnTimeSheet" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_TakeTurn" Role="Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_TTSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TurnTimeSheet_Tbl_Turn">
+          <End Type="HealthModel.Tbl_Turn" Role="Tbl_Turn" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_TurnTimeSheet" Role="Tbl_TurnTimeSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Turn">
+              <PropertyRef Name="Turn_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_TurnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1541,6 +1717,43 @@
                 <ScalarProperty Name="SI_Name" ColumnName="SI_Name" />
                 <ScalarProperty Name="SI_Guid" ColumnName="SI_Guid" />
                 <ScalarProperty Name="SI_ID" ColumnName="SI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_TakeTurn">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_TakeTurn">
+              <MappingFragment StoreEntitySet="Tbl_TakeTurn">
+                <ScalarProperty Name="TT_IsDelete" ColumnName="TT_IsDelete" />
+                <ScalarProperty Name="TT_IsPresent" ColumnName="TT_IsPresent" />
+                <ScalarProperty Name="TT_TTSID" ColumnName="TT_TTSID" />
+                <ScalarProperty Name="TT_StudentID" ColumnName="TT_StudentID" />
+                <ScalarProperty Name="TT_Guid" ColumnName="TT_Guid" />
+                <ScalarProperty Name="TT_ID" ColumnName="TT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Turn">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Turn">
+              <MappingFragment StoreEntitySet="Tbl_Turn">
+                <ScalarProperty Name="Turn_IsDelete" ColumnName="Turn_IsDelete" />
+                <ScalarProperty Name="Turn_IsActive" ColumnName="Turn_IsActive" />
+                <ScalarProperty Name="Turn_Description" ColumnName="Turn_Description" />
+                <ScalarProperty Name="Turn_Name" ColumnName="Turn_Name" />
+                <ScalarProperty Name="Turn_Guid" ColumnName="Turn_Guid" />
+                <ScalarProperty Name="Turn_ID" ColumnName="Turn_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_TurnTimeSheet">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_TurnTimeSheet">
+              <MappingFragment StoreEntitySet="Tbl_TurnTimeSheet">
+                <ScalarProperty Name="TTS_IsDelete" ColumnName="TTS_IsDelete" />
+                <ScalarProperty Name="TTS_IsActive" ColumnName="TTS_IsActive" />
+                <ScalarProperty Name="TTS_MaxSize" ColumnName="TTS_MaxSize" />
+                <ScalarProperty Name="TTS_Name" ColumnName="TTS_Name" />
+                <ScalarProperty Name="TTS_TurnID" ColumnName="TTS_TurnID" />
+                <ScalarProperty Name="TTS_Guid" ColumnName="TTS_Guid" />
+                <ScalarProperty Name="TTS_ID" ColumnName="TTS_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
