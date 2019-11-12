@@ -12,7 +12,6 @@ namespace Wtiau.Health.Web.Controllers
     {
         HealthEntities db = new HealthEntities();
 
-        // GET: PortalForms
         public ActionResult Index()
         {
             return View();
@@ -21,8 +20,6 @@ namespace Wtiau.Health.Web.Controllers
         [HttpGet]
         public ActionResult ShowForm(string ID)
         {
-
-
             var F = db.Tbl_Form.Where(a => a.Form_IsDelete == false && a.Form_Guid.ToString() == ID).SingleOrDefault();
 
             if (F != null)
@@ -34,7 +31,6 @@ namespace Wtiau.Health.Web.Controllers
                 };
 
                 _Form.Steps = new List<Model_Steps>();
-
 
                 List<Model_Steps> _Steps = new List<Model_Steps>();
 
@@ -90,26 +86,32 @@ namespace Wtiau.Health.Web.Controllers
         public ActionResult ShowForm(FormCollection model)
         {
             int? student_id = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault().Student_ID;
+
             if (student_id.HasValue)
             {
                 Tbl_Form _form = new Tbl_Form();
+
                 int i = 1;
+
                 foreach (string key in model.AllKeys)
                 {
                     if (key == "ID")
                     {
-                        _form = db.Tbl_Form.Where(a => a.Form_IsDelete == false && a.Form_Guid.ToString() == model[key]).SingleOrDefault();
+                        string q = model[key];
+                        _form = db.Tbl_Form.Where(a => a.Form_IsDelete == false && a.Form_Guid.ToString() == q).SingleOrDefault();
                     }
                     else
                     {
                         if (_form != null)
                         {
                             Guid guid;
+
                             if (Guid.TryParse(key, out guid))
                             {
                                 string q = model[key];
 
                                 Tbl_FormAnswer _answer = new Tbl_FormAnswer();
+                                _answer.FA_Guid = Guid.NewGuid();
                                 _answer.FA_FormID = _form.Form_ID;
                                 _answer.FA_StudentID = student_id.Value;
 
@@ -120,9 +122,8 @@ namespace Wtiau.Health.Web.Controllers
                                 foreach (string item in ANS)
                                 {
                                     Tbl_FormAnswerResponse _response = new Tbl_FormAnswerResponse();
-
+                                    _response.FAR_Guid = Guid.NewGuid();
                                     _response.FAR_ResponseID = db.Tbl_Response.Where(a => a.Response_Guid.ToString() == item).SingleOrDefault().Response_ID;
-
                                     _response.Tbl_FormAnswer = _answer;
 
                                     db.Tbl_FormAnswerResponse.Add(_response);
@@ -133,8 +134,27 @@ namespace Wtiau.Health.Web.Controllers
                         }
                     }
                 }
+
                 i = 0;
+
+                if (Convert.ToBoolean(db.SaveChanges() > 0))
+                {
+                    TempData["TosterState"] = "success";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
+
+                    return RedirectToAction("Index", "Portal");
+                }
+                else
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "خطا";
+
+                    return RedirectToAction("ShowForm", new { ID = _form.Form_Guid });
+                }
             }
+
             return View();
         }
     }
