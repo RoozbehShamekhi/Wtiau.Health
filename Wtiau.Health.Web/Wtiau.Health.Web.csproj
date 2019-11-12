@@ -1256,6 +1256,8 @@
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StepController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TimeSheetController.cs" />
+    <Compile Include="Controllers\TurnController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1437,6 +1439,8 @@
     <Folder Include="Scripts\Plugins\ckfinder\plugins\watermark\bin\Debug\" />
     <Folder Include="Scripts\Plugins\ckfinder\plugins\watermark\bin\Release\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\TimeSheet\" />
+    <Folder Include="Views\Turn\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
