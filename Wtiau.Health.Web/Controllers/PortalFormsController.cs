@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Collections.Generic;
-using System.Net;
+using System.Data;
+using System.Linq;
 using System.Web.Mvc;
 using Wtiau.Health.Web.Models.Domian;
 using Wtiau.Health.Web.Models.ViewModels;
@@ -25,22 +23,22 @@ namespace Wtiau.Health.Web.Controllers
         {
 
 
-            var F = db.Tbl_Form.Where(a =>  a.Form_Guid.ToString() == ID).SingleOrDefault();
+            var F = db.Tbl_Form.Where(a => a.Form_IsDelete == false && a.Form_Guid.ToString() == ID).SingleOrDefault();
 
             if (F != null)
             {
                 Model_Form _Form = new Model_Form()
                 {
-                    Name = F.Form_Display,
+                    Name = F.Form_Name,
                     ID = F.Form_ID,
                 };
 
-                _Form.Steps = new List<Model_Steps>(); 
+                _Form.Steps = new List<Model_Steps>();
 
 
                 List<Model_Steps> _Steps = new List<Model_Steps>();
 
-                foreach (var S_item in F.Tbl_FormStep.ToList())
+                foreach (var S_item in F.Tbl_FormStep.Where(a => a.FS_IsDelete == false).ToList())
                 {
                     Model_Steps _Step = new Model_Steps()
                     {
@@ -51,18 +49,19 @@ namespace Wtiau.Health.Web.Controllers
 
                     List<Model_Questions> _Questions = new List<Model_Questions>();
 
-                    foreach (var Q_item in S_item.Tbl_Question.ToList())
+                    foreach (var Q_item in S_item.Tbl_Question.Where(a => a.Question_IsDelete == false).ToList())
                     {
 
                         Model_Questions _Question = new Model_Questions()
                         {
                             Titel = Q_item.Question_Title,
                             type = Q_item.Question_TypeCodeID,
+                            Name = Q_item.Question_Guid.ToString(),
                         };
 
                         _Question.Responses = new List<Model_Responses>();
 
-                        foreach (var R_item in Q_item.Tbl_Response.ToList())
+                        foreach (var R_item in Q_item.Tbl_Response.Where(a => a.Response_IsDelete == false).ToList())
                         {
                             _Question.Responses.Add(new Model_Responses()
                             {
@@ -88,9 +87,54 @@ namespace Wtiau.Health.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShowForm( FormCollection model)
+        public ActionResult ShowForm(FormCollection model)
         {
-           var x = model;
+            int? student_id = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault().Student_ID;
+            if (student_id.HasValue)
+            {
+                Tbl_Form _form = new Tbl_Form();
+                int i = 1;
+                foreach (string key in model.AllKeys)
+                {
+                    if (key == "ID")
+                    {
+                        _form = db.Tbl_Form.Where(a => a.Form_IsDelete == false && a.Form_Guid.ToString() == model[key]).SingleOrDefault();
+                    }
+                    else
+                    {
+                        if (_form != null)
+                        {
+                            Guid guid;
+                            if (Guid.TryParse(key, out guid))
+                            {
+                                string q = model[key];
+
+                                Tbl_FormAnswer _answer = new Tbl_FormAnswer();
+                                _answer.FA_FormID = _form.Form_ID;
+                                _answer.FA_StudentID = student_id.Value;
+
+                                db.Tbl_FormAnswer.Add(_answer);
+
+                                string[] ANS = q.Split(',');
+
+                                foreach (string item in ANS)
+                                {
+                                    Tbl_FormAnswerResponse _response = new Tbl_FormAnswerResponse();
+
+                                    _response.FAR_ResponseID = db.Tbl_Response.Where(a => a.Response_Guid.ToString() == item).SingleOrDefault().Response_ID;
+
+                                    _response.Tbl_FormAnswer = _answer;
+
+                                    db.Tbl_FormAnswerResponse.Add(_response);
+                                }
+
+                                i++;
+                            }
+                        }
+                    }
+                }
+                i = 0;
+            }
             return View();
         }
     }

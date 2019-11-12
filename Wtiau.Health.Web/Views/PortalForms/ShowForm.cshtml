@@ -10,49 +10,76 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.ID)
 
+
+
     <div class="panel panel-default" style="margin: 0 auto;max-width:1000px;">
         <div class="panel-body">
 
-            <h4>@Model.Name</h4>
+            <div class="text-center">
+                <h3>@Model.Name</h3>
+            </div>
             <hr />
 
 
 
+            @{
+                int QN = 0;
+            }
 
             @foreach (var S in Model.Steps)
             {
 
-                @S.Name
-                <br />
+                <h4>@S.Name</h4>
+
                 int i = 0;
                 foreach (var Q in S.Questions)
                 {
-                    @Q.Titel
                     i++;
-                    <br />
+                    QN++;
+                    <p class="form-show-step-question"> @QN.ToString() - @Q.Titel</p>
+                    <div class="form-group form-show-step-question-response">
 
-                    foreach (var R in Q.Responses)
-                    {
-                        <input type="radio" name="Q+@i.ToString() " value="@R.Value" />
-                        @R.Text
+                        @if (Q.type == 3)
+                        {
+
+                            foreach (var R in Q.Responses)
+                            {
+                                <div>
+                                    <input type="radio" name="@Q.Name " value="@R.Value" required data-msg="باید به سوال @QN جواب داده شود" />
+                                    @R.Text
+                                </div>
+                            }
+                        }
+                        else
+                        {
+
+                            foreach (var R in Q.Responses)
+                            {
+                                <div>
+                                    <input type="checkbox" name="@Q.Name " value="@R.Value" required data-msg="باید به سوال @QN جواب داده شود" />
+                                    @R.Text
+                                </div>
 
 
-                    }
-                    <br />
+                            }
+                        }
+
+
+                    </div>
                 }
 
-                <br />
-                <br />
                 <br />
             }
 
         </div>
-    </div>
-    <div class="">
-        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
-        <button class="btn btn-success modal-btn-Dual pull-right " type="submit" name="btn-Delete">تایید</button>
-    </div>
-    <div class="clearfix"></div>
 
+        @Html.ValidationSummary(false)
+        <div class="">
 
+            <button class="btn btn-success btn-block " type="submit" name="btn-Delete">ثبت</button>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
 }
+

@@ -22,6 +22,7 @@ namespace Wtiau.Health.Web.Models.ViewModels
         public string Titel { get; set; }
         public List<Model_Responses> Responses { get; set; }
         public int type { get; set; }
+        public string Name { get; set; }
         public string [] Response { get; set; }
     }
     public class Model_Responses

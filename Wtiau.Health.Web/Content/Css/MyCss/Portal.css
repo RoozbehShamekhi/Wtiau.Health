@@ -2,6 +2,7 @@
 body {
     background-image: url('../../Content/Images/bg.jpg');
     font-family: Iransans;
+    text-align:justify;
 }
 
 
@@ -192,6 +193,22 @@ body {
     margin: auto;
     margin-bottom: 20px;
 }
+/*********************************************** FormShow **********************************************/
+.form-show-step-titel{
+
+}
+
+.form-show-step-question {
+    padding-right: 15px;
+}
+
+.form-show-step-question-response {
+    padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 
 
