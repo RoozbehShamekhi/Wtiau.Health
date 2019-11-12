@@ -8,7 +8,7 @@ using Wtiau.Health.Web.Models.ViewModels;
 
 namespace Wtiau.Health.Web.Controllers
 {
-    [Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class StepController : Controller
     {
         HealthEntities db = new HealthEntities();
@@ -23,6 +23,8 @@ namespace Wtiau.Health.Web.Controllers
                 QuestionCount = db.Tbl_FormStep.Where(xx => xx.FS_FormID == id).FirstOrDefault().Tbl_Question.Where(xx => xx.Question_IsDelete == false).ToList().Count,
                 Order = x.FS_Order
             }).ToList();
+
+            ViewBag.FormID = id;
 
             return View(_student);
         }

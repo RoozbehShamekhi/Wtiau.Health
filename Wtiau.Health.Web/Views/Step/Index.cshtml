@@ -7,6 +7,10 @@
 
 <div class="panel panel-body panel-default  navigation">
 
+    <div class="pull-left" style="margin-left: 10px;">
+        <a href="@Url.Action("Index", "Form")"><i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i></a>
+    </div>
+
     <div class="pull-left">
         <h4 class="navigation-title"><b>لیست مراحل</b></h4>
     </div>
@@ -59,9 +63,7 @@
                         </td>
 
                         <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "Question", new { id = item.ID })"> </a>
-                            <a class="btn btn-primary btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "Step", new { id = item.ID })"> </a>
-                            <a class="btn btn-success btn-sm glyphicon glyphicon-plus" onclick="AddStep(@item.ID)"> </a>
+                            <a class="btn btn-warning btn-sm glyphicon glyphicon-edit" onclick="Edit(@item.ID)"> </a>
                             <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="Delete(@item.ID)"> </a>
                         </td>
                     </tr>
