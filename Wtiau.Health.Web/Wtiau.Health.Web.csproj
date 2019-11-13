@@ -148,7 +148,6 @@
     <Content Include="Content\Plugins\MdBootstrapPersianDateTimePicker\jquery.Bootstrap-PersianDateTimePicker.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.carousel.min.css" />
     <Content Include="Content\Plugins\Owl.Carousel\owl.theme.default.min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.eot" />
     <Content Include="Content\Fonts\font awesome\webfonts\fa-brands-400.ttf" />
@@ -188,10 +187,6 @@
     <Content Include="Content\Plugins\jQuery.toastr\toastr.less" />
     <Content Include="Content\Plugins\jQuery.toastr\toastr.scss" />
     <Content Include="App_Data\Excel\شماره دانشجویی و کد ملی بدون مقطع.xlsx" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <EntityDeploy Include="Models\Domian\WTIAU-Health.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WTIAU-Health.Designer.cs</LastGenOutput>
@@ -1251,6 +1246,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\PortalFormsController.cs" />
+    <Compile Include="Controllers\PortalStudentInfoController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
@@ -1343,10 +1339,11 @@
     <Compile Include="Models\Plugins\Microsoft_Excel.cs" />
     <Compile Include="Models\Plugins\PersianDateExtensionMethods.cs" />
     <Compile Include="Models\Repository\Rep_CodeGroup.cs" />
+    <Compile Include="Models\Repository\Rep_SelectItems.cs" />
     <Compile Include="Models\Repository\Rep_Student.cs" />
     <Compile Include="Models\Repository\Rep_User.cs" />
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
-    <Compile Include="Models\ViewModels\Modal_QuestionAdd.cs" />
+    <Compile Include="Models\ViewModels\Model_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
     <Compile Include="Models\ViewModels\Model_Form.cs" />
     <Compile Include="Models\ViewModels\Model_FormCreate.cs" />
@@ -1363,7 +1360,14 @@
     <Compile Include="Models\ViewModels\Model_ResponseAdd.cs" />
     <Compile Include="Models\ViewModels\Model_ResponseList.cs" />
     <Compile Include="Models\ViewModels\Model_SetActiveness.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentInfo.cs" />
     <Compile Include="Models\ViewModels\Model_StudentList.cs" />
+    <Compile Include="Models\ViewModels\Model_TimeSheetAdd.cs" />
+    <Compile Include="Models\ViewModels\Model_TimeSheetEdit.cs" />
+    <Compile Include="Models\ViewModels\Model_TimeSheetList.cs" />
+    <Compile Include="Models\ViewModels\Model_TurnAdd.cs" />
+    <Compile Include="Models\ViewModels\Model_TurnEdit.cs" />
+    <Compile Include="Models\ViewModels\Model_TurnList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1418,6 +1422,15 @@
     <Content Include="Views\Question\QuestionEdit.cshtml" />
     <Content Include="Views\Question\QuestionDelete.cshtml" />
     <Content Include="Views\PortalForms\ShowForm.cshtml" />
+    <Content Include="Views\Turn\Index.cshtml" />
+    <Content Include="Views\Turn\TurnAdd.cshtml" />
+    <Content Include="Views\Turn\TurnEdit.cshtml" />
+    <Content Include="Views\Turn\TurnDelete.cshtml" />
+    <Content Include="Views\TimeSheet\Index.cshtml" />
+    <Content Include="Views\TimeSheet\TimeSheetAdd.cshtml" />
+    <Content Include="Views\TimeSheet\TimeSheetDelete.cshtml" />
+    <Content Include="Views\TimeSheet\TimeSheetEdit.cshtml" />
+    <Content Include="Views\PortalStudentInfo\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1439,8 +1452,6 @@
     <Folder Include="Scripts\Plugins\ckfinder\plugins\watermark\bin\Debug\" />
     <Folder Include="Scripts\Plugins\ckfinder\plugins\watermark\bin\Release\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\TimeSheet\" />
-    <Folder Include="Views\Turn\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

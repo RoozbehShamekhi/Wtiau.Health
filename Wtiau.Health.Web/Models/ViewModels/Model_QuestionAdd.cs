@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Wtiau.Health.Web.Models.ViewModels
 {
-    public class Modal_QuestionAdd
+    public class Model_QuestionAdd
     {
         public int ID { get; set; }
 
