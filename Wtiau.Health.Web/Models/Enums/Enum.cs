@@ -17,6 +17,11 @@ namespace Wtiau.Health.Web
     {
         Gender = 1,
         ResponseType = 2,
-
+        Nationality = 4,
+        Marriage = 5,
+        Grad =6,
+        BloodGroup = 7,
+        Insurance = 8,
+        HomeType = 9,
     }
 }

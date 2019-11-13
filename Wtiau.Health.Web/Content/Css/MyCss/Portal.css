@@ -17,6 +17,10 @@ body {
 }
 
 /*********************************************** navbar ********************************************/
+.navbar-fixed-top{
+    z-index:2500
+}
+
 .navbar-inverse {
     background-color: #222d32;
     height: 60px;

@@ -24,7 +24,7 @@ namespace Wtiau.Health.Web.Models.Repository
             return list.AsEnumerable();
         }
 
-        public static IEnumerable<SelectListItem> Get_AllCodesWithGroupWithGUID(int id)
+        public static IEnumerable<SelectListItem> Get_AllCodesWithGroupID(int id)
         {
             List<SelectListItem> list = new List<SelectListItem>();
 

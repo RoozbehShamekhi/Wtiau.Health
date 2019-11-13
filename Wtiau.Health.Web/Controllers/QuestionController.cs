@@ -39,7 +39,7 @@ namespace Wtiau.Health.Web.Controllers
         [HttpGet]
         public ActionResult QuestionCreate(int id)
         {
-            Modal_QuestionAdd model = new Modal_QuestionAdd()
+            Model_QuestionAdd model = new Model_QuestionAdd()
             {
                 ID = id
             };
@@ -48,7 +48,7 @@ namespace Wtiau.Health.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult QuestionCreate(Modal_QuestionAdd model)
+        public ActionResult QuestionCreate(Model_QuestionAdd model)
         {
             Tbl_Question _Question = new Tbl_Question()
             {
