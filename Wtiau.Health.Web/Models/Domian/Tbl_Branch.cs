@@ -22,11 +22,12 @@ namespace Wtiau.Health.Web.Models.Domian
     
         public int Branch_ID { get; set; }
         public System.Guid Branch_Guid { get; set; }
-        public int Branch_GroupID { get; set; }
-        public string Branch_Name { get; set; }
+        public Nullable<int> Branch_GroupID { get; set; }
         public string Branch_Display { get; set; }
         public bool Branch_IsDelete { get; set; }
+        public int Branch_GradeID { get; set; }
     
+        public virtual Tbl_Grad Tbl_Grad { get; set; }
         public virtual Tbl_Group Tbl_Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_StudentInfo> Tbl_StudentInfo { get; set; }

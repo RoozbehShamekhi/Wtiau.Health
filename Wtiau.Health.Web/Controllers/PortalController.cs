@@ -11,6 +11,11 @@ namespace Wtiau.Health.Web.Controllers
         // GET: Portal
         public ActionResult Index()
         {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("PortalLogin", "Account");
+            }
             return View();
         }
     }

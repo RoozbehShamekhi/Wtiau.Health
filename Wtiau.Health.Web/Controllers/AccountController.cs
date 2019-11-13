@@ -106,7 +106,7 @@ namespace Wtiau.Health.Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        [Authorize(Roles ="SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public ActionResult Register()
         {
@@ -174,8 +174,31 @@ namespace Wtiau.Health.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                var q = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault();
+                if (q != null)
+                {
+                    if (!q.Student_Info)
+                    {
+                        return RedirectToAction("index", "PortalStudentInfo");
+                    }
+                    else if (!q.Student_Form1)
+                    {
+                        return RedirectToAction("ShowForm", "PortalForms", new { ID = "c78afdf3-a647-4e54-95e8-94869576b7e5" });
+                    }
+                    else if (!q.Student_Form2)
+                    {
+                        return RedirectToAction("ShowForm", "PortalForms", new { ID = "de54c8ba-6032-4dc5-9241-2e6614a9840d" });
+                    }
+                    else if (!q.Student_TakeTurn)
+                    {
+                        return RedirectToAction("index", "PortalTakeTurn");
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "Portal");
+                    }
+                }
                 return RedirectToAction("index", "Portal");
-
             }
             return View();
         }
@@ -226,7 +249,37 @@ namespace Wtiau.Health.Web.Controllers
                 TempData["TosterType"] = TosterType.Maseage;
                 TempData["TosterMassage"] = "خوش آمدید";
 
-                return RedirectToAction("index", "Portal");
+                if (q != null)
+                {
+                    if (!q.Student_Info)
+                    {
+                        return RedirectToAction("index", "PortalStudentInfo");
+                    }
+                    else if (!q.Student_Form1)
+                    {
+                        return RedirectToAction("ShowForm", "PortalForms", new { ID = "c78afdf3-a647-4e54-95e8-94869576b7e5" });
+                    }
+                    else if (!q.Student_Form2)
+                    {
+                        return RedirectToAction("ShowForm", "PortalForms", new { ID = "de54c8ba-6032-4dc5-9241-2e6614a9840d" });
+                    }
+                    else if (!q.Student_TakeTurn)
+                    {
+                        return RedirectToAction("index", "PortalTakeTurn");
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "Portal");
+                    }
+                }
+                else
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "خطا";
+                    return View();
+                }
+
             }
             else
             {
