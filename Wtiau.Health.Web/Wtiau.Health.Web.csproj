@@ -1247,6 +1247,7 @@
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\PortalFormsController.cs" />
     <Compile Include="Controllers\PortalStudentInfoController.cs" />
+    <Compile Include="Controllers\PortalTakeTurnController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
@@ -1285,6 +1286,9 @@
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_FormStep.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\Tbl_Grad.cs">
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Domian\Tbl_Group.cs">
@@ -1343,6 +1347,7 @@
     <Compile Include="Models\Repository\Rep_Student.cs" />
     <Compile Include="Models\Repository\Rep_User.cs" />
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
+    <Compile Include="Models\ViewModels\Model_DropDown.cs" />
     <Compile Include="Models\ViewModels\Model_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
     <Compile Include="Models\ViewModels\Model_Form.cs" />
@@ -1362,6 +1367,7 @@
     <Compile Include="Models\ViewModels\Model_SetActiveness.cs" />
     <Compile Include="Models\ViewModels\Model_StudentInfo.cs" />
     <Compile Include="Models\ViewModels\Model_StudentList.cs" />
+    <Compile Include="Models\ViewModels\Model_TakeTurn.cs" />
     <Compile Include="Models\ViewModels\Model_TimeSheetAdd.cs" />
     <Compile Include="Models\ViewModels\Model_TimeSheetEdit.cs" />
     <Compile Include="Models\ViewModels\Model_TimeSheetList.cs" />
@@ -1431,6 +1437,7 @@
     <Content Include="Views\TimeSheet\TimeSheetDelete.cshtml" />
     <Content Include="Views\TimeSheet\TimeSheetEdit.cshtml" />
     <Content Include="Views\PortalStudentInfo\Index.cshtml" />
+    <Content Include="Views\PortalTakeTurn\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

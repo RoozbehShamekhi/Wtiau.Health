@@ -35,6 +35,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual DbSet<Tbl_FormAnswer> Tbl_FormAnswer { get; set; }
         public virtual DbSet<Tbl_FormAnswerResponse> Tbl_FormAnswerResponse { get; set; }
         public virtual DbSet<Tbl_FormStep> Tbl_FormStep { get; set; }
+        public virtual DbSet<Tbl_Grad> Tbl_Grad { get; set; }
         public virtual DbSet<Tbl_Group> Tbl_Group { get; set; }
         public virtual DbSet<Tbl_Login> Tbl_Login { get; set; }
         public virtual DbSet<Tbl_Question> Tbl_Question { get; set; }

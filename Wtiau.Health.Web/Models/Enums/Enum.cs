@@ -23,5 +23,6 @@ namespace Wtiau.Health.Web
         BloodGroup = 7,
         Insurance = 8,
         HomeType = 9,
+        BirthYear = 10,
     }
 }

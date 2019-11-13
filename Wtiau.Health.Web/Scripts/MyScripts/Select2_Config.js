@@ -3,5 +3,6 @@
     language: "fa",
     dir: "rtl",
     minimumResultsForSearch: 6,
-    placeholder:"انتخاب کنید"
+    placeholder: "انتخاب کنید",
+    //allowClear: true
 });

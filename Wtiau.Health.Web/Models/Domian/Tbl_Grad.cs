@@ -12,20 +12,22 @@ namespace Wtiau.Health.Web.Models.Domian
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Group
+    public partial class Tbl_Grad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Group()
+        public Tbl_Grad()
         {
             this.Tbl_Branch = new HashSet<Tbl_Branch>();
         }
     
-        public int Group_ID { get; set; }
-        public System.Guid Group_Guid { get; set; }
-        public string Group_Display { get; set; }
-        public bool Group_IsDelete { get; set; }
+        public int Grade_ID { get; set; }
+        public System.Guid Grade_Guid { get; set; }
+        public string Grade_Display { get; set; }
+        public int Grade_CollageID { get; set; }
+        public bool Grade_IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Branch> Tbl_Branch { get; set; }
+        public virtual Tbl_College Tbl_College { get; set; }
     }
 }

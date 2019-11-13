@@ -17,17 +17,17 @@ namespace Wtiau.Health.Web.Models.Domian
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tbl_College()
         {
-            this.Tbl_StudentInfo = new HashSet<Tbl_StudentInfo>();
+            this.Tbl_Grad = new HashSet<Tbl_Grad>();
         }
     
         public int College_ID { get; set; }
         public System.Guid College_Guid { get; set; }
         public int College_UniversityID { get; set; }
-        public string College_Name { get; set; }
         public string College_Display { get; set; }
+        public bool College_IsDelete { get; set; }
     
         public virtual Tbl_University Tbl_University { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_StudentInfo> Tbl_StudentInfo { get; set; }
+        public virtual ICollection<Tbl_Grad> Tbl_Grad { get; set; }
     }
 }

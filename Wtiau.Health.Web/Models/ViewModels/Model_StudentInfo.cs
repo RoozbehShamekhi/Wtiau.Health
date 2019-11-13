@@ -25,8 +25,8 @@ namespace Wtiau.Health.Web.Models.ViewModels
 
         [Display(Name = "موبایل")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        [MinLength(9, ErrorMessage = "شماره موبایل نامعتبر")]
-        [MaxLength(9, ErrorMessage = "شماره موبایل نامعتبر")]
+        [MinLength(11, ErrorMessage = "شماره موبایل نامعتبر")]
+        [MaxLength(11, ErrorMessage = "شماره موبایل نامعتبر")]
         public string Mobile { get; set; }
 
         [Display(Name = "تلفن ثابت")]

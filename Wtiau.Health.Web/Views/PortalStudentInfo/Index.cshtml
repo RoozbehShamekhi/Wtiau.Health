@@ -53,12 +53,9 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.BirthYear, htmlAttributes: new { @class = "control-label" })
-                            <div class="input-group">
-                                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                @Html.EditorFor(model => model.BirthYear, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            @Html.ValidationMessageFor(model => model.BirthYear, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.BirthYear, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.BirthYear), new { @class = "form-control Select2_Normal" })
                         </div>
+                        @Html.ValidationMessageFor(model => model.BirthYear, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-4">
@@ -137,7 +134,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.University, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.University, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "لطفا کاربر مورد نظر را انتخاب کنید ..." } }, new { @class = "form-control Select2_Normal" })
+                            @Html.DropDownListFor(model => model.University, new Rep_SelectItems().Get_AllUnivercity(), new { @class = "form-control Select2_Normal" })
                         </div>
                         @Html.ValidationMessageFor(model => model.University, "", new { @class = "text-danger" })
                     </div>
@@ -145,7 +142,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.College, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.College, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "لطفا کاربر مورد نظر را انتخاب کنید ..." } }, new { @class = "form-control Select2_Normal" })
+                            @Html.DropDownListFor(model => model.College, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "", } }, new { @class = "College form-control Select2_Normal" })
                         </div>
                         @Html.ValidationMessageFor(model => model.College, "", new { @class = "text-danger" })
                     </div>
@@ -153,23 +150,15 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Grad, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.Grad, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.Grad), new { @class = "form-control Select2_Normal" })
+                            @Html.DropDownListFor(model => model.Grad, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "", } }, new { @class = " Grad form-control Select2_Normal" })
                         </div>
                         @Html.ValidationMessageFor(model => model.Grad, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Group, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.Group, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.Gender), new { @class = "form-control Select2_Normal" })
-                        </div>
-                        @Html.ValidationMessageFor(model => model.Group, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
                             @Html.LabelFor(model => model.Branch, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.Branch, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "لطفا کاربر مورد نظر را انتخاب کنید ..." } }, new { @class = "form-control Select2_Normal" })
+                            @Html.DropDownListFor(model => model.Branch, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "", } }, new { @class = "Branch form-control Select2_Normal" })
                         </div>
                         @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "text-danger" })
                     </div>
@@ -208,8 +197,94 @@
                 </div>
 
             </div>
-            <input type="submit" value="Save" class="btn btn-default" />
+            <div>
+                <button class="btn btn-success pull-right" style="width:150px" type="submit" name="btn-Delete">ثبت</button>
+            </div>
         </div>
     </div>
+}
+
+@section Scripts{
+
+    <script>
+
+        $("#University").on("change", function () {
+            var UnivercityID = document.getElementById("University").value;
+
+            console.log(UnivercityID);
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_CollageList?UnivercityID=" + UnivercityID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".College").empty();
+                    $(".College").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".College").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+
+        $("#University").ready(function () {
+            var UnivercityID = document.getElementById("University").value;
+
+            console.log(UnivercityID);
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_CollageList?UnivercityID=" + UnivercityID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".College").empty();
+                    $(".College").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".College").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+
+        $("#College").on("change", function () {
+            var CollegeID = document.getElementById("College").value;
+
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_GradeList?CollageID=" + CollegeID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".Grad").empty();
+                    $(".Grad").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".Grad").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+        $("#Grad").on("change", function () {
+            var GradID = document.getElementById("Grad").value;
+
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_BranchList?GradeID=" + GradID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".Branch").empty();
+                    $(".Branch").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".Branch").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+    </script>
+
 }
 

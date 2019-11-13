@@ -32,10 +32,8 @@ namespace Wtiau.Health.Web.Models.Domian
         public int SI_NationalCodeID { get; set; }
         public int SI_BloodCodeID { get; set; }
         public int SI_InsuranceCodeID { get; set; }
-        public int SI_GradeCodeID { get; set; }
         public int SI_HomeTypeCodeID { get; set; }
         public int SI_MarriageCodeID { get; set; }
-        public int SI_CollegeID { get; set; }
         public int SI_BranchID { get; set; }
         public string SI_BirthdayLocation { get; set; }
         public string SI_BeforeUniversity { get; set; }
@@ -49,8 +47,6 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual Tbl_Code Tbl_Code4 { get; set; }
         public virtual Tbl_Code Tbl_Code5 { get; set; }
         public virtual Tbl_Code Tbl_Code6 { get; set; }
-        public virtual Tbl_Code Tbl_Code7 { get; set; }
-        public virtual Tbl_College Tbl_College { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Student> Tbl_Student { get; set; }
     }

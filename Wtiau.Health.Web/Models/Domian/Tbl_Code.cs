@@ -25,7 +25,6 @@ namespace Wtiau.Health.Web.Models.Domian
             this.Tbl_StudentInfo4 = new HashSet<Tbl_StudentInfo>();
             this.Tbl_StudentInfo5 = new HashSet<Tbl_StudentInfo>();
             this.Tbl_StudentInfo6 = new HashSet<Tbl_StudentInfo>();
-            this.Tbl_StudentInfo7 = new HashSet<Tbl_StudentInfo>();
         }
     
         public int Code_ID { get; set; }
@@ -53,7 +52,5 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual ICollection<Tbl_StudentInfo> Tbl_StudentInfo5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_StudentInfo> Tbl_StudentInfo6 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_StudentInfo> Tbl_StudentInfo7 { get; set; }
     }
 }
