@@ -18,6 +18,12 @@ namespace Wtiau.Health.Web.Controllers
             return View();
         }
 
+
+        public ActionResult AlartForm()
+        {
+            return PartialView();
+        }
+
         [HttpGet]
         public ActionResult ShowForm(string ID)
         {

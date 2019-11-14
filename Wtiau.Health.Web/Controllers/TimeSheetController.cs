@@ -15,7 +15,7 @@ namespace Wtiau.Health.Web.Controllers
         [HttpGet]
         public ActionResult Index(int id)
         {
-            var _timesheet = db.Tbl_TurnTimeSheet.Where(x => x.TTS_IsDelete == false).Select(x => new Model_TimeSheetList
+            var _timesheet = db.Tbl_TurnTimeSheet.Where(x => x.TTS_IsDelete == false && x.TTS_TurnID == id ).Select(x => new Model_TimeSheetList
             {
                 ID = x.TTS_ID,
                 name = x.TTS_Name,
