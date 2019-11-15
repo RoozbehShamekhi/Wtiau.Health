@@ -1,7 +1,7 @@
 ﻿@model Wtiau.Health.Web.Models.ViewModels.Model_Form
 
 @{
-    ViewBag.Title = "ShowForm";
+    ViewBag.Title = "فرم";
     Layout = "~/Views/Shared/_Portal.cshtml";
 }
 
@@ -77,4 +77,25 @@
         <div class="clearfix"></div>
 
     </div>
+}
+
+
+@Html.Partial("_Modal")
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "/PortalForms/AlartForm/",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('اطلاعیه');
+                $('#myModalBody').html(result);
+            });
+
+        });
+    </script>
 }

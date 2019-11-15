@@ -1340,6 +1340,7 @@
       <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\Enum.cs" />
+    <Compile Include="Models\Plugins\ConvertorToEN.cs" />
     <Compile Include="Models\Plugins\Microsoft_Excel.cs" />
     <Compile Include="Models\Plugins\PersianDateExtensionMethods.cs" />
     <Compile Include="Models\Repository\Rep_CodeGroup.cs" />
@@ -1438,6 +1439,7 @@
     <Content Include="Views\TimeSheet\TimeSheetEdit.cshtml" />
     <Content Include="Views\PortalStudentInfo\Index.cshtml" />
     <Content Include="Views\PortalTakeTurn\Index.cshtml" />
+    <Content Include="Views\PortalForms\AlartForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

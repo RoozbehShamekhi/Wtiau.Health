@@ -54,11 +54,11 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         public string Insurance { get; set; }
 
-        [Display(Name = "مقطع تحصیلی")]
+        [Display(Name = "مقطع تحصیلی پذیرفته شده در دانشگاه")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         public string Grad { get; set; }
 
-        [Display(Name = "نوع خانه")]
+        [Display(Name = "محل سکونت دوره دانشجویی")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         public string HomeType { get; set; }
 
@@ -86,7 +86,7 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         public string BirthLocation { get; set; }
 
-        [Display(Name = "دانشگاه قبلی")]
+        [Display(Name = "در صورتی که مقطع تحصیلی دانشگاهی قبلی داشته اید؟ ذکر نمایید")]
         public string BeforeUniversity { get; set; }
 
 

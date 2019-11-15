@@ -9,6 +9,8 @@ using System.Web.Security;
 using Wtiau.Health.Web.Models.Domian;
 using Wtiau.Health.Web.Models.ViewModels;
 using Wtiau.Health.Web.Models.Repository;
+using Wtiau.Health.Web.Models.Plugins;
+
 
 namespace Wtiau.Health.Web.Controllers
 {
@@ -220,6 +222,10 @@ namespace Wtiau.Health.Web.Controllers
                 return View("PortalLogin", model);
 
             }
+
+            model.NationalCode = model.NationalCode.PersianToEnglish();
+            model.StudentCode = model.StudentCode.PersianToEnglish();
+
             var q = db.Tbl_Student.Where(a => a.Student_Code == model.StudentCode).SingleOrDefault();
 
             if (q == null)
