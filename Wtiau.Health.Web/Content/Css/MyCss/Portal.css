@@ -11,7 +11,7 @@ body {
 }
 
 .modal-content {
-    top: 15vh;
+    top: 20vh;
     border-radius: 0px;
     background-color: #222D32;
     padding-bottom: 34px;
@@ -294,5 +294,10 @@ body {
 
     .navbar-custom-menu > .navbar-nav > li {
         float: right;
+    }
+
+
+    .navbar-nav {
+        margin: 0px;
     }
 }

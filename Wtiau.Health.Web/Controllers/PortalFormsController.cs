@@ -115,7 +115,9 @@ namespace Wtiau.Health.Web.Controllers
         [HttpPost]
         public ActionResult ShowForm(FormCollection model)
         {
-            int? student_id = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault().Student_ID;
+            var _student = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault();
+
+            int? student_id = _student.Student_ID;
 
             if (student_id.HasValue)
             {
@@ -129,6 +131,21 @@ namespace Wtiau.Health.Web.Controllers
                     {
                         string q = model[key];
                         _form = db.Tbl_Form.Where(a => a.Form_IsDelete == false && a.Form_Guid.ToString() == q).SingleOrDefault();
+
+                        if (_form.Form_Guid.ToString() == "c78afdf3-a647-4e54-95e8-94869576b7e5")
+                        {
+                            if (_student.Student_Form1)
+                            {
+                                return RedirectToAction("ShowForm", new { ID = "de54c8ba-6032-4dc5-9241-2e6614a9840d" });
+                            }
+                        }
+                        else if (_form.Form_Guid.ToString() == "de54c8ba-6032-4dc5-9241-2e6614a9840d")
+                        {
+                            if (_student.Student_Form2)
+                            {
+                                return RedirectToAction("index", "PortalTakeTurn");
+                            }
+                        }
                     }
                     else
                     {

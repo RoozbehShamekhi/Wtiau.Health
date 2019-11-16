@@ -132,6 +132,7 @@
     <Content Include="Content\Images\abstract-user-flat-3.png" />
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\logo-uni.png" />
+    <Content Include="Content\Images\LogoTitel.png" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap-theme.css" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap-theme.min.css" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap.css" />
@@ -194,6 +195,7 @@
     <Content Include="Models\Domian\WTIAU-Health.edmx.diagram">
       <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Data\Excel\TurnReportTemplate.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\WTIAU-Health.Context.tt">
@@ -1253,6 +1255,7 @@
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StepController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentsTimeSheetController.cs" />
     <Compile Include="Controllers\TimeSheetController.cs" />
     <Compile Include="Controllers\TurnController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1344,10 +1347,12 @@
     <Compile Include="Models\Plugins\Microsoft_Excel.cs" />
     <Compile Include="Models\Plugins\PersianDateExtensionMethods.cs" />
     <Compile Include="Models\Repository\Rep_CodeGroup.cs" />
+    <Compile Include="Models\Repository\Rep_Dashboard.cs" />
     <Compile Include="Models\Repository\Rep_SelectItems.cs" />
     <Compile Include="Models\Repository\Rep_Student.cs" />
     <Compile Include="Models\Repository\Rep_User.cs" />
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
+    <Compile Include="Models\ViewModels\Model_DashBoardInfo.cs" />
     <Compile Include="Models\ViewModels\Model_DropDown.cs" />
     <Compile Include="Models\ViewModels\Model_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
@@ -1368,6 +1373,7 @@
     <Compile Include="Models\ViewModels\Model_SetActiveness.cs" />
     <Compile Include="Models\ViewModels\Model_StudentInfo.cs" />
     <Compile Include="Models\ViewModels\Model_StudentList.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentTakeTimeList.cs" />
     <Compile Include="Models\ViewModels\Model_TakeTurn.cs" />
     <Compile Include="Models\ViewModels\Model_TimeSheetAdd.cs" />
     <Compile Include="Models\ViewModels\Model_TimeSheetEdit.cs" />
@@ -1440,6 +1446,8 @@
     <Content Include="Views\PortalStudentInfo\Index.cshtml" />
     <Content Include="Views\PortalTakeTurn\Index.cshtml" />
     <Content Include="Views\PortalForms\AlartForm.cshtml" />
+    <Content Include="Views\StudentsTimeSheet\Index.cshtml" />
+    <Content Include="Views\StudentsTimeSheet\Excel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

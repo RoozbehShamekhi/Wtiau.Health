@@ -18,6 +18,7 @@ namespace Wtiau.Health.Web.Controllers
         public ActionResult Index()
         {
             var q = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault();
+
             if (q != null)
             {
                 if (q.Student_TakeTurn)
@@ -45,6 +46,14 @@ namespace Wtiau.Health.Web.Controllers
 
             Tbl_TurnTimeSheet _TurnTimeSheet = db.Tbl_TurnTimeSheet.Where(a => a.TTS_ID == ID).SingleOrDefault();
             Tbl_Student _Student = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault();
+
+
+            if (_Student.Student_TakeTurn)
+            {
+                return RedirectToAction("index", "Portal");
+            }
+
+
             if (_TurnTimeSheet.TTS_MaxSize > _TurnTimeSheet.Tbl_TakeTurn.Count())
             {
                 Tbl_TakeTurn _TakeTurn = new Tbl_TakeTurn()
@@ -97,10 +106,7 @@ namespace Wtiau.Health.Web.Controllers
 
             var t = db.Tbl_TurnTimeSheet.Where(a => a.TTS_TurnID == q.Turn_ID).ToList();
 
-
             List<Model_DropDown> list = new List<Model_DropDown>();
-
-
 
             foreach (var item in t)
             {
@@ -109,9 +115,6 @@ namespace Wtiau.Health.Web.Controllers
                     list.Add(new Model_DropDown(item.TTS_ID, item.TTS_Name));
                 }
             }
-
-
-
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

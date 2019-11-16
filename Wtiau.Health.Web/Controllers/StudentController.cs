@@ -32,8 +32,8 @@ namespace Wtiau.Health.Web.Controllers
                 Student_Form1 = x.Student_Form1,
                 Student_Form2 = x.Student_Form1,
                 Student_Turn = x.Student_TakeTurn,
-                Student_Name = x.Student_SIID.HasValue ? "نا معلوم" : x.Tbl_StudentInfo.SI_Name,
-                Student_Family = x.Student_SIID.HasValue ? "نا معلوم" : x.Tbl_StudentInfo.SI_Family,
+                Student_Name = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Name : "نا معلوم",
+                Student_Family = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Family : "نا معلوم",
                 Student_Info = x.Student_SIID.HasValue
 
             }).ToList();
@@ -102,8 +102,8 @@ namespace Wtiau.Health.Web.Controllers
                 Student_Form1 = x.Student_Form1,
                 Student_Form2 = x.Student_Form1,
                 Student_Turn = x.Student_TakeTurn,
-                Student_Name = x.Student_SIID.HasValue ? "نا معلوم" : x.Tbl_StudentInfo.SI_Name,
-                Student_Family = x.Student_SIID.HasValue ? "نا معلوم" : x.Tbl_StudentInfo.SI_Family,
+                Student_Name = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Name: "نا معلوم" ,
+                Student_Family = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Family : "نا معلوم" ,
                 Student_Info = x.Student_SIID.HasValue
 
             }).ToList();
