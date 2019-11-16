@@ -20,11 +20,13 @@ namespace Wtiau.Health.Web.Models.Repository
             if (q != null)
             {
                 Model_AccountInfo infoModel = new Model_AccountInfo();
+
+                infoModel.Name = q.Student_Code;
+
                 if (q.Student_SIID != null)
                 {
                     infoModel.Name = q.Tbl_StudentInfo.SI_Name + " " + q.Tbl_StudentInfo.SI_Family;
                 }
-                infoModel.Name = q.Student_Code;
 
                 infoModel.Role = "دانشجو";
                 return infoModel;

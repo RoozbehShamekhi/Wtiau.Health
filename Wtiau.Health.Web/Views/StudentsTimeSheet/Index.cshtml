@@ -1,20 +1,24 @@
-﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_TimeSheetList>
-@using Wtiau.Health.Web.Models.Repository
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_StudentTakeTimeList>
 
 @{
-    ViewBag.Title = "شیفت های کاری";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+
+
+
+
+
 
 
 <div class="panel panel-body panel-default  navigation">
 
     <div class="pull-left">
-        <h4 class="navigation-title"><b>شیفت های کاری</b></h4>
+        <h4 class="navigation-title"><b>تایم های کاری</b></h4>
     </div>
 
     <div class="pull-right">
-        <a href="javascript:void(0)" onclick="Create(@ViewBag.ID)"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
+        <a href="@Url.Action("Excel","StudentsTimeSheet", new { id = ViewBag.ID })" ><i class="glyphicon glyphicon-cloud-download navigation-btn-icon"></i></a>
     </div>
 
 </div>
@@ -28,10 +32,11 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.name)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.MaxSize)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Size)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Activeness)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Code)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_National)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Family)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.per)</th>
                     <th scope="col" data-orderable="false">کنترل</th>
                 </tr>
             </thead>
@@ -49,23 +54,27 @@
                         <td scope="row">@x</td>
 
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.name) </span>
+                            <span> @Html.DisplayFor(modelItem => item.Student_Code) </span>
                         </td>
 
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.MaxSize) </span>
+                            <span> @Html.DisplayFor(modelItem => item.Student_National) </span>
                         </td>
 
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Size) </span>
+                            <span> @Html.DisplayFor(modelItem => item.Student_Name) </span>
                         </td>
 
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Activeness) </span>
+                            <span> @Html.DisplayFor(modelItem => item.Student_Family) </span>
                         </td>
 
                         <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "StudentsTimeSheet", new { id = item.ID })"> </a>
+                            <span> @Html.DisplayFor(modelItem => item.per) </span>
+                        </td>
+
+                        <td scope="row">
+                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "TimeSheet", new { id = item.ID })"> </a>
                             <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" href="javascript:void(0)" onclick="Edit(@item.ID)"> </a>
                             <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" href="javascript:void(0)" onclick="Delete(@item.ID)"> </a>
                         </td>
@@ -89,36 +98,36 @@
 
         function Delete(id) {
             $.ajax({
-                url: "/TimeSheet/TimeSheetDelete/" + id,
+                url: "/Turn/TurnDelete/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('حدف شیفت');
+                $('#myModalLabel').html('حدف تایم');
                 $('#myModalBody').html(result);
             });
         }
 
-        function Create(id) {
+        function Create() {
             $.ajax({
-                url: "/TimeSheet/TimeSheetAdd/" + id,
+                url: "/Turn/TurnAdd/",
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('افزودن شیفت');
+                $('#myModalLabel').html('افزودن تایم');
                 $('#myModalBody').html(result);
             });
         }
 
         function Edit(id) {
             $.ajax({
-                url: "/TimeSheet/TimeSheetEdit/" + id,
+                url: "/Turn/TurnEdit/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('ویرایش شیفت');
+                $('#myModalLabel').html('ویرایش تایم');
                 $('#myModalBody').html(result);
             });
         }
@@ -126,3 +135,6 @@
     </script>
 
 }
+
+
+

@@ -29,6 +29,24 @@ namespace Wtiau.Health.Web.Models.Plugins
             wb.Close();
         }
 
+
+        public void Save()
+        {
+            wb.Save();
+        }
+
+        public void SaveAs(string _path)
+        {
+            wb.SaveAs(_path);
+        }
+
+        public void WriteToCell(int i ,int j,string text)
+        {
+            i++;
+            j++;
+            ws.Cells[i, j].Value2 = text;
+        }
+
         public int Get_RowCount()
         {
             var cel = ws.UsedRange;
@@ -71,7 +89,7 @@ namespace Wtiau.Health.Web.Models.Plugins
         {
             Range range = (Range)ws.Range[ws.Cells[SI, SY], ws.Cells[EI, EY]];
             Object[,] Holder = range.Value2;
-            string[,] SA = new string[EI - SI +1, EY - SY + 1];
+            string[,] SA = new string[EI - SI + 1, EY - SY + 1];
             for (int i = 1; i <= EI - SI + 1; i++)
             {
                 for (int j = 1; j <= EY - SY + 1; j++)

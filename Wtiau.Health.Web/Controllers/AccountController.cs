@@ -112,9 +112,9 @@ namespace Wtiau.Health.Web.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("index", "Dashboard");
+                return RedirectToAction("Login");
 
             }
             return View();
@@ -123,10 +123,6 @@ namespace Wtiau.Health.Web.Controllers
         [HttpPost]
         public ActionResult Register(Model_Register model)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("index", "Dashboard");
-            }
 
             if (!ModelState.IsValid)
             {
@@ -309,7 +305,7 @@ namespace Wtiau.Health.Web.Controllers
             Response.Cookies.Add(Cookie);
             Session.RemoveAll();
 
-            return RedirectToAction("PortalLogin", "Account");
+            return Redirect("http://wtiau.ac.ir/fa");
         }
 
     }

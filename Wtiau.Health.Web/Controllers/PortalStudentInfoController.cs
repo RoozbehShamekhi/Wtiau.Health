@@ -50,6 +50,13 @@ namespace Wtiau.Health.Web.Controllers
         [HttpPost]
         public ActionResult Index(Model_StudentInfo model)
         {
+            Tbl_Student _Student = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault();
+
+            if (_Student.Student_SIID != null || _Student.Student_Info)
+            {
+                return RedirectToAction("ShowForm", "PortalForms", new { ID = "c78afdf3-a647-4e54-95e8-94869576b7e5" });
+            }
+
             Tbl_StudentInfo _info = new Tbl_StudentInfo()
             {
                 SI_Name = model.Name,
@@ -72,7 +79,6 @@ namespace Wtiau.Health.Web.Controllers
 
             db.Tbl_StudentInfo.Add(_info);
 
-            Tbl_Student _Student = db.Tbl_Student.Where(a => a.Student_Code == User.Identity.Name).SingleOrDefault();
 
             _Student.Tbl_StudentInfo = _info;
             _Student.Student_Info = true;
