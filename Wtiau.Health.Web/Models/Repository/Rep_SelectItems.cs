@@ -45,7 +45,7 @@ namespace Wtiau.Health.Web.Models.Repository
             List<SelectListItem> list = new List<SelectListItem>();
 
 
-            foreach (var item in db.Tbl_Turn)
+            foreach (var item in db.Tbl_Turn.Where(a => a.Turn_IsActive != false))
             {
                 int size = 0;
                 int Use = 0;

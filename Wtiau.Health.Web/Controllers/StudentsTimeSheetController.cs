@@ -27,7 +27,7 @@ namespace Wtiau.Health.Web.Controllers
                 Student_National = a.Student_NationalCode,
                 Student_Name = a.Student_SIID.HasValue ? a.Tbl_StudentInfo.SI_Name : "نا معلوم",
                 Student_Family = a.Student_SIID.HasValue ? a.Tbl_StudentInfo.SI_Family : "نا معلوم",
-                per = false,
+                per = a.Tbl_TakeTurn.FirstOrDefault().TT_IsPresent,
 
             }).ToList();
 
@@ -36,11 +36,64 @@ namespace Wtiau.Health.Web.Controllers
             return View(_Student);
         }
 
+        public ActionResult SetActiveness(int id)
+        {
+            var _TakeTurn = db.Tbl_TakeTurn.Where(x => x.Tbl_Student.Student_ID == id).SingleOrDefault();
+
+            if (_TakeTurn != null)
+            {
+                Model_SetActiveness model = new Model_SetActiveness()
+                {
+                    ID = id,
+                    Activeness = _TakeTurn.TT_IsPresent
+                };
+
+                return PartialView(model);
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult SetActiveness(Model_SetActiveness model)
+        {
+            if (ModelState.IsValid)
+            {
+                var _TakeTurn = db.Tbl_TakeTurn.Where(x => x.Tbl_Student.Student_ID == model.ID).SingleOrDefault();
+
+                if (_TakeTurn != null)
+                {
+                    _TakeTurn.TT_IsPresent = model.Activeness;
+
+                    db.Entry(_TakeTurn).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
+
+                        return RedirectToAction("Index", new { id = _TakeTurn.Tbl_TurnTimeSheet.TTS_ID });
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "عملیات با موفقیت انجام نشده";
+
+                        return HttpNotFound();
+                    }
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
         public FileResult Excel (int id)
         {
             var _TakeTurn = db.Tbl_TurnTimeSheet.Where(a => a.TTS_ID == id).SingleOrDefault().Tbl_TakeTurn;
 
-            var _Student = _TakeTurn.Select(a => a.Tbl_Student).Select(a => new Model_StudentTakeTimeList
+            var _Student = _TakeTurn.Select(a => a.Tbl_Student).OrderBy(a => a.Student_Code).Select(a => new Model_StudentTakeTimeList
             {
                 ID = a.Student_ID,
                 Student_Code = a.Student_Code,
@@ -52,7 +105,7 @@ namespace Wtiau.Health.Web.Controllers
             }).ToList();
 
 
-            string path = Path.Combine(Server.MapPath("~/App_Data/Excel/"), "TurnReportTemplate.xlsx");
+            string path = Path.Combine(Server.MapPath("~/Content/Reports/Excel/"), "TurnReportTemplate.xlsx");
 
             Microsoft_Excel _Excel = new Microsoft_Excel(path);
             _Excel.Open(1);
