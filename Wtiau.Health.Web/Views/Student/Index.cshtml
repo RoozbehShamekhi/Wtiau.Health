@@ -12,7 +12,30 @@
         <h4 class="navigation-title"><b>لیست دانشجیان</b></h4>
     </div>
 
-    <div class="pull-right">
+
+    <div class="dropdown pull-right" style="margin:0px 5px;">
+        <a id="NavDropOption" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+            <i class="glyphicon glyphicon-option-vertical navigation-btn-icon"></i>
+        </a>
+
+        <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
+
+            <li>
+                <a href="@Url.Action("Excel_AllStudents","Student")">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    تمام دانشجویان
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Excel_NotRegisterStudents","Student")">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    دانشجویان ثبت نام نکرده
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="pull-right" style="margin:0px 5px;">
         <a href="#" onclick="Create()"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
     </div>
 
@@ -109,7 +132,7 @@
                     {
                         "data": "ID", "render": function (data) {
                             return "<a class='btn btn-info btn-sm glyphicon glyphicon-list' href='@Url.Action("Details", "Exam")/" + data + "'></a>&nbsp;" +
-                                   "<a class='btn btn-warning btn-sm glyphicon glyphicon-pencil' onclick='Edit(" + data + ")'></a>&nbsp;" +
+                                   "<a class='btn btn-warning btn-sm glyphicon glyphicon-scale' onclick='Edit(" + data + ")'></a>&nbsp;" +
                                    "<a class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='Delete(" + data + ")'></a>&nbsp;";
                         },
                         "orderable": false,

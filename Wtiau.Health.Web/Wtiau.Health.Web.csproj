@@ -196,6 +196,10 @@
       <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Content>
     <Content Include="App_Data\Excel\TurnReportTemplate.xlsx" />
+    <Content Include="Content\Reports\Excel\TurnReportTemplate.xlsx" />
+    <Content Include="App_Data\Excel\23.rar" />
+    <Content Include="App_Data\Excel\StudentTemplate.xlsx" />
+    <Content Include="Content\Reports\Excel\StudentTemplate.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\WTIAU-Health.Context.tt">
@@ -1244,6 +1248,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
@@ -1447,7 +1452,7 @@
     <Content Include="Views\PortalTakeTurn\Index.cshtml" />
     <Content Include="Views\PortalForms\AlartForm.cshtml" />
     <Content Include="Views\StudentsTimeSheet\Index.cshtml" />
-    <Content Include="Views\StudentsTimeSheet\Excel.cshtml" />
+    <Content Include="Views\StudentsTimeSheet\SetActiveness.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1457,7 +1462,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Pages\" />
-    <Folder Include="Content\Reports\" />
     <Folder Include="Models\Attribute\" />
     <Folder Include="Models\MetaData\" />
     <Folder Include="Scripts\Plugins\ckfinder\bin\Debug\" />
@@ -1468,6 +1472,7 @@
     <Folder Include="Scripts\Plugins\ckfinder\plugins\imageresize\bin\Release\" />
     <Folder Include="Scripts\Plugins\ckfinder\plugins\watermark\bin\Debug\" />
     <Folder Include="Scripts\Plugins\ckfinder\plugins\watermark\bin\Release\" />
+    <Folder Include="Views\File\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -1476,6 +1481,26 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

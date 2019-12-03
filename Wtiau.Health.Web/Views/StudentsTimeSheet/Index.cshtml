@@ -14,11 +14,11 @@
 <div class="panel panel-body panel-default  navigation">
 
     <div class="pull-left">
-        <h4 class="navigation-title"><b>تایم های کاری</b></h4>
+        <h4 class="navigation-title"><b>لیست دانشجویان</b></h4>
     </div>
 
     <div class="pull-right">
-        <a href="@Url.Action("Excel","StudentsTimeSheet", new { id = ViewBag.ID })" ><i class="glyphicon glyphicon-cloud-download navigation-btn-icon"></i></a>
+        <a href="@Url.Action("Excel","StudentsTimeSheet", new { id = ViewBag.ID })"><i class="glyphicon glyphicon-cloud-download navigation-btn-icon"></i></a>
     </div>
 
 </div>
@@ -74,9 +74,19 @@
                         </td>
 
                         <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "TimeSheet", new { id = item.ID })"> </a>
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" href="javascript:void(0)" onclick="Edit(@item.ID)"> </a>
-                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" href="javascript:void(0)" onclick="Delete(@item.ID)"> </a>
+
+                            @if (item.per)
+                            {
+                                <a class="btn btn-success btn-sm glyphicon glyphicon-user" href="javascript:void(0)" onclick="Activeness(@item.ID)"> </a>
+
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger btn-sm glyphicon glyphicon-user" href="javascript:void(0)" onclick="Activeness(@item.ID)"> </a>
+
+                            }
+
+
                         </td>
                     </tr>
                 }
@@ -96,41 +106,21 @@
 
     <script>
 
-        function Delete(id) {
+        function Activeness(id) {
             $.ajax({
-                url: "/Turn/TurnDelete/" + id,
+                url: "/StudentsTimeSheet/SetActiveness/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('حدف تایم');
+                $('#myModalLabel').html('وضعیت حضور');
                 $('#myModalBody').html(result);
             });
         }
 
-        function Create() {
-            $.ajax({
-                url: "/Turn/TurnAdd/",
-                type: "Get",
-                data: {}
-            }).done(function (result) {
-                $('#myModal').modal('show');
-                $('#myModalLabel').html('افزودن تایم');
-                $('#myModalBody').html(result);
-            });
-        }
 
-        function Edit(id) {
-            $.ajax({
-                url: "/Turn/TurnEdit/" + id,
-                type: "Get",
-                data: {}
-            }).done(function (result) {
-                $('#myModal').modal('show');
-                $('#myModalLabel').html('ویرایش تایم');
-                $('#myModalBody').html(result);
-            });
-        }
+
+
 
     </script>
 
