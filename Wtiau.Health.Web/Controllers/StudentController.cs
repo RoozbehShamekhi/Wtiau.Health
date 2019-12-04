@@ -196,6 +196,75 @@ namespace Wtiau.Health.Web.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
+        public ActionResult CreateHealthInformation(int? id)
+        {
+            if (id != null)
+            {
+                var _Student = db.Tbl_Student.Where(x => x.Student_ID == id).SingleOrDefault();
+
+                if (_Student != null)
+                {
+                    return PartialView(new Model_StudentHealthInformation() { ID = id.Value });
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateHealthInformation(Model_StudentHealthInformation model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.Tbl_StudentHealthInformation.Where(x => x.SHI_StudentID == model.ID).Any())
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.WithTitel;
+                    TempData["TosterTitel"] = "خطا";
+                    TempData["TosterMassage"] = "اطلاعات سلامت دانشجو مورد نظر قبلا در سامانه ثبت شده است.";
+
+                    return RedirectToAction("Index");
+                }
+
+                Tbl_StudentHealthInformation _StudentHealthInformation = new Tbl_StudentHealthInformation()
+                {
+                    SHI_Guid = Guid.NewGuid(),
+                    SHI_StudentID = model.ID,
+                    SHI_Height = model.Height,
+                    SHI_Weight = model.Weight,
+                    SHI_BloodSuger = model.BloodSuger,
+                    SHI_BloodPressure = model.BloodPressure,
+                    SHI_BMI = Convertor.SetPrecision(model.Weight / Math.Pow(model.Height / 100, 2), 4)
+                };
+
+                db.Tbl_StudentHealthInformation.Add(_StudentHealthInformation);
+
+                if (Convert.ToBoolean(db.SaveChanges() > 0))
+                {
+                    TempData["TosterState"] = "success";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "ثبت شد";
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "ثبت نشد";
+
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
         #region Data
 
         public ActionResult ImportStudentFromExcel()

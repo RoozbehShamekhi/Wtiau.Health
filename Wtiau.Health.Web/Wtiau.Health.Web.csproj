@@ -188,6 +188,11 @@
     <Content Include="Content\Plugins\jQuery.toastr\toastr.less" />
     <Content Include="Content\Plugins\jQuery.toastr\toastr.scss" />
     <Content Include="App_Data\Excel\شماره دانشجویی و کد ملی بدون مقطع.xlsx" />
+    <Content Include="App_Data\Excel\TurnReportTemplate.xlsx" />
+    <Content Include="Content\Reports\Excel\TurnReportTemplate.xlsx" />
+    <Content Include="App_Data\Excel\23.rar" />
+    <Content Include="App_Data\Excel\StudentTemplate.xlsx" />
+    <Content Include="Content\Reports\Excel\StudentTemplate.xlsx" />
     <EntityDeploy Include="Models\Domian\WTIAU-Health.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WTIAU-Health.Designer.cs</LastGenOutput>
@@ -195,11 +200,6 @@
     <Content Include="Models\Domian\WTIAU-Health.edmx.diagram">
       <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Data\Excel\TurnReportTemplate.xlsx" />
-    <Content Include="Content\Reports\Excel\TurnReportTemplate.xlsx" />
-    <Content Include="App_Data\Excel\23.rar" />
-    <Content Include="App_Data\Excel\StudentTemplate.xlsx" />
-    <Content Include="Content\Reports\Excel\StudentTemplate.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\WTIAU-Health.Context.tt">
@@ -1317,6 +1317,9 @@
     <Compile Include="Models\Domian\Tbl_Student.cs">
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Domian\Tbl_StudentHealthInformation.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Domian\Tbl_StudentInfo.cs">
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
@@ -1348,6 +1351,7 @@
       <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\Enum.cs" />
+    <Compile Include="Models\Plugins\Convertor.cs" />
     <Compile Include="Models\Plugins\ConvertorToEN.cs" />
     <Compile Include="Models\Plugins\Microsoft_Excel.cs" />
     <Compile Include="Models\Plugins\PersianDateExtensionMethods.cs" />
@@ -1359,6 +1363,7 @@
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
     <Compile Include="Models\ViewModels\Model_DashBoardInfo.cs" />
     <Compile Include="Models\ViewModels\Model_DropDown.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentHealthInformation.cs" />
     <Compile Include="Models\ViewModels\Model_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
     <Compile Include="Models\ViewModels\Model_Form.cs" />
@@ -1453,6 +1458,7 @@
     <Content Include="Views\PortalForms\AlartForm.cshtml" />
     <Content Include="Views\StudentsTimeSheet\Index.cshtml" />
     <Content Include="Views\StudentsTimeSheet\SetActiveness.cshtml" />
+    <Content Include="Views\Student\CreateHealthInformation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -97,14 +97,14 @@
             });
         }
 
-        function Edit(id) {
+        function CreateHealthInformation(id) {
             $.ajax({
-                url: "/Dashboard/Exam/CreateOrEdit/" + id,
+                url: "/Student/CreateHealthInformation/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('ویرایش آزمون');
+                $('#myModalLabel').html('ثبت اطلاعات سلامت دانشجو');
                 $('#myModalBody').html(result);
             });
         }
@@ -132,7 +132,7 @@
                     {
                         "data": "ID", "render": function (data) {
                             return "<a class='btn btn-info btn-sm glyphicon glyphicon-list' href='@Url.Action("Details", "Exam")/" + data + "'></a>&nbsp;" +
-                                   "<a class='btn btn-warning btn-sm glyphicon glyphicon-scale' onclick='Edit(" + data + ")'></a>&nbsp;" +
+                                   "<a class='btn btn-warning btn-sm glyphicon glyphicon-scale' onclick='CreateHealthInformation(" + data + ")'></a>&nbsp;" +
                                    "<a class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='Delete(" + data + ")'></a>&nbsp;";
                         },
                         "orderable": false,

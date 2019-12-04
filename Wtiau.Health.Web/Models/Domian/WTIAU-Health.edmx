@@ -201,6 +201,20 @@
           <Property Name="Student_Info" Type="bit" Nullable="false" />
           <Property Name="Student_IsDelete" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Tbl_StudentHealthInformation">
+          <Key>
+            <PropertyRef Name="SHI_ID" />
+          </Key>
+          <Property Name="SHI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SHI_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SHI_StudentID" Type="int" Nullable="false" />
+          <Property Name="SHI_Height" Type="float" Nullable="false" />
+          <Property Name="SHI_Weight" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodSuger" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodPressure" Type="float" Nullable="false" />
+          <Property Name="SHI_BMI" Type="float" Nullable="false" />
+          <Property Name="SHI_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tbl_StudentInfo">
           <Key>
             <PropertyRef Name="SI_ID" />
@@ -460,6 +474,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_StudentHealthInformation_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="1" />
+          <End Role="Tbl_StudentHealthInformation" Type="Self.Tbl_StudentHealthInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentHealthInformation">
+              <PropertyRef Name="SHI_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tbl_StudentInfo_Tbl_Branch">
           <End Role="Tbl_Branch" Type="Self.Tbl_Branch" Multiplicity="1" />
           <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
@@ -610,6 +636,7 @@
           <EntitySet Name="Tbl_Response" EntityType="Self.Tbl_Response" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Role" EntityType="Self.Tbl_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Student" EntityType="Self.Tbl_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_StudentHealthInformation" EntityType="Self.Tbl_StudentHealthInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_StudentInfo" EntityType="Self.Tbl_StudentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_TakeTurn" EntityType="Self.Tbl_TakeTurn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Turn" EntityType="Self.Tbl_Turn" Schema="dbo" store:Type="Tables" />
@@ -679,6 +706,10 @@
             <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
             <End Role="Tbl_Student" EntitySet="Tbl_Student" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentHealthInformation_Tbl_Student" Association="Self.FK_Tbl_StudentHealthInformation_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_StudentHealthInformation" EntitySet="Tbl_StudentHealthInformation" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Branch" Association="Self.FK_Tbl_StudentInfo_Tbl_Branch">
             <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
             <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
@@ -746,6 +777,7 @@
           <EntitySet Name="Tbl_Response" EntityType="HealthModel.Tbl_Response" />
           <EntitySet Name="Tbl_Role" EntityType="HealthModel.Tbl_Role" />
           <EntitySet Name="Tbl_Student" EntityType="HealthModel.Tbl_Student" />
+          <EntitySet Name="Tbl_StudentHealthInformation" EntityType="HealthModel.Tbl_StudentHealthInformation" />
           <EntitySet Name="Tbl_StudentInfo" EntityType="HealthModel.Tbl_StudentInfo" />
           <EntitySet Name="Tbl_TakeTurn" EntityType="HealthModel.Tbl_TakeTurn" />
           <EntitySet Name="Tbl_Turn" EntityType="HealthModel.Tbl_Turn" />
@@ -846,6 +878,10 @@
           <AssociationSet Name="FK_Tbl_Student_Tbl_StudentInfo" Association="HealthModel.FK_Tbl_Student_Tbl_StudentInfo">
             <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
             <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentHealthInformation_Tbl_Student" Association="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_StudentHealthInformation" EntitySet="Tbl_StudentHealthInformation" />
           </AssociationSet>
           <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_Student" Association="HealthModel.FK_Tbl_TakeTurn_Tbl_Student">
             <End Role="Tbl_Student" EntitySet="Tbl_Student" />
@@ -1093,7 +1129,23 @@
           <Property Name="Student_Info" Type="Boolean" Nullable="false" />
           <Property Name="Student_IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_Student" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentHealthInformation" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_StudentHealthInformation" />
           <NavigationProperty Name="Tbl_TakeTurn" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_TakeTurn" />
+        </EntityType>
+        <EntityType Name="Tbl_StudentHealthInformation">
+          <Key>
+            <PropertyRef Name="SHI_ID" />
+          </Key>
+          <Property Name="SHI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SHI_Guid" Type="Guid" Nullable="false" />
+          <Property Name="SHI_StudentID" Type="Int32" Nullable="false" />
+          <Property Name="SHI_Height" Type="Double" Nullable="false" />
+          <Property Name="SHI_Weight" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodSuger" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodPressure" Type="Double" Nullable="false" />
+          <Property Name="SHI_BMI" Type="Double" Nullable="false" />
+          <Property Name="SHI_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_StudentHealthInformation" ToRole="Tbl_Student" />
         </EntityType>
         <EntityType Name="Tbl_StudentInfo">
           <Key>
@@ -1465,6 +1517,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_StudentHealthInformation_Tbl_Student">
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentHealthInformation" Role="Tbl_StudentHealthInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentHealthInformation">
+              <PropertyRef Name="SHI_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tbl_TakeTurn_Tbl_Student">
           <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
           <End Type="HealthModel.Tbl_TakeTurn" Role="Tbl_TakeTurn" Multiplicity="*" />
@@ -1501,7 +1565,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1717,6 +1781,21 @@
                 <ScalarProperty Name="Student_SIID" ColumnName="Student_SIID" />
                 <ScalarProperty Name="Student_Guid" ColumnName="Student_Guid" />
                 <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_StudentHealthInformation">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_StudentHealthInformation">
+              <MappingFragment StoreEntitySet="Tbl_StudentHealthInformation">
+                <ScalarProperty Name="SHI_IsDelete" ColumnName="SHI_IsDelete" />
+                <ScalarProperty Name="SHI_BMI" ColumnName="SHI_BMI" />
+                <ScalarProperty Name="SHI_BloodPressure" ColumnName="SHI_BloodPressure" />
+                <ScalarProperty Name="SHI_BloodSuger" ColumnName="SHI_BloodSuger" />
+                <ScalarProperty Name="SHI_Weight" ColumnName="SHI_Weight" />
+                <ScalarProperty Name="SHI_Height" ColumnName="SHI_Height" />
+                <ScalarProperty Name="SHI_StudentID" ColumnName="SHI_StudentID" />
+                <ScalarProperty Name="SHI_Guid" ColumnName="SHI_Guid" />
+                <ScalarProperty Name="SHI_ID" ColumnName="SHI_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -42,6 +42,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public virtual DbSet<Tbl_Response> Tbl_Response { get; set; }
         public virtual DbSet<Tbl_Role> Tbl_Role { get; set; }
         public virtual DbSet<Tbl_Student> Tbl_Student { get; set; }
+        public virtual DbSet<Tbl_StudentHealthInformation> Tbl_StudentHealthInformation { get; set; }
         public virtual DbSet<Tbl_StudentInfo> Tbl_StudentInfo { get; set; }
         public virtual DbSet<Tbl_TakeTurn> Tbl_TakeTurn { get; set; }
         public virtual DbSet<Tbl_Turn> Tbl_Turn { get; set; }
