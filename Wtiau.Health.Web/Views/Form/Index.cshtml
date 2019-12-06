@@ -9,11 +9,13 @@
 <div class="panel panel-body panel-default  navigation">
 
     <div class="pull-left">
-        <h4 class="navigation-title"><b>لیست پرسش نامه ها</b></h4>
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
     </div>
 
     <div class="pull-right">
-        <a href="javascript:void(0)" onclick="Create()"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
+        <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن پرسش نامه'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
     </div>
 
 </div>
@@ -22,7 +24,7 @@
 
     <div class="panel-body table-body" style="overflow-x:auto;">
 
-        <table id="DateTable" class="table  table-bordered table-striped table-secondary" style="width:100%;">
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
 
             <thead class="thead-dark">
                 <tr>
@@ -37,6 +39,7 @@
             </thead>
 
             <tbody>
+
                 @{
                     int x = 0;
                 }
@@ -60,16 +63,16 @@
                             <span> @Html.DisplayFor(modelItem => item.Form_CreateDate) </span>
                         </td>
                         <td scope="row">
-                            <span> @( item.Form_IsActive ? "فعال" : "غیر فعال" ) </span>
+                            <span> @(item.Form_IsActive ? "فعال" : "غیر فعال") </span>
                         </td>
 
                         <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "Question", new { id = item.ID })"> </a>
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" href="javascript:void(0)" onclick="Edit(@item.ID)"> </a>
-                            <a class="btn btn-primary btn-sm glyphicon glyphicon-th-list" href="@Url.Action("Index", "Step", new { id = item.ID })"> </a>
-                            <a class="btn btn-success btn-sm glyphicon glyphicon-plus" href="javascript:void(0)" onclick="AddStep(@item.ID)"> </a>
-                            <a class="btn wtiau-btn-wtiau btn-sm glyphicon glyphicon-ok" href="javascript:void(0)" onclick="SetActiveness(@item.ID)"> </a>
-                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" href="javascript:void(0)" onclick="Delete(@item.ID)"> </a>
+                            <a class="control btn btn-primary btn-sm glyphicon glyphicon-th-list" data-toggle='tooltip' data-placement='auto' title='مراحل' href="@Url.Action("Index", "Step", new { id = item.ID })"></a>
+                            <a class="control btn btn-success btn-sm glyphicon glyphicon-plus" data-toggle='tooltip' data-placement='auto' title='افزودن مرحله' href="javascript:void(0)" onclick="AddStep(@item.ID)"></a>
+                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='سوالات' href="@Url.Action("Index", "Question", new { id = item.ID })"></a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
+                            <a class="control btn wtiau-btn-wtiau btn-sm glyphicon glyphicon-ok" data-toggle='tooltip' data-placement='auto' title='تغییر وضعیت نمایش' href="javascript:void(0)" onclick="SetActiveness(@item.ID)"></a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
                         </td>
                     </tr>
                 }
@@ -121,7 +124,7 @@
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('افزودن فرم');
+                $('#myModalLabel').html('افزودن پرسش نامه');
                 $('#myModalBody').html(result);
             });
         }
@@ -145,7 +148,7 @@
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('فعال سازی');
+                $('#myModalLabel').html('تغییر وضعیت نمایش');
                 $('#myModalBody').html(result);
             });
         }

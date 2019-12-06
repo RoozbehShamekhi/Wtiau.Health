@@ -1,14 +1,12 @@
-﻿
-<ul class="navbar nav aside-panel">
+﻿<ul class="navbar nav aside-panel">
+
     <li>
-        <img src="~/Content/Images/abstract-user-flat-3.png" alt="Logo" class="img-responsive img-rounded img-logo" style="height:200px;">
-        <!--</div>-->
-        <a href="@Url.Action("index","Dashboard" , new {  aria="Dashboard"})">
-            <i class="glyphicon glyphicon-dashboard  "></i>
+        <img src="~/Content/Images/logo-uni.png" alt="Logo" class="img-responsive img-rounded img-logo" style="height:200px;">
+        <a href="@Url.Action("index", "Dashboard", new { area = "Dashboard"})">
+            <i class="glyphicon glyphicon-dashboard"></i>
             داشبورد
         </a>
     </li>
-
 
     <li data-toggle="collapse" data-target="#sub-menu-site">
 
@@ -16,7 +14,6 @@
             <i class="glyphicon glyphicon-book"></i>
             مدیرت دانشجویان
             <i class="glyphicon glyphicon-chevron-right pull-right gly-rotate-90"></i>
-
         </a>
 
         <ul class="collapse nav aside-sub-panel " id="sub-menu-site">
@@ -148,32 +145,26 @@
 
         </li>*@
 
-
     <li>
         <a href="@Url.Action("index","Turn")">
             <i class="glyphicon glyphicon-list"></i>
             نوبت دهی
         </a>
-
     </li>
 
     <li>
         <a href="@Url.Action("Index", "Form")">
             <i class="glyphicon glyphicon-list"></i>
-            آزمون
+            پرسش نامه ها
         </a>
-
     </li>
-
 
     <li>
         <a href="@Url.Action("Excel", "File")">
             <i class="glyphicon glyphicon-list"></i>
             فایل
         </a>
-
     </li>
-
 
     @*<li>
             <a href="@Url.Action("Setting","Setting")">
@@ -183,8 +174,4 @@
 
         </li>*@
 
-
-
-
 </ul>
-
