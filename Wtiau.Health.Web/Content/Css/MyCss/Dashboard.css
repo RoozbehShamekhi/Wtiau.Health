@@ -429,10 +429,15 @@ body {
 
 /*********************************************** UserProfile **********************************************/
 
-.userprofile .panel.userprofile-File-panel {
+/*.userprofile .panel.userprofile-File-panel {
     overflow: auto;
     background-color: #374449;
-}
+}*/
+
+/*.panel-group .panel {
+    overflow: auto;
+    background-color: #374449;
+}*/
 
 .setting-col {
     background-color: #222D32;
@@ -507,6 +512,7 @@ body {
         padding-left: 0px;
         padding-right: 0px;
         padding-bottom: 10px;
+        height: 510px;
         background-color: #222d32;
         border-left: 3px solid #9d9d9d;
     }
@@ -553,6 +559,7 @@ body {
     background-color: #374449;
     color: whitesmoke;
     padding-bottom: 10px;
+    height: 510px;
 }
 
     .userprofile-section a {

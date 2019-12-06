@@ -60,9 +60,9 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
         public string Insurance { get; set; }
 
-        //[Display(Name = "مقطع تحصیلی پذیرفته شده در دانشگاه")]
-        //[Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
-        //public string Grad { get; set; }
+        [Display(Name = "مقطع تحصیلی پذیرفته شده در دانشگاه")]
+        [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
+        public string Grade { get; set; }
 
         [Display(Name = "محل سکونت دوره دانشجویی")]
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
@@ -87,10 +87,6 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Display(Name = "رشته")]
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
         public string Branch { get; set; }
-
-        [Display(Name = "مقطع")]
-        [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
-        public string Grade { get; set; }
 
         [Display(Name = "محل تولد")]
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
