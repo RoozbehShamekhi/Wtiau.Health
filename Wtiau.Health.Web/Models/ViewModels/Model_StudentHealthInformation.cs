@@ -22,8 +22,12 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
         public double BloodSuger { get; set; }
 
-        [Display(Name = "فشار خون")]
+        [Display(Name = "فشار خون Min")]
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
-        public double BloodPressure { get; set; }
+        public double BloodPressureMin { get; set; }
+
+        [Display(Name = "فشار خون Max")]
+        [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
+        public double BloodPressureMax { get; set; }
     }
 }

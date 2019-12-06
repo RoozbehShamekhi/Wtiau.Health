@@ -18,7 +18,7 @@ namespace Wtiau.Health.Web.Controllers
     {
         HealthEntities db = new HealthEntities();
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, int formID)
         {
             var _Response = db.Tbl_Response.Where(x => x.Tbl_Question.Question_ID == id).Select(x => new Model_ResponseList
             {
@@ -29,6 +29,7 @@ namespace Wtiau.Health.Web.Controllers
                 IsTrue = x.Response_IsTrue,
             }).ToList();
 
+            ViewBag.FormID = formID;
             ViewBag.QuestionID = id;
 
             return View(_Response);

@@ -20,7 +20,8 @@ namespace Wtiau.Health.Web.Models.Domian
         public double SHI_Height { get; set; }
         public double SHI_Weight { get; set; }
         public double SHI_BloodSuger { get; set; }
-        public double SHI_BloodPressure { get; set; }
+        public double SHI_BloodPressureMin { get; set; }
+        public double SHI_BloodPressureMax { get; set; }
         public double SHI_BMI { get; set; }
         public bool SHI_IsDelete { get; set; }
     

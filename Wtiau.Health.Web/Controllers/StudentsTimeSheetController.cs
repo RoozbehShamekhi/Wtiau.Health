@@ -16,7 +16,7 @@ namespace Wtiau.Health.Web.Controllers
         HealthEntities db = new HealthEntities();
 
         // GET: StudentsTimeSheet
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, int turnID)
         {
             var _TakeTurn = db.Tbl_TurnTimeSheet.Where(a => a.TTS_ID == id).SingleOrDefault().Tbl_TakeTurn;
 
@@ -32,13 +32,14 @@ namespace Wtiau.Health.Web.Controllers
             }).ToList();
 
             ViewBag.ID = id;
+            ViewBag.turnID = turnID;
 
             return View(_Student);
         }
 
         public ActionResult SetActiveness(int id)
         {
-            var _TakeTurn = db.Tbl_TakeTurn.Where(x => x.Tbl_Student.Student_ID == id).SingleOrDefault();
+            var _TakeTurn = db.Tbl_TakeTurn.Where(x => x.Tbl_Student.Student_ID == id).FirstOrDefault();
 
             if (_TakeTurn != null)
             {
@@ -59,7 +60,7 @@ namespace Wtiau.Health.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _TakeTurn = db.Tbl_TakeTurn.Where(x => x.Tbl_Student.Student_ID == model.ID).SingleOrDefault();
+                var _TakeTurn = db.Tbl_TakeTurn.Where(x => x.Tbl_Student.Student_ID == model.ID).FirstOrDefault();
 
                 if (_TakeTurn != null)
                 {

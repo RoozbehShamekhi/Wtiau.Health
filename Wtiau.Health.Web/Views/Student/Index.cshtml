@@ -1,42 +1,48 @@
 ﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_StudentList>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "لیست دانشجویان";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
 
-<div class="panel panel-body panel-default  navigation">
+<div class="panel panel-body panel-default navigation">
 
     <div class="pull-left">
-        <h4 class="navigation-title"><b>لیست دانشجیان</b></h4>
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
     </div>
 
 
     <div class="dropdown pull-right" style="margin:0px 5px;">
-        <a id="NavDropOption" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+
+        <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
             <i class="glyphicon glyphicon-option-vertical navigation-btn-icon"></i>
         </a>
 
         <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
 
             <li>
-                <a href="@Url.Action("Excel_AllStudents","Student")">
+                <a href="@Url.Action("Excel_AllStudents", "Student")">
                     <i class="glyphicon glyphicon-cloud-download"></i>
                     تمام دانشجویان
                 </a>
             </li>
+
             <li>
-                <a href="@Url.Action("Excel_NotRegisterStudents","Student")">
+                <a href="@Url.Action("Excel_NotRegisterStudents", "Student")">
                     <i class="glyphicon glyphicon-cloud-download"></i>
                     دانشجویان ثبت نام نکرده
                 </a>
             </li>
+
         </ul>
+
     </div>
 
-    <div class="pull-right" style="margin:0px 5px;">
-        <a href="#" onclick="Create()"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
+    <div class="pull-right" style="margin:0px 5px;" data-toggle='tooltip' data-placement='auto' title='افزودن دانشجو'>
+        <a href="javascript:void(0)" onclick="Create()">
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
     </div>
 
 </div>
@@ -133,9 +139,9 @@
                     { "data": "Student_HealthInfo", "name": "Student_HealthInfo" },
                     {
                         "data": "ID", "render": function (data) {
-                            return "<a class='btn btn-info btn-sm glyphicon glyphicon-list' href='@Url.Action("Details", "Student")/" + data + "'></a>&nbsp;" +
-                                   "<a class='btn btn-warning btn-sm glyphicon glyphicon-scale' onclick='CreateHealthInformation(" + data + ")'></a>&nbsp;" +
-                                   "<a class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='Delete(" + data + ")'></a>&nbsp;";
+                            return "<a class='control btn btn-info btn-sm glyphicon glyphicon-list' data-toggle='tooltip' data-placement='auto' title='جزییات' href='@Url.Action("Details", "Student")/" + data + "'></a>&nbsp;" +
+                                   "<a class='control btn btn-warning btn-sm glyphicon glyphicon-scale' data-toggle='tooltip' data-placement='auto' title='ثبت اطلاعات سلامت' href='javascript:void(0)' onclick='CreateHealthInformation(" + data + ")'></a>&nbsp;" +
+                                   "<a class='control btn btn-danger btn-sm glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='auto' title='حذف' href='javascript:void(0)' onclick='Delete(" + data + ")'></a>&nbsp;";
                         },
                         "orderable": false,
                         "searchable": false,

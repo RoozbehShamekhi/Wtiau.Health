@@ -56,7 +56,7 @@
                         {
                             <div class="panel userprofile-File-panel">
 
-                                <a href="#@form.Name" data-parent="#gp" data-toggle="collapse">
+                                <a href="#@form.Display" data-parent="#gp" data-toggle="collapse">
                                     <div class="panel-heading userprofile-File-heading">
                                         <h4 class="panel-title userprofile-File-titel">
                                             @form.Name
@@ -66,7 +66,7 @@
 
                                 @if (firstTime)
                                 {
-                                    <div id="@form.Name" class="panel-collapse collapse in">
+                                    <div id="@form.Display" class="panel-collapse collapse in">
                                         <div class="slim-scroll panel-body userprofile-File-body">
                                             @{
                                                 int i = 1;
@@ -90,7 +90,7 @@
                                 }
                                 else
                                 {
-                                    <div id="@form.Name" class="panel-collapse collapse">
+                                    <div id="@form.Display" class="panel-collapse collapse">
                                         <div class="slim-scroll panel-body userprofile-File-body">
                                             @{
                                                 int i = 1;
@@ -467,14 +467,31 @@
                     <div class="col-md-3 userprofile-detiles-col-3-main">
                         <div class="panel userprofile-detiles-col-3 ">
                             <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.BloodPressure)
+                                @Html.DisplayNameFor(model => model.BloodPressureMin)
                             </span>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="panel userprofile-detiles-col-9">
                             <span class="userprofile-detiles-text">
-                                @Model.BloodPressure
+                                @Model.BloodPressureMin
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.BloodPressureMax)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @Model.BloodPressureMax
                             </span>
                         </div>
                     </div>
@@ -507,7 +524,7 @@
                         </div>
 
                         <div class="pull-right ">
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangePassword(000)"> </a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangePassword(000)"></a>
                         </div>
                     </div>
 
@@ -518,7 +535,7 @@
                         </div>
 
                         <div class="pull-right ">
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangeBaseRole(000)"> </a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangeBaseRole(000)"></a>
                         </div>
                     </div>
 
@@ -529,7 +546,7 @@
                         </div>
 
                         <div class="pull-right ">
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangeUserInfo(000)"> </a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangeUserInfo(000)"></a>
                         </div>
                     </div>
 
@@ -540,7 +557,7 @@
                         </div>
 
                         <div class="pull-right ">
-                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="DeleteUser(000)"> </a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="DeleteUser(000)"></a>
                         </div>
                     </div>
 
@@ -553,7 +570,7 @@
                             </div>
 
                             <div class="pull-right ">
-                                <a class="btn btn-danger btn-sm fa fa-user-slash" style="line-height: 18px;padding-left: 9px;padding-right: 9px;" onclick="BanUser(000)"> </a>
+                                <a class="control btn btn-danger btn-sm fa fa-user-slash" style="line-height: 18px;padding-left: 9px;padding-right: 9px;" onclick="BanUser(000)"></a>
                             </div>
                         </div>
                     }
@@ -566,7 +583,7 @@
                             </div>
 
                             <div class="pull-right ">
-                                <a class="btn btn-success btn-sm fa fa-user" style="line-height: 18px;padding-left: 11px;padding-right: 11px;" onclick="BanUser(000)"> </a>
+                                <a class="control btn btn-success btn-sm fa fa-user" style="line-height: 18px;padding-left: 11px;padding-right: 11px;" onclick="BanUser(000)"></a>
                             </div>
                         </div>
                     }

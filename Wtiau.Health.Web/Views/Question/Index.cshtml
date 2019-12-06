@@ -7,14 +7,22 @@
 }
 
 
-<div class="panel panel-body panel-default  navigation">
+<div class="panel panel-body panel-default navigation">
+
+    <div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+        <a href="@Url.Action("Index", "Form")">
+            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+        </a>
+    </div>
 
     <div class="pull-left">
-        <h4 class="navigation-title"><b>لیست سوالات</b></h4>
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
     </div>
 
     <div class="pull-right">
-        <a href="javascript:void(0)" onclick="Create(@ViewBag.FormID)"><i class="glyphicon glyphicon-plus navigation-btn-icon"></i></a>
+        <a href="javascript:void(0)" onclick="Create(@ViewBag.FormID)" data-toggle='tooltip' data-placement='auto' title='افزودن سوال'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
     </div>
 
 </div>
@@ -23,7 +31,7 @@
 
     <div class="panel-body table-body" style="overflow-x:auto;">
 
-        <table id="DateTable" class="table  table-bordered table-striped table-secondary" style="width:100%;">
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
 
             <thead class="thead-dark">
                 <tr>
@@ -38,6 +46,7 @@
             </thead>
 
             <tbody>
+
                 @{
                     int x = 0;
                 }
@@ -70,9 +79,9 @@
                         </td>
 
                         <td scope="row">
-                            <a class="btn btn-info btn-sm glyphicon glyphicon-list" href="@Url.Action("Index", "Response", new { id = item.ID })"> </a>
-                            <a class="btn btn-warning btn-sm glyphicon glyphicon-pencil" href="javascript:void(0)" onclick="Edit(@item.ID)"> </a>
-                            <a class="btn btn-danger btn-sm glyphicon glyphicon-trash" href="javascript:void(0)" onclick="Delete(@item.ID)"> </a>
+                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='پاسخ ها' href="@Url.Action("Index", "Response", new { id = item.ID, formID = ViewBag.FormID })"></a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
                         </td>
                     </tr>
                 }
@@ -131,5 +140,3 @@
     </script>
 
 }
-
-

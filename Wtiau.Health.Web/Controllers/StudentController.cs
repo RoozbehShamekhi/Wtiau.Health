@@ -135,7 +135,8 @@ namespace Wtiau.Health.Web.Controllers
                         model.Height = _StudentHealthInformation.SHI_Height;
                         model.Weight = _StudentHealthInformation.SHI_Weight;
                         model.BloodSuger = _StudentHealthInformation.SHI_BloodSuger;
-                        model.BloodPressure = _StudentHealthInformation.SHI_BloodPressure;
+                        model.BloodPressureMin = _StudentHealthInformation.SHI_BloodPressureMin;
+                        model.BloodPressureMax = _StudentHealthInformation.SHI_BloodPressureMax;
                         model.BMI = _StudentHealthInformation.SHI_BMI;
                     }
 
@@ -149,7 +150,8 @@ namespace Wtiau.Health.Web.Controllers
                             {
                                 Model_StudentDetailsForms model_StudentDetailsForms = new Model_StudentDetailsForms
                                 {
-                                    Name = form.Form_Display
+                                    Name = form.Form_Name,
+                                    Display = form.Form_Display
                                 };
 
                                 foreach (var item in _FormAnswers)
@@ -341,7 +343,8 @@ namespace Wtiau.Health.Web.Controllers
                         SHI_Height = model.Height,
                         SHI_Weight = model.Weight,
                         SHI_BloodSuger = model.BloodSuger,
-                        SHI_BloodPressure = model.BloodPressure,
+                        SHI_BloodPressureMin = model.BloodPressureMin,
+                        SHI_BloodPressureMax = model.BloodPressureMax,
                         SHI_BMI = Convertor.SetPrecision(model.Weight / Math.Pow(model.Height / 100, 2), 4)
                     };
 
