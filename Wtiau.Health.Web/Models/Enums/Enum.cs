@@ -25,4 +25,10 @@ namespace Wtiau.Health.Web
         HomeType = 9,
         BirthYear = 10,
     }
+
+    public enum Forms
+    {
+        form1 = 3,
+        form2 = 5
+    }
 }

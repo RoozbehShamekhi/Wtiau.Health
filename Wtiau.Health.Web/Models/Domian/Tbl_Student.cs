@@ -30,6 +30,7 @@ namespace Wtiau.Health.Web.Models.Domian
         public bool Student_Form2 { get; set; }
         public bool Student_TakeTurn { get; set; }
         public bool Student_Info { get; set; }
+        public bool Student_HealthInfo { get; set; }
         public bool Student_IsDelete { get; set; }
     
         public virtual Tbl_StudentInfo Tbl_StudentInfo { get; set; }

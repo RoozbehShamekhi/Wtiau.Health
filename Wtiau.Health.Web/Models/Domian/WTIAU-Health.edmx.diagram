@@ -21,7 +21,7 @@
         <EntityTypeShape EntityType="HealthModel.Tbl_Question" Width="1.5" PointX="9.75" PointY="13.125" />
         <EntityTypeShape EntityType="HealthModel.Tbl_Response" Width="1.5" PointX="12" PointY="13.25" />
         <EntityTypeShape EntityType="HealthModel.Tbl_Role" Width="1.5" PointX="16.75" PointY="2.125" />
-        <EntityTypeShape EntityType="HealthModel.Tbl_Student" Width="1.5" PointX="12" PointY="3" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Student" Width="1.5" PointX="12" PointY="2.875" />
         <EntityTypeShape EntityType="HealthModel.Tbl_StudentHealthInformation" Width="1.5" PointX="14.25" PointY="6.625" />
         <EntityTypeShape EntityType="HealthModel.Tbl_StudentInfo" Width="1.5" PointX="9.75" PointY="1.625" />
         <EntityTypeShape EntityType="HealthModel.Tbl_TakeTurn" Width="1.5" PointX="14.25" PointY="2.5" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -26,12 +27,13 @@ namespace Wtiau.Health.Web.Controllers
                 ID = x.Student_ID,
                 Student_Code = x.Student_Code,
                 Student_National = x.Student_NationalCode,
-                Student_Form1 = x.Student_Form1,
-                Student_Form2 = x.Student_Form1,
-                Student_Turn = x.Student_TakeTurn,
+                Student_Form1 = x.Student_Form1.ToString(),
+                Student_Form2 = x.Student_Form2.ToString(),
+                Student_Turn = x.Student_TakeTurn.ToString(),
                 Student_Name = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Name : "نا معلوم",
                 Student_Family = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Family : "نا معلوم",
-                Student_Info = x.Student_SIID.HasValue
+                Student_Info = x.Student_SIID.HasValue.ToString(),
+                Student_HealthInfo = x.Student_HealthInfo.ToString()
 
             }).ToList();
 
@@ -52,12 +54,13 @@ namespace Wtiau.Health.Web.Controllers
                 ID = x.Student_ID,
                 Student_Code = x.Student_Code,
                 Student_National = x.Student_NationalCode,
-                Student_Form1 = x.Student_Form1,
-                Student_Form2 = x.Student_Form1,
-                Student_Turn = x.Student_TakeTurn,
+                Student_Form1 = x.Student_Form1 ? "تکمیل" : "ثبت نشده",
+                Student_Form2 = x.Student_Form2 ? "تکمیل" : "ثبت نشده",
+                Student_Turn = x.Student_TakeTurn ? "تکمیل" : "ثبت نشده",
                 Student_Name = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Name : "نا معلوم",
                 Student_Family = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Family : "نا معلوم",
-                Student_Info = x.Student_SIID.HasValue
+                Student_Info = x.Student_SIID.HasValue ? "تکمیل" : "ثبت نشده",
+                Student_HealthInfo = x.Student_HealthInfo ? "تکمیل" : "ثبت نشده"
 
             }).ToList();
 
@@ -73,7 +76,8 @@ namespace Wtiau.Health.Web.Controllers
                                                x.Student_Turn.ToString().ToLower().Contains(searchValue.ToLower()) ||
                                                (string.IsNullOrEmpty(x.Student_Name) ? false : x.Student_Name.ToLower().Contains(searchValue.ToLower())) ||
                                                (string.IsNullOrEmpty(x.Student_Family) ? false : x.Student_Family.ToLower().Contains(searchValue.ToLower())) ||
-                                               x.Student_Info.ToString().ToLower().Contains(searchValue.ToLower())).ToList();
+                                               x.Student_Info.ToString().ToLower().Contains(searchValue.ToLower()) ||
+                                               x.Student_HealthInfo.ToString().ToLower().Contains(searchValue.ToLower())).ToList();
             }
 
             int totalRowsAfterFiltering = _student.Count;
@@ -83,6 +87,101 @@ namespace Wtiau.Health.Web.Controllers
             _student = _student.Skip(start).Take(length).ToList();
 
             return Json(new { data = _student, draw = Request["draw"], recordsTotal = totalRows, recordsFiltered = totalRowsAfterFiltering }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id != null)
+            {
+                var _Student = db.Tbl_Student.Where(x => x.Student_ID == id && !x.Student_IsDelete).SingleOrDefault();
+
+                if (_Student != null)
+                {
+                    Model_StudentDetails model = new Model_StudentDetails();
+
+                    var _StudentInfo = db.Tbl_StudentInfo.Where(x => x.SI_ID == _Student.Student_SIID && !x.SI_IsDelete).SingleOrDefault();
+                    var _Forms = db.Tbl_Form.Where(x => x.Form_IsActive && !x.Form_IsDelete).ToList();
+                    var _StudentHealthInformation = db.Tbl_StudentHealthInformation.Where(x => x.SHI_StudentID == _Student.Student_ID && !x.SHI_IsDelete).SingleOrDefault();
+
+                    if (_StudentInfo != null)
+                    {
+                        model.Name = _StudentInfo.SI_Name;
+                        model.Family = _StudentInfo.SI_Family;
+                        model.Email = _StudentInfo.SI_Email;
+                        model.StudentCode = _Student.Student_Code;
+                        model.NationalCode = _Student.Student_NationalCode;
+                        model.Mobile = _StudentInfo.SI_Mobile;
+                        model.Phone = _StudentInfo.SI_Phone;
+                        model.Gender = _StudentInfo.Tbl_Code.Code_Display;
+                        model.BirthYear = _StudentInfo.Tbl_Code1.Code_Display;
+                        model.National = _StudentInfo.Tbl_Code2.Code_Display;
+                        model.Blood = _StudentInfo.Tbl_Code3.Code_Display;
+                        model.Insurance = _StudentInfo.Tbl_Code4.Code_Display;
+                        model.HomeType = _StudentInfo.Tbl_Code5.Code_Display;
+                        model.Marriage = _StudentInfo.Tbl_Code6.Code_Display;
+                        model.Branch = _StudentInfo.Tbl_Branch.Branch_Display;
+                        model.Grade = _StudentInfo.Tbl_Branch.Tbl_Grad.Grade_Display;
+                        model.BirthLocation = _StudentInfo.SI_BirthdayLocation;
+                        model.BeforeUniversity = _StudentInfo.SI_BeforeUniversity;
+                    }
+                    else
+                    {
+                        model.StudentCode = _Student.Student_Code;
+                        model.NationalCode = _Student.Student_NationalCode;
+                    }
+
+                    if (_StudentHealthInformation != null)
+                    {
+                        model.Height = _StudentHealthInformation.SHI_Height;
+                        model.Weight = _StudentHealthInformation.SHI_Weight;
+                        model.BloodSuger = _StudentHealthInformation.SHI_BloodSuger;
+                        model.BloodPressure = _StudentHealthInformation.SHI_BloodPressure;
+                        model.BMI = _StudentHealthInformation.SHI_BMI;
+                    }
+
+                    if (_Forms != null)
+                    {
+                        foreach (var form in _Forms)
+                        {
+                            var _FormAnswers = db.Tbl_FormAnswer.Where(x => x.FA_StudentID == _Student.Student_ID && x.FA_FormID == form.Form_ID && !x.FA_IsDelete).ToList();
+
+                            if (_FormAnswers != null)
+                            {
+                                Model_StudentDetailsForms model_StudentDetailsForms = new Model_StudentDetailsForms
+                                {
+                                    Name = form.Form_Display
+                                };
+
+                                foreach (var item in _FormAnswers)
+                                {
+                                    var _FormAnswerResponse = item.Tbl_FormAnswerResponse.Where(x => !x.FAR_IsDelete).ToList();
+
+                                    if (_FormAnswerResponse != null)
+                                    {
+                                        Model_StudentDetailsFormsQuestions model_StudentDetailsFormsQuestions = new Model_StudentDetailsFormsQuestions
+                                        {
+                                            Name = _FormAnswerResponse.First().Tbl_Response.Tbl_Question.Question_Title
+                                        };
+
+                                        foreach (var response in _FormAnswerResponse)
+                                        {
+                                            model_StudentDetailsFormsQuestions.Responses.Add(response.Tbl_Response.Response_Title);
+                                        }
+
+                                        model_StudentDetailsForms.Questions.Add(model_StudentDetailsFormsQuestions);
+                                    }
+                                };
+
+                                model.Forms.Add(model_StudentDetailsForms);
+                            }
+                        }
+                    }
+
+                    return View(model);
+                }
+            }
+
+            return HttpNotFound();
         }
 
         public ActionResult DetailStudent(int? id)
@@ -221,45 +320,55 @@ namespace Wtiau.Health.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.Tbl_StudentHealthInformation.Where(x => x.SHI_StudentID == model.ID).Any())
-                {
-                    TempData["TosterState"] = "error";
-                    TempData["TosterType"] = TosterType.WithTitel;
-                    TempData["TosterTitel"] = "خطا";
-                    TempData["TosterMassage"] = "اطلاعات سلامت دانشجو مورد نظر قبلا در سامانه ثبت شده است.";
+                var _Student = db.Tbl_Student.Where(x => x.Student_ID == model.ID).SingleOrDefault();
 
-                    return RedirectToAction("Index");
+                if (_Student != null)
+                {
+                    if (_Student.Student_HealthInfo)
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.WithTitel;
+                        TempData["TosterTitel"] = "خطا";
+                        TempData["TosterMassage"] = "اطلاعات سلامت دانشجو مورد نظر قبلا در سامانه ثبت شده است.";
+
+                        return RedirectToAction("Index");
+                    }
+
+                    Tbl_StudentHealthInformation _StudentHealthInformation = new Tbl_StudentHealthInformation()
+                    {
+                        SHI_Guid = Guid.NewGuid(),
+                        SHI_StudentID = model.ID,
+                        SHI_Height = model.Height,
+                        SHI_Weight = model.Weight,
+                        SHI_BloodSuger = model.BloodSuger,
+                        SHI_BloodPressure = model.BloodPressure,
+                        SHI_BMI = Convertor.SetPrecision(model.Weight / Math.Pow(model.Height / 100, 2), 4)
+                    };
+
+                    _Student.Student_HealthInfo = true;
+
+                    db.Tbl_StudentHealthInformation.Add(_StudentHealthInformation);
+                    db.Entry(_Student).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "ثبت شد";
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "ثبت نشد";
+
+                        return RedirectToAction("Index");
+                    }
                 }
 
-                Tbl_StudentHealthInformation _StudentHealthInformation = new Tbl_StudentHealthInformation()
-                {
-                    SHI_Guid = Guid.NewGuid(),
-                    SHI_StudentID = model.ID,
-                    SHI_Height = model.Height,
-                    SHI_Weight = model.Weight,
-                    SHI_BloodSuger = model.BloodSuger,
-                    SHI_BloodPressure = model.BloodPressure,
-                    SHI_BMI = Convertor.SetPrecision(model.Weight / Math.Pow(model.Height / 100, 2), 4)
-                };
-
-                db.Tbl_StudentHealthInformation.Add(_StudentHealthInformation);
-
-                if (Convert.ToBoolean(db.SaveChanges() > 0))
-                {
-                    TempData["TosterState"] = "success";
-                    TempData["TosterType"] = TosterType.Maseage;
-                    TempData["TosterMassage"] = "ثبت شد";
-
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    TempData["TosterState"] = "error";
-                    TempData["TosterType"] = TosterType.Maseage;
-                    TempData["TosterMassage"] = "ثبت نشد";
-
-                    return RedirectToAction("Index");
-                }
+                return HttpNotFound();
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

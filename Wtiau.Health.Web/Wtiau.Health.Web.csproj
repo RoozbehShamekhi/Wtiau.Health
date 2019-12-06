@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Css\font.css" />
+    <Content Include="Content\Css\MasterStyle.css" />
     <Content Include="Content\Css\MyCss\Dashboard.css" />
     <Content Include="Content\Css\MyCss\defaults.css" />
     <Content Include="Content\Css\MyCss\Login.css" />
@@ -1363,6 +1364,7 @@
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
     <Compile Include="Models\ViewModels\Model_DashBoardInfo.cs" />
     <Compile Include="Models\ViewModels\Model_DropDown.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentDetails.cs" />
     <Compile Include="Models\ViewModels\Model_StudentHealthInformation.cs" />
     <Compile Include="Models\ViewModels\Model_QuestionAdd.cs" />
     <Compile Include="Models\ViewModels\Model_AccountInfo.cs" />
@@ -1459,6 +1461,7 @@
     <Content Include="Views\StudentsTimeSheet\Index.cshtml" />
     <Content Include="Views\StudentsTimeSheet\SetActiveness.cshtml" />
     <Content Include="Views\Student\CreateHealthInformation.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

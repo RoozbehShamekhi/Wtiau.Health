@@ -199,6 +199,7 @@
           <Property Name="Student_Form2" Type="bit" Nullable="false" />
           <Property Name="Student_TakeTurn" Type="bit" Nullable="false" />
           <Property Name="Student_Info" Type="bit" Nullable="false" />
+          <Property Name="Student_HealthInfo" Type="bit" Nullable="false" />
           <Property Name="Student_IsDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_StudentHealthInformation">
@@ -1127,6 +1128,7 @@
           <Property Name="Student_Form2" Type="Boolean" Nullable="false" />
           <Property Name="Student_TakeTurn" Type="Boolean" Nullable="false" />
           <Property Name="Student_Info" Type="Boolean" Nullable="false" />
+          <Property Name="Student_HealthInfo" Type="Boolean" Nullable="false" />
           <Property Name="Student_IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_Student" ToRole="Tbl_StudentInfo" />
           <NavigationProperty Name="Tbl_StudentHealthInformation" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_StudentHealthInformation" />
@@ -1772,6 +1774,7 @@
             <EntityTypeMapping TypeName="HealthModel.Tbl_Student">
               <MappingFragment StoreEntitySet="Tbl_Student">
                 <ScalarProperty Name="Student_IsDelete" ColumnName="Student_IsDelete" />
+                <ScalarProperty Name="Student_HealthInfo" ColumnName="Student_HealthInfo" />
                 <ScalarProperty Name="Student_Info" ColumnName="Student_Info" />
                 <ScalarProperty Name="Student_TakeTurn" ColumnName="Student_TakeTurn" />
                 <ScalarProperty Name="Student_Form2" ColumnName="Student_Form2" />
