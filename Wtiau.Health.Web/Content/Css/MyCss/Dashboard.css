@@ -429,57 +429,6 @@ body {
 
 /*********************************************** UserProfile **********************************************/
 
-/*.userprofile .panel.userprofile-File-panel {
-    overflow: auto;
-    background-color: #374449;
-}*/
-
-/*.panel-group .panel {
-    overflow: auto;
-    background-color: #374449;
-}*/
-
-.setting-col {
-    background-color: #222D32;
-    height: 43px;
-    border-radius: 0px;
-    padding-right: 8px;
-    padding-left: 8px;
-    margin-bottom: 10px;
-}
-
-.setting-col-titel {
-    color: whitesmoke;
-}
-
-.setting-col-titel-icon {
-    top: 4px;
-}
-
-.nav-tabs.nav-justified > li > a {
-    margin-left: 0;
-    border-radius: 0px;
-    border-bottom: 1px solid #222D32;
-    font-size: 18px;
-    color: #9d9d9d;
-}
-
-    .nav-tabs.nav-justified > li > a:hover,
-    .nav-tabs.nav-justified > li > a:focus {
-        border: none;
-        background-color: #222D32;
-        border-bottom: 1px solid #222D32;
-    }
-
-.nav-tabs.nav-justified > li.active > a,
-.nav-tabs.nav-justified > li.active > a:hover,
-.nav-tabs.nav-justified > li.active > a:focus {
-    border: none;
-    background-color: #222D32;
-    color: whitesmoke;
-    border-bottom: 1px solid #222D32;
-}
-
 .userprofile {
     margin-top: 0;
 }
@@ -489,8 +438,8 @@ body {
 }
 
     .userprofile-header > div {
-        background-color: #222d32;
-        color: #9d9d9d;
+        /*background-color: #222d32;
+        color: #9d9d9d;*/
     }
 
         .userprofile-header > div > span {
@@ -513,8 +462,7 @@ body {
         padding-right: 0px;
         padding-bottom: 10px;
         height: 510px;
-        background-color: #222d32;
-        border-left: 3px solid #9d9d9d;
+        border-left: 1px solid #9d9d9d;
     }
 
 .userprofile-img {
@@ -540,24 +488,16 @@ body {
 }
 
 .userprofile-aside-item > li {
-    color: #9d9d9d;
+    color: black;
     text-align: center;
     margin: 15px 0;
 }
 
-    .userprofile-aside-item > li:hover,
-    .userprofile-aside-item > li:active,
-    .userprofile-aside-item > li:focus {
-        color: whitesmoke;
-        background-color: #222d32;
-        cursor: default;
-    }
+
 
 .userprofile-section {
     padding-left: 0px;
     padding-right: 0px;
-    background-color: #374449;
-    color: whitesmoke;
     padding-bottom: 10px;
     height: 510px;
 }
@@ -572,27 +512,28 @@ body {
         margin-bottom: 5px
     }
 
-.userprofile-section-tabs {
-    background-color: #374449;
-    border-bottom: 1px solid #222D32;
-}
 
 .userprofile-File-panel {
     border: 0px;
 }
 
 .userprofile-File-heading {
-    background-color: #222D32;
+    background-color: #f5f5f5;
     border-radius: 0px;
+    margin-left:5px;
+    margin-right:5px;
+    border-bottom:3px solid #9d9d9d !important;
 }
 
 .userprofile-File-titel {
-    color: #9d9d9d;
+    color: black;
 }
 
 .userprofile-File-body {
-    background-color: #374449;
-    height: 334px;
+    background-color: #f5f5f5;
+    height: 370px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .userprofile-detiles {
@@ -604,14 +545,14 @@ body {
 }
 
 .userprofile-detiles-col-3 {
-    background-color: #222D32;
+    background-color: #f5f5f5;
     line-height: 40px;
     border-radius: 0px;
     margin-bottom: 10px;
 }
 
 .userprofile-detiles-col-9 {
-    background-color: #222D32;
+    background-color: #f5f5f5;
     line-height: 40px;
     border-radius: 0px;
     margin-bottom: 10px;

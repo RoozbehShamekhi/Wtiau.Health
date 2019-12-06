@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<main class="panel row userprofile-main" style="background-color: #f5f5f5;">
+<main class="panel row userprofile-main">
 
     <aside class="col-md-3">
 
@@ -118,296 +118,296 @@
             </div>
 
             <div class="tab-pane fade" id="Details" style="margin-top:15px">
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Name)
-                            </span>
+                <div id="Details-tabel">
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Name
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Name
-                            </span>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Family)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Family
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Email
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.StudentCode)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.StudentCode
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.NationalCode)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.NationalCode
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Mobile)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Mobile
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Phone
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Gender
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.BirthYear)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.BirthYear
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.National)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.National
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Blood)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Blood
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Insurance)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Insurance
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.HomeType)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.HomeType
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Marriage)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Marriage
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Branch)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.Branch
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.BirthLocation)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.BirthLocation
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.BeforeUniversity)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.BeforeUniversity
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Family)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Family
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Email)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Email
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.StudentCode)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.StudentCode
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.NationalCode)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.NationalCode
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Mobile)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Mobile
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Phone)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Phone
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Gender)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Gender
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.BirthYear)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.BirthYear
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.National)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.National
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Blood)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Blood
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Insurance)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Insurance
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.HomeType)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.HomeType
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Marriage)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Marriage
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.Branch)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.Branch
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.BirthLocation)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.BirthLocation
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row userprofile-detiles-item" style="">
-                    <div class="col-md-3 userprofile-detiles-col-3-main">
-                        <div class="panel userprofile-detiles-col-3 ">
-                            <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.BeforeUniversity)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="panel userprofile-detiles-col-9">
-                            <span class="userprofile-detiles-text">
-                                @Model.BeforeUniversity
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="tab-pane fade" id="Setting" style="margin-top:15px">
@@ -593,3 +593,20 @@
         //});
     });
 </script>
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            $('.slim-scroll').slimScroll({
+                height: '370px'
+            });
+
+            $('#Details-tabel').slimScroll({
+                height: '450px'
+            });
+        });
+    </script>
+
+
+}
