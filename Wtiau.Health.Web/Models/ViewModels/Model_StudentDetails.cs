@@ -72,17 +72,13 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
         public string Marriage { get; set; }
 
-        //[Display(Name = "دانشگاه")]
-        //[Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
-        //public string University { get; set; }
+        [Display(Name = "دانشگاه")]
+        [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
+        public string University { get; set; }
 
-        //[Display(Name = "دانشکده")]
-        //[Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
-        //public string College { get; set; }
-
-        //[Display(Name = "گروه")]
-        //[Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
-        //public string Group { get; set; }
+        [Display(Name = "دانشکده")]
+        [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
+        public string College { get; set; }
 
         [Display(Name = "رشته")]
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
@@ -92,7 +88,7 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
         public string BirthLocation { get; set; }
 
-        [Display(Name = "در صورتی که مقطع تحصیلی دانشگاهی قبلی داشته اید؟ ذکر نمایید")]
+        [Display(Name = "مقطع و دانشگاه قبلی")]
         public string BeforeUniversity { get; set; }
 
 

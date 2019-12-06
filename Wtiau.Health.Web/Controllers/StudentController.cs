@@ -119,6 +119,8 @@ namespace Wtiau.Health.Web.Controllers
                         model.Insurance = _StudentInfo.Tbl_Code4.Code_Display;
                         model.HomeType = _StudentInfo.Tbl_Code5.Code_Display;
                         model.Marriage = _StudentInfo.Tbl_Code6.Code_Display;
+                        model.University = _StudentInfo.Tbl_Branch.Tbl_Grad.Tbl_College.Tbl_University.University_Display;
+                        model.College = _StudentInfo.Tbl_Branch.Tbl_Grad.Tbl_College.College_Display;
                         model.Branch = _StudentInfo.Tbl_Branch.Branch_Display;
                         model.Grade = _StudentInfo.Tbl_Branch.Tbl_Grad.Grade_Display;
                         model.BirthLocation = _StudentInfo.SI_BirthdayLocation;

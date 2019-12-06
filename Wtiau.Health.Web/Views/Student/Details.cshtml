@@ -7,6 +7,13 @@
 
 
 <div class="panel panel-body panel-default navigation">
+
+    <div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+        <a href="@Url.Action("Index")">
+            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+        </a>
+    </div>
+
     <div class="pull-left">
         <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
     </div>
@@ -21,8 +28,9 @@
         </div>
 
         <div class="text-center userprofile-aside-btn-regine">
-            <a onclick="ChangeUserInfo(000)" class="btn btn-warning fa fa-edit" style="margin: 0 10px; padding: 9px 13px;"></a>
-            <a onclick="SandMassage(000)" class="btn btn-primary fa fa-edit" style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a onclick="ChangeUserInfo(000)" class="btn btn-warning fa fa-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات هویتی' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a onclick="SandMassage(000)" class="btn btn-primary fa fa-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات سلامت' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a onclick="SandMassage(000)" class="btn btn-danger fa fa-trash" data-toggle='tooltip' data-placement='auto' title='حذف' style="margin: 0 10px; padding: 9px 13px;"></a>
         </div>
 
         <div>
@@ -30,8 +38,9 @@
                 <li>@(Model.Name + " " + Model.Family)</li>
                 <li>@Model.StudentCode</li>
                 <li>@Model.NationalCode</li>
-                <li>@Model.Branch</li>
+                <li>@Model.College</li>
                 <li>@Model.Grade</li>
+                <li>@Model.Branch</li>
             </ul>
         </div>
 
@@ -49,70 +58,39 @@
 
             <div class="tab-pane fade in active" id="Description">
                 <div class="panel-group" id="gp">
-                    @{
-                        bool firstTime = true;
+                    @foreach (var form in Model.Forms)
+                    {
+                        <div class="panel userprofile-File-panel">
 
-                        foreach (var form in Model.Forms)
-                        {
-                            <div class="panel userprofile-File-panel">
+                            <a href="#@form.Display" data-parent="#gp" data-toggle="collapse">
+                                <div class="panel-heading userprofile-File-heading">
+                                    <h4 class="panel-title userprofile-File-titel">
+                                        @form.Name
+                                    </h4>
+                                </div>
+                            </a>
 
-                                <a href="#@form.Display" data-parent="#gp" data-toggle="collapse">
-                                    <div class="panel-heading userprofile-File-heading">
-                                        <h4 class="panel-title userprofile-File-titel">
-                                            @form.Name
-                                        </h4>
-                                    </div>
-                                </a>
+                            <div id="@form.Display" class="panel-collapse collapse">
+                                <div class="slim-scroll panel-body userprofile-File-body">
+                                    @{
+                                        int i = 1;
 
-                                @if (firstTime)
-                                {
-                                    <div id="@form.Display" class="panel-collapse collapse in">
-                                        <div class="slim-scroll panel-body userprofile-File-body">
-                                            @{
-                                                int i = 1;
+                                        foreach (var question in form.Questions)
+                                        {
+                                            <p>@(i++):&nbsp;@question.Name</p>
 
-                                                foreach (var question in form.Questions)
-                                                {
-                                                    <p>@(i++):&nbsp;@question.Name</p>
-
-                                                    foreach (var response in question.Responses)
-                                                    {
-                                                        <p>-&nbsp;@response</p>
-                                                    }
-
-                                                    <br />
-                                                }
+                                            foreach (var response in question.Responses)
+                                            {
+                                                <p>-&nbsp;@response</p>
                                             }
-                                        </div>
-                                    </div>
 
-                                    firstTime = false;
-                                }
-                                else
-                                {
-                                    <div id="@form.Display" class="panel-collapse collapse">
-                                        <div class="slim-scroll panel-body userprofile-File-body">
-                                            @{
-                                                int i = 1;
-
-                                                foreach (var question in form.Questions)
-                                                {
-                                                    <p>@(i++):&nbsp;@question.Name</p>
-
-                                                    foreach (var response in question.Responses)
-                                                    {
-                                                        <p>-&nbsp;@response</p>
-                                                    }
-
-                                                    <br />
-                                                }
-                                            }
-                                        </div>
-                                    </div>
-                                }
-
+                                            <br />
+                                        }
+                                    }
+                                </div>
                             </div>
-                        }
+
+                        </div>
                     }
                 </div>
             </div>
@@ -352,6 +330,40 @@
                             <div class="panel userprofile-detiles-col-9">
                                 <span class="userprofile-detiles-text">
                                     @Model.Marriage
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.University)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.University
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.College)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.College
                                 </span>
                             </div>
                         </div>
