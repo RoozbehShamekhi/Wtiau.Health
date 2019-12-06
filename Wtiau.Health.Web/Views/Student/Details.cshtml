@@ -56,7 +56,7 @@
                         {
                             <div class="panel userprofile-File-panel">
 
-                                <a href="#@form.Name" data-parent="#gp" data-toggle="collapse">
+                                <a href="#@form.Display" data-parent="#gp" data-toggle="collapse">
                                     <div class="panel-heading userprofile-File-heading">
                                         <h4 class="panel-title userprofile-File-titel">
                                             @form.Name
@@ -66,7 +66,7 @@
 
                                 @if (firstTime)
                                 {
-                                    <div id="@form.Name" class="panel-collapse collapse in">
+                                    <div id="@form.Display" class="panel-collapse collapse in">
                                         <div class="slim-scroll panel-body userprofile-File-body">
                                             @{
                                                 int i = 1;
@@ -90,7 +90,7 @@
                                 }
                                 else
                                 {
-                                    <div id="@form.Name" class="panel-collapse collapse">
+                                    <div id="@form.Display" class="panel-collapse collapse">
                                         <div class="slim-scroll panel-body userprofile-File-body">
                                             @{
                                                 int i = 1;
@@ -467,14 +467,31 @@
                     <div class="col-md-3 userprofile-detiles-col-3-main">
                         <div class="panel userprofile-detiles-col-3 ">
                             <span class="userprofile-detiles-text">
-                                @Html.DisplayNameFor(model => model.BloodPressure)
+                                @Html.DisplayNameFor(model => model.BloodPressureMin)
                             </span>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="panel userprofile-detiles-col-9">
                             <span class="userprofile-detiles-text">
-                                @Model.BloodPressure
+                                @Model.BloodPressureMin
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.BloodPressureMax)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @Model.BloodPressureMax
                             </span>
                         </div>
                     </div>

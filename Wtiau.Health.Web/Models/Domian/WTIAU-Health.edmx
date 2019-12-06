@@ -212,7 +212,8 @@
           <Property Name="SHI_Height" Type="float" Nullable="false" />
           <Property Name="SHI_Weight" Type="float" Nullable="false" />
           <Property Name="SHI_BloodSuger" Type="float" Nullable="false" />
-          <Property Name="SHI_BloodPressure" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodPressureMin" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodPressureMax" Type="float" Nullable="false" />
           <Property Name="SHI_BMI" Type="float" Nullable="false" />
           <Property Name="SHI_IsDelete" Type="bit" Nullable="false" />
         </EntityType>
@@ -1144,7 +1145,8 @@
           <Property Name="SHI_Height" Type="Double" Nullable="false" />
           <Property Name="SHI_Weight" Type="Double" Nullable="false" />
           <Property Name="SHI_BloodSuger" Type="Double" Nullable="false" />
-          <Property Name="SHI_BloodPressure" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodPressureMin" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodPressureMax" Type="Double" Nullable="false" />
           <Property Name="SHI_BMI" Type="Double" Nullable="false" />
           <Property Name="SHI_IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_StudentHealthInformation" ToRole="Tbl_Student" />
@@ -1792,7 +1794,8 @@
               <MappingFragment StoreEntitySet="Tbl_StudentHealthInformation">
                 <ScalarProperty Name="SHI_IsDelete" ColumnName="SHI_IsDelete" />
                 <ScalarProperty Name="SHI_BMI" ColumnName="SHI_BMI" />
-                <ScalarProperty Name="SHI_BloodPressure" ColumnName="SHI_BloodPressure" />
+                <ScalarProperty Name="SHI_BloodPressureMax" ColumnName="SHI_BloodPressureMax" />
+                <ScalarProperty Name="SHI_BloodPressureMin" ColumnName="SHI_BloodPressureMin" />
                 <ScalarProperty Name="SHI_BloodSuger" ColumnName="SHI_BloodSuger" />
                 <ScalarProperty Name="SHI_Weight" ColumnName="SHI_Weight" />
                 <ScalarProperty Name="SHI_Height" ColumnName="SHI_Height" />
