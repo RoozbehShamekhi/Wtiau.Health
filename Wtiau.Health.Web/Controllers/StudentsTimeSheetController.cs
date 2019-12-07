@@ -16,7 +16,7 @@ namespace Wtiau.Health.Web.Controllers
         HealthEntities db = new HealthEntities();
 
         // GET: StudentsTimeSheet
-        public ActionResult Index(int id, int turnID)
+        public ActionResult Index(int id, int turnID, string turnDisplay, string timeSheetDisplay)
         {
             var _TakeTurn = db.Tbl_TurnTimeSheet.Where(a => a.TTS_ID == id).SingleOrDefault().Tbl_TakeTurn;
 
@@ -33,6 +33,8 @@ namespace Wtiau.Health.Web.Controllers
 
             ViewBag.ID = id;
             ViewBag.turnID = turnID;
+            ViewBag.TurnDisplay = turnDisplay;
+            ViewBag.TimeSheetDisplay = timeSheetDisplay;
 
             return View(_Student);
         }

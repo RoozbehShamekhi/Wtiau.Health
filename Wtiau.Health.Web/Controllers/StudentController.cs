@@ -9,11 +9,12 @@ using System.Net;
 using System.Web.Mvc;
 using Wtiau.Health.Web.Models.Domian;
 using Wtiau.Health.Web.Models.Plugins;
+using Wtiau.Health.Web.Models.Repository;
 using Wtiau.Health.Web.Models.ViewModels;
 
 namespace Wtiau.Health.Web.Controllers
 {
-    [Authorize(Roles = "Admin,SuperAdmin,DataEntry")]
+    [Authorize(Roles = "Admin, SuperAdmin, DataEntry")]
     public class StudentController : Controller
     {
         HealthEntities db = new HealthEntities();
@@ -21,7 +22,6 @@ namespace Wtiau.Health.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
             var _student = db.Tbl_Student.Where(x => x.Student_IsDelete == false).Select(x => new Model_StudentList
             {
                 ID = x.Student_ID,
@@ -105,6 +105,7 @@ namespace Wtiau.Health.Web.Controllers
 
                     if (_StudentInfo != null)
                     {
+                        model.ID = _Student.Student_ID;
                         model.Name = _StudentInfo.SI_Name;
                         model.Family = _StudentInfo.SI_Family;
                         model.Email = _StudentInfo.SI_Email;
@@ -125,11 +126,15 @@ namespace Wtiau.Health.Web.Controllers
                         model.Grade = _StudentInfo.Tbl_Branch.Tbl_Grad.Grade_Display;
                         model.BirthLocation = _StudentInfo.SI_BirthdayLocation;
                         model.BeforeUniversity = _StudentInfo.SI_BeforeUniversity;
+
+                        ViewBag.StudentDisplay = _StudentInfo.SI_Name + " " + _StudentInfo.SI_Family;
                     }
                     else
                     {
                         model.StudentCode = _Student.Student_Code;
                         model.NationalCode = _Student.Student_NationalCode;
+
+                        ViewBag.StudentDisplay = _Student.Student_Code;
                     }
 
                     if (_StudentHealthInformation != null)
@@ -188,117 +193,6 @@ namespace Wtiau.Health.Web.Controllers
             return HttpNotFound();
         }
 
-        public ActionResult DetailStudent(int? id)
-        {
-            if (id != null)
-            {
-                Model_MessageModal model = new Model_MessageModal();
-
-                var q = db.Tbl_Form.Where(x => x.Form_ID == id).SingleOrDefault();
-
-                if (q != null)
-                {
-                    model.ID = id.Value;
-                    model.Name = q.Form_Name;
-                    model.Description = "آیا از حذف پرسش نامه مورد نظر اطمینان دارید ؟";
-
-                    return PartialView(model);
-                }
-                else
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-            }
-
-            return HttpNotFound();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DetailsStudent(Model_MessageModal model)
-        {
-            if (ModelState.IsValid)
-            {
-
-            }
-
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-
-        public ActionResult EditStudent(int? id)
-        {
-            if (id != null)
-            {
-                Model_MessageModal model = new Model_MessageModal();
-
-                var q = db.Tbl_Form.Where(x => x.Form_ID == id).SingleOrDefault();
-
-                if (q != null)
-                {
-                    model.ID = id.Value;
-                    model.Name = q.Form_Name;
-                    model.Description = "آیا از حذف پرسش نامه مورد نظر اطمینان دارید ؟";
-
-                    return PartialView(model);
-                }
-                else
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-            }
-
-            return HttpNotFound();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditStudent(Model_MessageModal model)
-        {
-            if (ModelState.IsValid)
-            {
-
-            }
-
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-
-        public ActionResult DeleteStudent(int? id)
-        {
-            if (id != null)
-            {
-                Model_MessageModal model = new Model_MessageModal();
-
-                var q = db.Tbl_Form.Where(x => x.Form_ID == id).SingleOrDefault();
-
-                if (q != null)
-                {
-                    model.ID = id.Value;
-                    model.Name = q.Form_Name;
-                    model.Description = "آیا از حذف پرسش نامه مورد نظر اطمینان دارید ؟";
-
-                    return PartialView(model);
-                }
-                else
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-            }
-
-            return HttpNotFound();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteStudent(Model_MessageModal model)
-        {
-            if (ModelState.IsValid)
-            {
-
-            }
-
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-
         public ActionResult CreateHealthInformation(int? id)
         {
             if (id != null)
@@ -308,10 +202,6 @@ namespace Wtiau.Health.Web.Controllers
                 if (_Student != null)
                 {
                     return PartialView(new Model_StudentHealthInformation() { ID = id.Value });
-                }
-                else
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
             }
 
@@ -374,6 +264,220 @@ namespace Wtiau.Health.Web.Controllers
                 }
 
                 return HttpNotFound();
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult ChangeHealthInfo(int? id)
+        {
+            if (id != null)
+            {
+                var _StudentHealthInformation = db.Tbl_StudentHealthInformation.Where(x => x.Tbl_Student.Student_ID == id && !x.SHI_IsDelete).SingleOrDefault();
+
+                if (_StudentHealthInformation != null)
+                {
+                    Model_StudentHealthInformation model = new Model_StudentHealthInformation()
+                    {
+                        ID = id.Value,
+                        Height = _StudentHealthInformation.SHI_Height,
+                        Weight = _StudentHealthInformation.SHI_Weight,
+                        BloodSuger = _StudentHealthInformation.SHI_BloodSuger,
+                        BloodPressureMin = _StudentHealthInformation.SHI_BloodPressureMin,
+                        BloodPressureMax = _StudentHealthInformation.SHI_BloodPressureMax
+                    };
+
+                    return PartialView(model);
+                }
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeHealthInfo(Model_StudentHealthInformation model)
+        {
+            if (ModelState.IsValid)
+            {
+                var _StudentHealthInformation = db.Tbl_StudentHealthInformation.Where(x => x.Tbl_Student.Student_ID == model.ID && !x.SHI_IsDelete).SingleOrDefault();
+
+                if (_StudentHealthInformation != null)
+                {
+                    _StudentHealthInformation.SHI_Height = model.Height;
+                    _StudentHealthInformation.SHI_Weight = model.Weight;
+                    _StudentHealthInformation.SHI_BloodSuger = model.BloodSuger;
+                    _StudentHealthInformation.SHI_BloodPressureMin = model.BloodPressureMin;
+                    _StudentHealthInformation.SHI_BloodPressureMax = model.BloodPressureMax;
+                    _StudentHealthInformation.SHI_BMI = Convertor.SetPrecision(model.Weight / Math.Pow(model.Height / 100, 2), 4);
+
+                    db.Entry(_StudentHealthInformation).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "ویرایش شد";
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "ویرایش نشد";
+                    }
+
+                    return RedirectToAction("Details", new { id = model.ID });
+                }
+
+                return HttpNotFound();
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult ChangeInfo(int? id)
+        {
+            if (id != null)
+            {
+                var _StudentInfo = db.Tbl_StudentInfo.Where(x => x.Tbl_Student.FirstOrDefault().Student_ID == id && !x.SI_IsDelete).SingleOrDefault();
+
+                if (_StudentInfo != null)
+                {
+                    Model_StudentInfoEdit model = new Model_StudentInfoEdit()
+                    {
+                        ID = _StudentInfo.SI_ID,
+                        Name = _StudentInfo.SI_Name,
+                        Family = _StudentInfo.SI_Family,
+                        Email = _StudentInfo.SI_Email,
+                        Mobile = _StudentInfo.SI_Mobile,
+                        Phone = _StudentInfo.SI_Phone,
+                        Gender = _StudentInfo.SI_GenderCodeID,
+                        BirthYear = _StudentInfo.SI_BirthYearCodeID,
+                        National = _StudentInfo.SI_NationalCodeID,
+                        Blood = _StudentInfo.SI_BloodCodeID,
+                        Insurance = _StudentInfo.SI_InsuranceCodeID,
+                        Grad = _StudentInfo.Tbl_Branch.Tbl_Grad.Grade_ID,//
+                        HomeType = _StudentInfo.SI_HomeTypeCodeID,
+                        Marriage = _StudentInfo.SI_MarriageCodeID,
+                        University = _StudentInfo.Tbl_Branch.Tbl_Grad.Tbl_College.Tbl_University.University_ID,//
+                        College = _StudentInfo.Tbl_Branch.Tbl_Grad.Tbl_College.College_ID,//
+                        Branch = _StudentInfo.Tbl_Branch.Branch_ID,//
+                        BirthLocation = _StudentInfo.SI_BirthdayLocation,
+                        BeforeUniversity = _StudentInfo.SI_BeforeUniversity,
+                    };
+
+                    return PartialView(model);
+                }
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeInfo(Model_StudentInfoEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                var _StudentInfo = db.Tbl_StudentInfo.Where(x => x.Tbl_Student.FirstOrDefault().Student_ID == model.ID && !x.SI_IsDelete).SingleOrDefault();
+
+                if (_StudentInfo != null)
+                {
+                    _StudentInfo.SI_Name = model.Name;
+                    _StudentInfo.SI_Family = model.Family;
+                    _StudentInfo.SI_Mobile = model.Mobile;
+                    _StudentInfo.SI_Email = model.Email;
+                    _StudentInfo.SI_Phone = model.Phone;
+                    _StudentInfo.SI_GenderCodeID = Convert.ToInt32(model.Gender);
+                    _StudentInfo.SI_BirthYearCodeID = Convert.ToInt32(model.BirthYear);
+                    _StudentInfo.SI_NationalCodeID = Convert.ToInt32(model.National);
+                    _StudentInfo.SI_BloodCodeID = Convert.ToInt32(model.Blood);
+                    _StudentInfo.SI_InsuranceCodeID = Convert.ToInt32(model.Insurance);
+                    //Grad
+                    _StudentInfo.SI_HomeTypeCodeID = Convert.ToInt32(model.HomeType);
+                    _StudentInfo.SI_MarriageCodeID = Convert.ToInt32(model.Marriage);
+                    //University
+                    //College
+                    _StudentInfo.SI_BranchID = Convert.ToInt32(model.Branch);//
+                    _StudentInfo.SI_BirthdayLocation = model.BirthLocation;
+                    _StudentInfo.SI_BeforeUniversity = model.BeforeUniversity;
+
+                    db.Entry(_StudentInfo).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "ویرایش شد";
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "ویرایش نشد";
+                    }
+
+                    return RedirectToAction("Details", new { id = model.ID });
+                }
+
+                return HttpNotFound();
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id != null)
+            {
+                var _StudentInfo = db.Tbl_StudentInfo.Where(x => x.Tbl_Student.FirstOrDefault().Student_ID == id && !x.SI_IsDelete).SingleOrDefault();
+
+                if (_StudentInfo != null)
+                {
+                    Model_MessageModal model = new Model_MessageModal
+                    {
+                        ID = id.Value,
+                        Name = _StudentInfo.SI_Name + " " + _StudentInfo.SI_Family,
+                        Description = "آیا از حذف دانشجوی مورد نظر اطمینان دارید ؟"
+                    };
+
+                    return PartialView(model);
+                }
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(Model_MessageModal model)
+        {
+            if (ModelState.IsValid)
+            {
+                var _StudentInfo = db.Tbl_StudentInfo.Where(x => x.Tbl_Student.FirstOrDefault().Student_ID == model.ID && !x.SI_IsDelete).SingleOrDefault();
+
+                if (_StudentInfo != null)
+                {
+                    _StudentInfo.SI_IsDelete = true;
+                    _StudentInfo.Tbl_Student.FirstOrDefault().Student_IsDelete = true;
+
+                    db.Entry(_StudentInfo).State = EntityState.Modified;
+
+                    if (Convert.ToBoolean(db.SaveChanges() > 0))
+                    {
+                        TempData["TosterState"] = "success";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "دانشجوی مورد نظر با موفقیت حذف شد.";
+                    }
+                    else
+                    {
+                        TempData["TosterState"] = "error";
+                        TempData["TosterType"] = TosterType.Maseage;
+                        TempData["TosterMassage"] = "دانشجوی مورد نظر با موفقیت حذف نشد.";
+                    }
+
+                    return RedirectToAction("Index");
+                }
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

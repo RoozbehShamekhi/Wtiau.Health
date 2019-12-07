@@ -8,6 +8,8 @@ namespace Wtiau.Health.Web.Models.ViewModels
 {
     public class Model_StudentDetails
     {
+        public int ID { get; set; }
+
         [Display(Name = "نام")]
         [Required(ErrorMessage = "لطفا مقداری را وارد نمایید")]
         public string Name { get; set; }

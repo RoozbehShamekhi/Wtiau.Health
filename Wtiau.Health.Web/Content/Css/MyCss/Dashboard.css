@@ -2,19 +2,17 @@
 body {
     font-family: Iransans;
     background-color: whitesmoke;
- 
 }
 
-
 .modal {
-    color:whitesmoke;
+    color: whitesmoke;
 }
 
 .modal-content {
     top: 15vh;
     border-radius: 0px;
     background-color: #222D32;
-    padding-bottom:34px;
+    padding-bottom: 34px;
 }
 
 .modal-btn-singel {
@@ -58,7 +56,7 @@ body {
 .modal-main {
     padding-left: 15px;
     padding-right: 15px;
-    font-size:12px;
+    font-size: 12px;
 }
 
 .control {
@@ -68,14 +66,14 @@ body {
 /*********************************************** Config ********************************************/
 
 .Main-Config {
-    margin-top:70px;
+    margin-top: 70px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .aside-Config {
-    width:270px;
-    margin-right:15px;   
+    width: 270px;
+    margin-right: 15px;
 }
 
 .section-Config {
@@ -236,7 +234,7 @@ body {
 /*********************************************** Aside *********************************************/
 .aside-panel {
     background-color: #222d32;
-
+    padding: 0 0 10px 0;
 }
 
     .aside-panel a {
@@ -279,6 +277,7 @@ body {
 .navigation {
     margin-bottom: 15px;
 }
+
 .navigation-title {
     margin-top: 5px;
     margin-bottom: 0px;
@@ -293,15 +292,36 @@ body {
     padding-right: 6px;
 }
 
+.breadcrumb {
+    padding: 5px;
+    margin-bottom: 0;
+    background-color: transparent;
+}
+
+    .breadcrumb > .active {
+        color: #333333;
+    }
+
+    .breadcrumb > li + li:before {
+        color: #333333;
+    }
+
+.navigation nav {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+}
 
 /*********************************************** Form **********************************************/
 .wtiau-btn {
     border-radius: 0px;
 }
+
 .wtiau-btn-success {
     background: #3ecf8e;
     color: #fff;
 }
+
     .wtiau-btn-success:hover {
         background: #35996c;
         color: #fff;
@@ -316,26 +336,31 @@ body {
         background: #35996c;
         color: #fff;
     }
+
 .wtiau-btn-s {
     padding: 0px;
     font-size: 14px;
     font-weight: bold;
 }
+
 .wtiau-btn-sm {
     padding: 5px;
     font-size: 14px;
     font-weight: bold;
 }
+
 .wtiau-btn-L {
     padding: 10px;
     font-size: 14px;
     font-weight: bold;
 }
+
 .wtiau-btn-LX {
     wtiaupadding: 15px;
     font-size: 14px;
     font-weight: bold;
 }
+
 .wtiau-btn-LXX {
     padding: 20px;
     font-size: 14px;
@@ -346,8 +371,9 @@ body {
 .login {
     color: whitesmoke;
 }
+
 .Login-img {
-    padding:15px;
+    padding: 15px;
 }
 
 
@@ -432,7 +458,6 @@ body {
 }
 
 /*********************************************** UserProfile **********************************************/
-
 .userprofile {
     margin-top: 0;
 }
@@ -441,15 +466,10 @@ body {
     margin-bottom: 5px;
 }
 
-    .userprofile-header > div {
-        /*background-color: #222d32;
-        color: #9d9d9d;*/
+    .userprofile-header > div > span {
+        font-size: 18px;
+        font-weight: bold;
     }
-
-        .userprofile-header > div > span {
-            font-size: 18px;
-            font-weight: bold;
-        }
 
 .userprofile-main {
     margin-left: 0px;
@@ -471,7 +491,6 @@ body {
 
 .userprofile-img {
     padding-top: 15px;
-    margin-bottom: 20px;
 }
 
     .userprofile-img > img {
@@ -483,19 +502,15 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 30px 0 15px 0;
 }
 
-.userprofile-aside-item {
-
-}
 
 .userprofile-aside-item > li {
     color: black;
     text-align: center;
     margin: 15px 0;
 }
-
-
 
 .userprofile-section {
     padding-left: 0px;
@@ -522,9 +537,9 @@ body {
 .userprofile-File-heading {
     background-color: #f5f5f5;
     border-radius: 0px;
-    margin-left:5px;
-    margin-right:5px;
-    border-bottom:3px solid #9d9d9d !important;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-bottom: 3px solid #9d9d9d !important;
 }
 
 .userprofile-File-titel {
@@ -602,8 +617,8 @@ body {
         float: right;
     }
 
-    .navbar-nav{
-        margin:0px;
+    .navbar-nav {
+        margin: 0px;
     }
 
     /*********************************************** UserProfile **********************************************/

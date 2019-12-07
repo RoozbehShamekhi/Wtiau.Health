@@ -9,9 +9,15 @@
 
 <div class="panel panel-body panel-default navigation">
 
-    <div class="pull-left">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left">
         <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
-    </div>
+    </div>*@
 
     <div class="pull-right">
         <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن تایم'>
@@ -63,7 +69,7 @@
                         </td>
 
                         <td scope="row">
-                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='شیفت های کاری' href="@Url.Action("Index", "TimeSheet", new { id = item.ID })"></a>
+                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='شیفت های کاری' href="@Url.Action("Index", "TimeSheet", new { id = item.ID, turnDisplay = item.Titel })"></a>
                             <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
                             <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
                         </td>

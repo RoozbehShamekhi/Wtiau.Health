@@ -8,15 +8,22 @@
 
 <div class="panel panel-body panel-default navigation">
 
-    <div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
-        <a href="@Url.Action("Index")">
-            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
-        </a>
-    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Student")" data-toggle="tooltip" data-placement="auto" title="دانشجویان">@ViewBag.StudentDisplay</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
 
-    <div class="pull-left">
-        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
-    </div>
+    @*<div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+            <a href="@Url.Action("Index")">
+                <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+            </a>
+        </div>*@
+
+    @*<div class="pull-left">
+            <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+        </div>*@
 </div>
 
 <main class="panel row userprofile-main">
@@ -28,14 +35,13 @@
         </div>
 
         <div class="text-center userprofile-aside-btn-regine">
-            <a onclick="ChangeUserInfo(000)" class="btn btn-warning fa fa-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات هویتی' style="margin: 0 10px; padding: 9px 13px;"></a>
-            <a onclick="SandMassage(000)" class="btn btn-primary fa fa-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات سلامت' style="margin: 0 10px; padding: 9px 13px;"></a>
-            <a onclick="SandMassage(000)" class="btn btn-danger fa fa-trash" data-toggle='tooltip' data-placement='auto' title='حذف' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a href="@Url.Action("ChangeInfo", "Student", new { id = Model.ID })" class="btn btn-warning fa fa-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات هویتی' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a href="javascript:void(0)" onclick="ChangeHealthInfo(@Model.ID)" class="btn btn-primary fa fa-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات سلامت' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a href="javascript:void(0)" onclick="Delete(@Model.ID)" class="btn btn-danger fa fa-trash" data-toggle='tooltip' data-placement='auto' title='حذف' style="margin: 0 10px; padding: 9px 13px;"></a>
         </div>
 
         <div>
             <ul class="nav userprofile-aside-item">
-                <li>@(Model.Name + " " + Model.Family)</li>
                 <li>@Model.StudentCode</li>
                 <li>@Model.NationalCode</li>
                 <li>@Model.College</li>
@@ -49,7 +55,7 @@
     <section class="col-md-9 userprofile-section">
 
         <ul class=" nav nav-tabs nav-justified userprofile-section-tabs">
-            <li class="active"><a href="#Description" data-toggle="tab">فرم ها</a></li>
+            <li class="active"><a href="#Description" data-toggle="tab">پرسش نامه ها</a></li>
             <li><a href="#Details" data-toggle="tab">اطلاعات هویتی</a></li>
             <li><a href="#Setting" data-toggle="tab">اطلاعات سلامت</a></li>
         </ul>
@@ -469,7 +475,7 @@
                     <div class="col-md-9">
                         <div class="panel userprofile-detiles-col-9">
                             <span class="userprofile-detiles-text">
-                                @Model.Height
+                                @Model.BloodSuger
                             </span>
                         </div>
                     </div>
@@ -609,24 +615,12 @@
 
 </main>
 
-<script>
-    $(function () {
-        $('.slim-scroll').slimScroll({
-            height: '334px'
-        });
-        //$('#filebody').slimScroll({
-        //    height: '334px'
-        //});
-        //$('#filebody').slimScroll({
-        //    height: '334px'
-        //});
-    });
-</script>
+@Html.Partial("_Modal")
 
-@section Scripts{
-
+@section Scripts {
     <script>
         $(function () {
+
             $('.slim-scroll').slimScroll({
                 height: '370px'
             });
@@ -634,8 +628,47 @@
             $('#Details-tabel').slimScroll({
                 height: '450px'
             });
+
         });
     </script>
 
+    <script>
 
+        function ChangeInfo(id) {
+            $.ajax({
+                url: "/Student/ChangeInfo/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('تغییر اطلاعات هویتی دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function ChangeHealthInfo(id) {
+            $.ajax({
+                url: "/Student/ChangeHealthInfo/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('تغییر اطلاعات سلامت دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Delete(id) {
+            $.ajax({
+                url: "/Student/Delete/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('حذف دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+    </script>
 }

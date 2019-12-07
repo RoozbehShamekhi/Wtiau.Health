@@ -13,7 +13,7 @@ namespace Wtiau.Health.Web.Controllers
     {
         HealthEntities db = new HealthEntities();
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, string formDisplay)
         {
             var _student = db.Tbl_FormStep.Where(x => x.FS_IsDelete == false && x.FS_FormID == id).Select(x => new Model_FormStepList
             {
@@ -24,7 +24,7 @@ namespace Wtiau.Health.Web.Controllers
                 Order = x.FS_Order
             }).ToList();
 
-            ViewBag.FormID = id;
+            ViewBag.FormDisplay = formDisplay;
 
             return View(_student);
         }

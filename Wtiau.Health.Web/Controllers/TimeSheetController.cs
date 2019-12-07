@@ -13,7 +13,7 @@ namespace Wtiau.Health.Web.Controllers
         HealthEntities db = new HealthEntities();
 
         [HttpGet]
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, string turnDisplay)
         {
             var _timesheet = db.Tbl_TurnTimeSheet.Where(x => x.TTS_IsDelete == false && x.TTS_TurnID == id ).Select(x => new Model_TimeSheetList
             {
@@ -26,6 +26,7 @@ namespace Wtiau.Health.Web.Controllers
             }).ToList();
 
             ViewBag.ID = id;
+            ViewBag.TurnDisplay = turnDisplay;
 
             return View(_timesheet);
         }

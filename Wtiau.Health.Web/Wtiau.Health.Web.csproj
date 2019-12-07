@@ -139,6 +139,7 @@
     <Content Include="Content\Plugins\Boostrap3\bootstrap.css" />
     <Content Include="Content\Plugins\Boostrap3\bootstrap.min.css" />
     <Content Include="Content\Plugins\Boostrap4\bootstrap.min.css" />
+    <Content Include="Content\Plugins\Chart.js\Chart.min.css" />
     <Content Include="Content\Plugins\jQuery.Select2\search-magnifier-interface-symbol.svg" />
     <Content Include="Content\Plugins\jQuery.Select2\select2-bootstrap.css" />
     <Content Include="Content\Plugins\jQuery.Select2\select2.css" />
@@ -233,6 +234,8 @@
     <Content Include="Scripts\Plugins\Boostrap3\bootstrap.js" />
     <Content Include="Scripts\Plugins\Boostrap3\bootstrap.min.js" />
     <Content Include="Scripts\Plugins\Boostrap4\bootstrap.min.js" />
+    <Content Include="Scripts\Plugins\Chart.js\Chart.min.js" />
+    <Content Include="Scripts\Plugins\Chart.js\utils.js" />
     <Content Include="Scripts\Plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\Plugins\ckeditor\build-config.js" />
     <Content Include="Scripts\Plugins\ckeditor\ckeditor.js" />
@@ -1384,6 +1387,7 @@
     <Compile Include="Models\ViewModels\Model_ResponseList.cs" />
     <Compile Include="Models\ViewModels\Model_SetActiveness.cs" />
     <Compile Include="Models\ViewModels\Model_StudentInfo.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentInfoEdit.cs" />
     <Compile Include="Models\ViewModels\Model_StudentList.cs" />
     <Compile Include="Models\ViewModels\Model_StudentTakeTimeList.cs" />
     <Compile Include="Models\ViewModels\Model_TakeTurn.cs" />
@@ -1462,6 +1466,9 @@
     <Content Include="Views\StudentsTimeSheet\SetActiveness.cshtml" />
     <Content Include="Views\Student\CreateHealthInformation.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\ChangeHealthInfo.cshtml" />
+    <Content Include="Views\Student\ChangeInfo.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

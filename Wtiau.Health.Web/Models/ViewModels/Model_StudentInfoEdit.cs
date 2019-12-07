@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Wtiau.Health.Web.Models.ViewModels
 {
-    public class Model_StudentInfo
+    public class Model_StudentInfoEdit
     {
         public int ID { get; set; }
 
@@ -36,47 +36,47 @@ namespace Wtiau.Health.Web.Models.ViewModels
 
         [Display(Name = "جنسیت")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string Gender { get; set; }
+        public int Gender { get; set; }
 
         [Display(Name = "سال تولد")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string BirthYear { get; set; }
+        public int BirthYear { get; set; }
 
         [Display(Name = "ملیت")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string National { get; set; }
+        public int National { get; set; }
 
         [Display(Name = "گروه خونی")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string Blood { get; set; }
+        public int Blood { get; set; }
 
         [Display(Name = "بیمه")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string Insurance { get; set; }
+        public int Insurance { get; set; }
 
         [Display(Name = "مقطع تحصیلی پذیرفته شده در دانشگاه")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string Grad { get; set; }
+        public int Grad { get; set; }
 
         [Display(Name = "محل سکونت دوره دانشجویی")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string HomeType { get; set; }
+        public int HomeType { get; set; }
 
         [Display(Name = "وضیعیت تاهل")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string Marriage { get; set; }
+        public int Marriage { get; set; }
 
         [Display(Name = "دانشگاه")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string University { get; set; }
+        public int University { get; set; }
 
         [Display(Name = "دانشکده")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string College { get; set; }
+        public int College { get; set; }
 
         [Display(Name = "رشته")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
-        public string Branch { get; set; }
+        public int Branch { get; set; }
 
         [Display(Name = "محل تولد")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]

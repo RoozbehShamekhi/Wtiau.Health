@@ -19,7 +19,7 @@ namespace Wtiau.Health.Web.Controllers
     {
         HealthEntities db = new HealthEntities();
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, string formDisplay)
         {
             var _Qusetion = db.Tbl_Question.Where(x => x.Question_IsDelete == false && x.Tbl_FormStep.FS_FormID == id).Select(x => new Model_QusetionList
             {
@@ -31,7 +31,8 @@ namespace Wtiau.Health.Web.Controllers
                 ResponseCount = x.Tbl_Response.Where(xx => xx.Response_IsDelete == false).ToList().Count,
             }).ToList();
 
-            ViewBag.FormID = id;
+            ViewBag.FormId = id;
+            ViewBag.FormDisplay = formDisplay;
 
             return View(_Qusetion);
         }

@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_StudentList>
 
 @{
-    ViewBag.Title = "لیست دانشجویان";
+    ViewBag.Title = "دانشجویان";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
 
 <div class="panel panel-body panel-default navigation">
 
-    <div class="pull-left">
-        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
-    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
 
+    @*<div class="pull-left">
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+    </div>*@
 
     <div class="dropdown pull-right" style="margin:0px 5px;">
 
@@ -82,24 +87,12 @@
 
         function Delete(id) {
             $.ajax({
-                url: "/Dashboard/Exam/Delete/" + id,
+                url: "/Student/Delete/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('حدف آزمون');
-                $('#myModalBody').html(result);
-            });
-        }
-
-        function Create() {
-            $.ajax({
-                url: "/Dashboard/Exam/CreateOrEdit",
-                type: "Get",
-                data: {}
-            }).done(function (result) {
-                $('#myModal').modal('show');
-                $('#myModalLabel').html('افزودن آزمون');
+                $('#myModalLabel').html('حذف دانشجو');
                 $('#myModalBody').html(result);
             });
         }
@@ -139,7 +132,7 @@
                     { "data": "Student_HealthInfo", "name": "Student_HealthInfo" },
                     {
                         "data": "ID", "render": function (data) {
-                            return "<a class='control btn btn-info btn-sm glyphicon glyphicon-list' data-toggle='tooltip' data-placement='auto' title='جزییات' href='@Url.Action("Details", "Student")/" + data + "'></a>&nbsp;" +
+                            return "<a class='control btn btn-info btn-sm glyphicon glyphicon-list' data-toggle='tooltip' data-placement='auto' title='اطلاعات کاربر' href='@Url.Action("Details", "Student")/" + data + "'></a>&nbsp;" +
                                    "<a class='control btn btn-warning btn-sm glyphicon glyphicon-scale' data-toggle='tooltip' data-placement='auto' title='ثبت اطلاعات سلامت' href='javascript:void(0)' onclick='CreateHealthInformation(" + data + ")'></a>&nbsp;" +
                                    "<a class='control btn btn-danger btn-sm glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='auto' title='حذف' href='javascript:void(0)' onclick='Delete(" + data + ")'></a>&nbsp;";
                         },
