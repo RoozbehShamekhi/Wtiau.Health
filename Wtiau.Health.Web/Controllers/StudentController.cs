@@ -131,6 +131,7 @@ namespace Wtiau.Health.Web.Controllers
                     }
                     else
                     {
+                        model.ID = _Student.Student_ID;
                         model.StudentCode = _Student.Student_Code;
                         model.NationalCode = _Student.Student_NationalCode;
 
@@ -289,6 +290,10 @@ namespace Wtiau.Health.Web.Controllers
 
                     return PartialView(model);
                 }
+                else
+                {
+                    return RedirectToAction("Details", new { id });
+                }
             }
 
             return HttpNotFound();
@@ -368,6 +373,14 @@ namespace Wtiau.Health.Web.Controllers
 
                     return PartialView(model);
                 }
+                else
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "اطلاعات هویتی دانشجوی مورد نظر در سامانه ثبت نشده است.";
+
+                    return RedirectToAction("Details", new { id });
+                }
             }
 
             return HttpNotFound();
@@ -442,6 +455,10 @@ namespace Wtiau.Health.Web.Controllers
                     };
 
                     return PartialView(model);
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id });
                 }
             }
 
