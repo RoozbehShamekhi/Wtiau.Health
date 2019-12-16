@@ -27,13 +27,13 @@ namespace Wtiau.Health.Web.Controllers
                 ID = x.Student_ID,
                 Student_Code = x.Student_Code,
                 Student_National = x.Student_NationalCode,
-                Student_Form1 = x.Student_Form1.ToString(),
-                Student_Form2 = x.Student_Form2.ToString(),
-                Student_Turn = x.Student_TakeTurn.ToString(),
-                Student_Name = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Name : "نا معلوم",
-                Student_Family = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Family : "نا معلوم",
-                Student_Info = x.Student_SIID.HasValue.ToString(),
-                Student_HealthInfo = x.Student_HealthInfo.ToString()
+                Student_Form1 = x.Student_Form1 ? "تکمیل" : "ثبت نشده",
+                Student_Form2 = x.Student_Form2 ? "تکمیل" : "ثبت نشده",
+                Student_Turn = x.Student_TakeTurn ? "تکمیل" : "ثبت نشده",
+                Student_Name = x.Student_SIID.HasValue ? (x.Tbl_StudentInfo.SI_IsDelete ? "ثبت نشده" : x.Tbl_StudentInfo.SI_Name) : "نا معلوم",
+                Student_Family = x.Student_SIID.HasValue ? (x.Tbl_StudentInfo.SI_IsDelete ? "ثبت نشده" : x.Tbl_StudentInfo.SI_Family) : "نا معلوم",
+                Student_Info = x.Student_Info ? "تکمیل" : "ثبت نشده",
+                Student_HealthInfo = x.Student_HealthInfo ? "تکمیل" : "ثبت نشده"
 
             }).ToList();
 
@@ -57,9 +57,9 @@ namespace Wtiau.Health.Web.Controllers
                 Student_Form1 = x.Student_Form1 ? "تکمیل" : "ثبت نشده",
                 Student_Form2 = x.Student_Form2 ? "تکمیل" : "ثبت نشده",
                 Student_Turn = x.Student_TakeTurn ? "تکمیل" : "ثبت نشده",
-                Student_Name = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Name : "نا معلوم",
-                Student_Family = x.Student_SIID.HasValue ? x.Tbl_StudentInfo.SI_Family : "نا معلوم",
-                Student_Info = x.Student_SIID.HasValue ? "تکمیل" : "ثبت نشده",
+                Student_Name = x.Student_SIID.HasValue ? (x.Tbl_StudentInfo.SI_IsDelete ? "ثبت نشده" : x.Tbl_StudentInfo.SI_Name) : "نا معلوم",
+                Student_Family = x.Student_SIID.HasValue ? (x.Tbl_StudentInfo.SI_IsDelete ? "ثبت نشده" : x.Tbl_StudentInfo.SI_Family) : "نا معلوم",
+                Student_Info = x.Student_Info ? "تکمیل" : "ثبت نشده",
                 Student_HealthInfo = x.Student_HealthInfo ? "تکمیل" : "ثبت نشده"
 
             }).ToList();
@@ -87,6 +87,56 @@ namespace Wtiau.Health.Web.Controllers
             _student = _student.Skip(start).Take(length).ToList();
 
             return Json(new { data = _student, draw = Request["draw"], recordsTotal = totalRows, recordsFiltered = totalRowsAfterFiltering }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Create()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Model_StudentCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.Tbl_Student.Where(x => x.Student_Code == model.Student_Code).Any())
+                {
+                    TempData["TosterState"] = "info";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "اطلاعات دانشجوی مورد نظر قبلا در سامانه ثبت شده است.";
+
+                    return RedirectToAction("Index");
+                }
+
+                Tbl_Student Student = new Tbl_Student()
+                {
+                    Student_Guid = Guid.NewGuid(),
+                    Student_Code = model.Student_Code,
+                    Student_NationalCode = model.Student_NationalCode
+                };
+
+                db.Tbl_Student.Add(Student);
+
+                if (Convert.ToBoolean(db.SaveChanges() > 0))
+                {
+                    TempData["TosterState"] = "success";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "ثبت شد";
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "ثبت نشد";
+
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         public ActionResult Details(int? id)
@@ -476,7 +526,7 @@ namespace Wtiau.Health.Web.Controllers
                 if (_StudentInfo != null)
                 {
                     _StudentInfo.SI_IsDelete = true;
-                    _StudentInfo.Tbl_Student.FirstOrDefault().Student_IsDelete = true;
+                    _StudentInfo.Tbl_Student.FirstOrDefault().Student_Info = false;
 
                     db.Entry(_StudentInfo).State = EntityState.Modified;
 

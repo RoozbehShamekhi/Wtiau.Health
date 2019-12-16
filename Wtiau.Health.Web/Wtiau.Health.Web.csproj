@@ -1397,6 +1397,7 @@
     <Compile Include="Models\ViewModels\Model_TurnAdd.cs" />
     <Compile Include="Models\ViewModels\Model_TurnEdit.cs" />
     <Compile Include="Models\ViewModels\Model_TurnList.cs" />
+    <Compile Include="Models\ViewModels\Model_StudentCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1469,6 +1470,7 @@
     <Content Include="Views\Student\ChangeHealthInfo.cshtml" />
     <Content Include="Views\Student\ChangeInfo.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
