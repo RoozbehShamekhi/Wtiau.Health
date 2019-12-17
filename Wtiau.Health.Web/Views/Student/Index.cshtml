@@ -103,9 +103,13 @@
                 type: "Get",
                 data: {}
             }).done(function (result) {
-                $('#myModal').modal('show');
-                $('#myModalLabel').html('حذف دانشجو');
-                $('#myModalBody').html(result);
+                if (!result.startsWith("<!DOCTYPE html>")) {
+                    $('#myModal').modal('show');
+                    $('#myModalLabel').html('حذف دانشجو');
+                    $('#myModalBody').html(result);   
+                } else {
+                    toastr.error("اطلاعات هویتی دانشجوی مورد نظر در سامانه ثبت نشده است.");              
+                }
             });
         }
 
