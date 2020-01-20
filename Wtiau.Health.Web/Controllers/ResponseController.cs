@@ -22,7 +22,7 @@ namespace Wtiau.Health.Web.Controllers
         {
             var _Response = db.Tbl_Response.Where(x => x.Tbl_Question.Question_ID == id).Select(x => new Model_ResponseList
             {
-                ID = x.Tbl_Question.Question_ID,
+                ID = x.Response_ID,
                 Order = x.Response_Order,
                 Title = x.Response_Title,
                 Hint = x.Response_Hint,
@@ -81,5 +81,51 @@ namespace Wtiau.Health.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ResponseEdit(int id)
+        {
+            Model_ResponseEdit model = db.Tbl_Response.Where(x => x.Response_IsDelete == false && x.Response_ID == id).Select(x => new Model_ResponseEdit
+            {
+                ID = id,
+                Hint = x.Response_Hint,
+                IsTrue = x.Response_IsTrue,
+                Order = x.Response_Order,
+                Title = x.Response_Title
+
+            }).SingleOrDefault();
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult ResponseEdit(Model_ResponseEdit model)
+        {
+            var resp = db.Tbl_Response.Where(a => a.Response_ID == model.ID).SingleOrDefault();
+
+            resp.Response_Hint = model.Hint;
+            resp.Response_IsTrue = model.IsTrue;
+            resp.Response_Order = model.Order;
+            resp.Response_Title = model.Title;
+
+
+            db.Entry(resp).State = EntityState.Modified;
+
+            if (Convert.ToBoolean(db.SaveChanges() > 0))
+            {
+                TempData["TosterState"] = "success";
+                TempData["TosterType"] = TosterType.Maseage;
+                TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
+
+                return RedirectToAction("Index", new { id = resp.Response_QuestionID });
+            }
+            else
+            {
+                TempData["TosterState"] = "error";
+                TempData["TosterType"] = TosterType.Maseage;
+                TempData["TosterMassage"] = "خطا";
+
+                return RedirectToAction("Index", new { id = resp.Response_QuestionID });
+            }
+        }
     }
 }

@@ -67,5 +67,44 @@ namespace Wtiau.Health.Web.Models.Repository
 
             return list.AsEnumerable();
         }
+
+        public IEnumerable<SelectListItem> Get_AllRole()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+
+            foreach (var item in db.Tbl_Role)
+            {
+                list.Add(new SelectListItem() { Value = item.Role_ID.ToString(), Text = item.Role_Display });
+            }
+
+            return list.AsEnumerable();
+        } 
+
+        public IEnumerable<SelectListItem> Get_AllCourse()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+
+            foreach (var item in db.Tbl_Course)
+            {
+                list.Add(new SelectListItem() { Value = item.Course_Guid.ToString(), Text = item.Course_Name });
+            }
+
+            return list.AsEnumerable();
+        }
+
+        public IEnumerable<SelectListItem> Get_AllStep(int id)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+
+            foreach (var item in db.Tbl_FormStep.Where(a => a.FS_FormID == id && a.FS_IsDelete == false))
+            {
+                list.Add(new SelectListItem() { Value = item.FS_ID.ToString(), Text = item.FS_Display });
+            }
+
+            return list.AsEnumerable();
+        }
     }
 }

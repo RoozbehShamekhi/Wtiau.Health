@@ -234,6 +234,7 @@
     <Content Include="Scripts\Plugins\Boostrap3\bootstrap.js" />
     <Content Include="Scripts\Plugins\Boostrap3\bootstrap.min.js" />
     <Content Include="Scripts\Plugins\Boostrap4\bootstrap.min.js" />
+    <Content Include="Scripts\Plugins\bootstrap-filestyle.min.js" />
     <Content Include="Scripts\Plugins\Chart.js\Chart.min.js" />
     <Content Include="Scripts\Plugins\Chart.js\utils.js" />
     <Content Include="Scripts\Plugins\ckeditor\adapters\jquery.js" />
@@ -1260,6 +1261,7 @@
     <Compile Include="Controllers\PortalStudentInfoController.cs" />
     <Compile Include="Controllers\PortalTakeTurnController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StepController.cs" />
@@ -1367,6 +1369,8 @@
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
     <Compile Include="Models\ViewModels\Model_DashBoardInfo.cs" />
     <Compile Include="Models\ViewModels\Model_DropDown.cs" />
+    <Compile Include="Models\ViewModels\Model_ResponseEdit.cs" />
+    <Compile Include="Models\ViewModels\Model_RoleList.cs" />
     <Compile Include="Models\ViewModels\Model_StudentDetails.cs" />
     <Compile Include="Models\ViewModels\Model_StudentHealthInformation.cs" />
     <Compile Include="Models\ViewModels\Model_QuestionAdd.cs" />
@@ -1398,6 +1402,9 @@
     <Compile Include="Models\ViewModels\Model_TurnEdit.cs" />
     <Compile Include="Models\ViewModels\Model_TurnList.cs" />
     <Compile Include="Models\ViewModels\Model_StudentCreate.cs" />
+    <Compile Include="Models\ViewModels\Model_UserAdd.cs" />
+    <Compile Include="Models\ViewModels\Model_UserEdit.cs" />
+    <Compile Include="Models\ViewModels\Model_UserList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1471,6 +1478,14 @@
     <Content Include="Views\Student\ChangeInfo.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Setting\Role_List.cshtml" />
+    <Content Include="Views\Setting\User_List.cshtml" />
+    <Content Include="Views\Setting\User_Add.cshtml" />
+    <Content Include="Views\Setting\User_Edit.cshtml" />
+    <Content Include="Views\Setting\User_Delete.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Student\ImportStudentFromExcel.cshtml" />
+    <Content Include="Views\Response\ResponseEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1557,6 +1572,13 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
   <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
     <ItemGroup>
       <RoslynFiles Include="$(CscToolPath)\*" />

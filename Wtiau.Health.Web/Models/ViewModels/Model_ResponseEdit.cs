@@ -6,22 +6,21 @@ using System.Web;
 
 namespace Wtiau.Health.Web.Models.ViewModels
 {
-    public class Model_QuestionEdit
+    public class Model_ResponseEdit
     {
         public int ID { get; set; }
-        public int Form_ID { get; set; }
 
-        [Display(Name = "عنوان سوال")]
+        [Display(Name = "ترتیب")]
+        public int Order { get; set; }
+
+        [Display(Name = "عنوان")]
         [DataType(DataType.MultilineText)]
         public string Title { get; set; }
 
-        [Display(Name = "نوع سوال")]
-        public string Type { get; set; }
-
-        [Display(Name = "مرحله")]
-        public string Step { get; set; }
+        [Display(Name = "امتیاز")]
+        public int Hint { get; set; }
 
         [Display(Name = " ")]
-        public bool Lie { get; set; }
+        public bool IsTrue { get; set; }
     }
 }

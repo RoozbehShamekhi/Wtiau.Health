@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Wtiau.Health.Web.Models.Domian;
 using Wtiau.Health.Web.Models.Plugins;
@@ -551,9 +552,34 @@ namespace Wtiau.Health.Web.Controllers
         }
 
         #region Data
-
+        [HttpGet]
         public ActionResult ImportStudentFromExcel()
         {
+
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult ImportStudentFromExcel(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+                try
+                {
+                    string path = Path.Combine(Server.MapPath("~/Images"),Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                }
+                catch
+                {
+                    TempData["TosterState"] = "error";
+                    TempData["TosterType"] = TosterType.Maseage;
+                    TempData["TosterMassage"] = "خطا";
+                    return View();
+                }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
+
             Microsoft_Excel excel = new Microsoft_Excel(@"C:\2.xlsx");
 
             excel.Open(1);

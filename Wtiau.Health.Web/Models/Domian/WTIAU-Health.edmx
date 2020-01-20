@@ -185,6 +185,7 @@
           <Property Name="Role_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Role_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Role_IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Role_Level" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Student">
           <Key>
@@ -1115,6 +1116,7 @@
           <Property Name="Role_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Role_IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_Login" Relationship="HealthModel.FK_Tbl_Login_Tbl_Role" FromRole="Tbl_Role" ToRole="Tbl_Login" />
+          <Property Name="Role_Level" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Student">
           <Key>
@@ -1764,6 +1766,7 @@
           <EntitySetMapping Name="Tbl_Role">
             <EntityTypeMapping TypeName="HealthModel.Tbl_Role">
               <MappingFragment StoreEntitySet="Tbl_Role">
+                <ScalarProperty Name="Role_Level" ColumnName="Role_Level" />
                 <ScalarProperty Name="Role_IsDelete" ColumnName="Role_IsDelete" />
                 <ScalarProperty Name="Role_Display" ColumnName="Role_Display" />
                 <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />

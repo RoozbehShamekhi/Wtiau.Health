@@ -1,38 +1,32 @@
-﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_ResponseList>
-@using Wtiau.Health.Web.Models.Repository
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_UserList>
 
 @{
-    ViewBag.Title = "پاسخ ها";
+    ViewBag.Title = "کاربران";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+
 <div class="panel panel-body panel-default navigation">
+
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Form")" data-toggle="tooltip" data-placement="auto" title="پرسش نامه ها">@ViewBag.FormDisplay</a></li>
-            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Question", new { id = ViewBag.FormId, formDisplay = ViewBag.FormDisplay })" data-toggle="tooltip" data-placement="auto" title="سوالات">@ViewBag.QuestionDisplay</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Setting")" data-toggle="tooltip" data-placement="auto" title="تنظیمات">تنظیمات</a></li>
             <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
         </ol>
     </nav>
 
-    @*<div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
-        <a href="@Url.Action("Index", "Question", new { id = ViewBag.FormId })">
-            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
-        </a>
-    </div>*@
-
-    @*<div class="pull-left">
-        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
-    </div>*@
-
     <div class="pull-right">
-        <a href="javascript:void(0)" onclick="Create(@ViewBag.QuestionID)" data-toggle='tooltip' data-placement='auto' title='افزودن پاسخ'>
+        <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن کاربر'>
             <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
         </a>
     </div>
 
 </div>
+
+
+
+
 
 <div class="panel panel-default">
 
@@ -43,15 +37,17 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Order)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Title)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Hint)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.IsTrue)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Family)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Role)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Mobile)</th>
                     <th scope="col" data-orderable="false">کنترل</th>
                 </tr>
             </thead>
 
             <tbody>
+
                 @{
                     int x = 0;
                 }
@@ -63,19 +59,21 @@
                     <tr>
                         <td scope="row">@x</td>
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Order) </span>
+                            <span>@Html.DisplayFor(modelItem => item.Name)</span>
                         </td>
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Title) </span>
+                            <span>@Html.DisplayFor(modelItem => item.Family)</span>
                         </td>
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.Hint) </span>
+                            <span>@Html.DisplayFor(modelItem => item.Role)</span>
                         </td>
                         <td scope="row">
-                            <span> @Html.DisplayFor(modelItem => item.IsTrue) </span>
+                            <span>@Html.DisplayFor(modelItem => item.Email)</span>
                         </td>
-
                         <td scope="row">
+                            <span>@Html.DisplayFor(modelItem => item.Mobile)</span>
+                        </td>
+                        <td>
                             <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
                             <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
                         </td>
@@ -91,46 +89,50 @@
 </div>
 
 
+
+
 @Html.Partial("_Modal")
 
 @section Modal {
+
     <script>
 
         function Delete(id) {
             $.ajax({
-                url: "/Dashboard/Exam/Delete/" + id,
+                url: "/Setting/User_Delete/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('حدف آزمون');
+                $('#myModalLabel').html('حدف سوال');
                 $('#myModalBody').html(result);
             });
         }
 
-        function Create(id) {
+        function Create() {
             $.ajax({
-                url: "/Response/ResponseAdd/" + id,
+                url: "/Setting/User_Add",
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('افزودن پاسخ');
+                $('#myModalLabel').html('افزودن سوال');
                 $('#myModalBody').html(result);
             });
         }
 
         function Edit(id) {
             $.ajax({
-                url: "/Response/ResponseEdit/" + id,
+                url: "/Setting/User_Edit/" + id,
                 type: "Get",
                 data: {}
             }).done(function (result) {
                 $('#myModal').modal('show');
-                $('#myModalLabel').html('ویرایش آزمون');
+                $('#myModalLabel').html('ویرایش سوال');
                 $('#myModalBody').html(result);
             });
         }
 
     </script>
+
 }

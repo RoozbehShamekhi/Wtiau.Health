@@ -23,7 +23,7 @@ namespace Wtiau.Health.Web.Controllers
         {
             var _Qusetion = db.Tbl_Question.Where(x => x.Question_IsDelete == false && x.Tbl_FormStep.FS_FormID == id).Select(x => new Model_QusetionList
             {
-                ID  = x.Question_ID,
+                ID = x.Question_ID,
                 Name = x.Question_Title,
                 type = x.Question_TypeCodeID,
                 Lie = x.Question_Lie,
@@ -57,7 +57,7 @@ namespace Wtiau.Health.Web.Controllers
                 Question_Guid = Guid.NewGuid(),
                 Question_FormID = model.ID,
                 Question_Lie = model.Lie,
-                Question_FSID = db.Tbl_FormStep.Where( a=> a.FS_Guid.ToString() == model.Step).SingleOrDefault().FS_ID,
+                Question_FSID = db.Tbl_FormStep.Where(a => a.FS_Guid.ToString() == model.Step).SingleOrDefault().FS_ID,
             };
 
             _Question.Tbl_Code = db.Tbl_Code.Where(x => x.Code_Guid.ToString() == model.Type).SingleOrDefault();
@@ -92,7 +92,8 @@ namespace Wtiau.Health.Web.Controllers
                 {
                     ID = q.Question_ID,
                     Title = q.Question_Title,
-                    //step = ,
+                    Step = q.Question_FSID.ToString(),
+                    Form_ID = q.Question_FormID
                     //type = 
                 };
 
@@ -103,7 +104,6 @@ namespace Wtiau.Health.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult QuestionEdit(Model_QuestionEdit model)
         {
             if (ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace Wtiau.Health.Web.Controllers
                 {
                     q.Question_Title = model.Title;
                     q.Question_TypeCodeID = Rep_CodeGroup.Get_CodeIDWithGUID(Guid.Parse(model.Type));
-                    q.Tbl_FormStep.FS_ID = Rep_CodeGroup.Get_CodeIDWithGUID(Guid.Parse(model.Step));
+                    q.Tbl_FormStep.FS_ID = Convert.ToInt32(model.Step);
 
                     db.Entry(q).State = EntityState.Modified;
 
