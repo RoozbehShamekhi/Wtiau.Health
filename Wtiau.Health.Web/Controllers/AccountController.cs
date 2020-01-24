@@ -92,11 +92,10 @@ namespace Wtiau.Health.Web.Controllers
 
         }
 
-
-
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+
             var Cookie = new HttpCookie(FormsAuthentication.FormsCookieName)
             {
                 Expires = DateTime.Now.AddDays(-1)
@@ -137,6 +136,8 @@ namespace Wtiau.Health.Web.Controllers
             _Login.Login_Family = model.Family;
             _Login.Login_Mobile = model.Mobile;
             _Login.Login_RoleID = 1;
+            _Login.Login_CreateDate = DateTime.Now;
+            _Login.Login_Modify = DateTime.Now;
 
             var Salt = Guid.NewGuid().ToString("N");
             var SaltPassword = model.Password + Salt;

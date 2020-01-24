@@ -8,7 +8,6 @@ namespace Wtiau.Health.Web.Models.ViewModels
 {
     public class Model_UserAdd
     {
-
         [Display(Name = "نام")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(100, ErrorMessage = "مقدار وارد شده بیش 100 کارکتراست")]
@@ -31,7 +30,6 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(200, ErrorMessage = "مقدار وارد شده بیش 200 کارکتراست")]
         [EmailAddress(ErrorMessage = "ایمیل را به درستی وارد نمایید")]
-        //[Remote("EmailValid", "Account", HttpMethod = "Post", ErrorMessage = "این ایمیل قبلا ثبت شده است")]
         public string Email { get; set; }
 
         [Display(Name = "رمز عبور")]
@@ -40,12 +38,11 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //  [Remote("PasswordMatch", "Account", HttpMethod = "Post",ErrorMessage ="پسورد ها برابر نیست")]
         [Display(Name = "تکرار رمز عبور")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(100, ErrorMessage = "مقدار وارد شده بیش 100 کارکتراست")]
         [DataType(DataType.Password)]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "پسورد ها برابر نیست")]
+        [Compare("Password", ErrorMessage = "پسورد ها برابر نیست")]
         public string PasswordVerify { get; set; }
     }
 }
