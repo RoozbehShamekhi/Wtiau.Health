@@ -15,7 +15,7 @@ namespace Wtiau.Health.Web.Controllers
 
         public ActionResult Index(int id, string formDisplay)
         {
-            var _student = db.Tbl_FormStep.Where(x => x.FS_IsDelete == false && x.FS_FormID == id).Select(x => new Model_FormStepList
+            var _step = db.Tbl_FormStep.Where(x => x.FS_IsDelete == false && x.FS_FormID == id).Select(x => new Model_FormStepList
             {
                 ID = x.FS_ID,
                 Name = x.FS_Name,
@@ -25,8 +25,9 @@ namespace Wtiau.Health.Web.Controllers
             }).ToList();
 
             ViewBag.FormDisplay = formDisplay;
+            ViewBag.ID = id;
 
-            return View(_student);
+            return View(_step);
         }
 
     }

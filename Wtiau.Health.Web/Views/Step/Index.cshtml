@@ -26,7 +26,7 @@
     </div>*@
 
     <div class="pull-right">
-        <a href="javascript:void(0)" onclick="AddStep()" data-toggle='tooltip' data-placement='auto' title='ثبت مرحله جدید'>
+        <a href="javascript:void(0)" onclick="AddStep(@ViewBag.ID)" data-toggle='tooltip' data-placement='auto' title='ثبت مرحله جدید'>
             <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
         </a>
     </div>
@@ -76,7 +76,7 @@
                         </td>
 
                         <td scope="row">
-                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="@item.ID)"></a>
                             <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
                         </td>
                     </tr>
@@ -108,7 +108,7 @@
             });
         }
 
-        function Create() {
+        function Edit() {
             $.ajax({
                 url: "/Form/CreateForm",
                 type: "Get",

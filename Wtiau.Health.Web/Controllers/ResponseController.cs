@@ -116,7 +116,7 @@ namespace Wtiau.Health.Web.Controllers
                 TempData["TosterType"] = TosterType.Maseage;
                 TempData["TosterMassage"] = "عملیات با موفقیت انجام شده";
 
-                return RedirectToAction("Index", new { id = resp.Response_QuestionID });
+                return RedirectToAction("Index", new { id = resp.Response_QuestionID , formId = resp.Tbl_Question.Tbl_Form.Form_ID , formDisplay = resp.Tbl_Question.Tbl_Form.Form_Name, questionDisplay = resp.Tbl_Question.Question_Title });
             }
             else
             {
@@ -124,7 +124,7 @@ namespace Wtiau.Health.Web.Controllers
                 TempData["TosterType"] = TosterType.Maseage;
                 TempData["TosterMassage"] = "خطا";
 
-                return RedirectToAction("Index", new { id = resp.Response_QuestionID });
+                return RedirectToAction("Index", new { id = resp.Response_QuestionID, formId = resp.Tbl_Question.Tbl_Form.Form_ID, formDisplay = resp.Tbl_Question.Tbl_Form.Form_Name, questionDisplay = resp.Tbl_Question.Question_Title });
             }
         }
     }
