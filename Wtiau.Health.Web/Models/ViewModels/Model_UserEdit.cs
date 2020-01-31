@@ -14,10 +14,12 @@ namespace Wtiau.Health.Web.Models.ViewModels
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(100, ErrorMessage = "مقدار وارد شده بیش 100 کارکتراست")]
         public string Name { get; set; }
+
         [Display(Name = "نام خانوادگی")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(100, ErrorMessage = "مقدار وارد شده بیش 100 کارکتراست")]
         public string Family { get; set; }
+
         [Display(Name = "موبایل")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(11, ErrorMessage = "مقدار وارد شده بیش 11 کارکتراست")]
@@ -25,11 +27,11 @@ namespace Wtiau.Health.Web.Models.ViewModels
 
         [Display(Name = "نقش")]
         public int Role { get; set; }
+
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا مقدار را وارد نمایید")]
         [StringLength(200, ErrorMessage = "مقدار وارد شده بیش 200 کارکتراست")]
         [EmailAddress(ErrorMessage = "ایمیل را به درستی وارد نمایید")]
-        //[Remote("EmailValid", "Account", HttpMethod = "Post", ErrorMessage = "این ایمیل قبلا ثبت شده است")]
         public string Email { get; set; }
     }
 }

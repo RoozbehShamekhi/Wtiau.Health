@@ -21,7 +21,6 @@ namespace Wtiau.Health.Web.Models.Repository
 
         public Model_AccountInfo GetInfoForNavbar(string Username)
         {
-
             var q = db.Tbl_Login.Where(a => a.Login_Email == Username || a.Login_Mobile == Username).SingleOrDefault();
 
             if (q != null)
@@ -34,9 +33,7 @@ namespace Wtiau.Health.Web.Models.Repository
             else
             {
                 return null;
-
             }
-
         }
 
         public int Get_UserIDWithGUID(Guid guid)

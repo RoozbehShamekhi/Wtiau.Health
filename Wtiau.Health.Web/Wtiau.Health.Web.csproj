@@ -1272,6 +1272,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Domian\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domian\sp_helpdiagrams_Result.cs">
+      <DependentUpon>WTIAU-Health.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Domian\sysdiagram.cs">
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
