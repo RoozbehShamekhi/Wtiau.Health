@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Tbl_Branch">
           <Key>
             <PropertyRef Name="Branch_ID" />
@@ -184,8 +174,8 @@
           <Property Name="Role_Guid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Role_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Role_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Role_Level" Type="int" Nullable="false" />
           <Property Name="Role_IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Role_Level" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Student">
           <Key>
@@ -342,6 +332,18 @@
             </Principal>
             <Dependent Role="Tbl_FormAnswer">
               <PropertyRef Name="FA_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswer_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="1" />
+          <End Role="Tbl_FormAnswer" Type="Self.Tbl_FormAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -653,7 +655,6 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HealthModelStoreContainer">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Branch" EntityType="Self.Tbl_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Code" EntityType="Self.Tbl_Code" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_CodeGroup" EntityType="Self.Tbl_CodeGroup" Schema="dbo" store:Type="Tables" />
@@ -694,6 +695,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_From" Association="Self.FK_Tbl_FormAnswer_Tbl_From">
             <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_Student" Association="Self.FK_Tbl_FormAnswer_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
             <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
           </AssociationSet>
           <AssociationSet Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" Association="Self.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
@@ -824,7 +829,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="sysdiagrams" EntityType="HealthModel.sysdiagram" />
           <EntitySet Name="Tbl_Branch" EntityType="HealthModel.Tbl_Branch" />
           <EntitySet Name="Tbl_Code" EntityType="HealthModel.Tbl_Code" />
           <EntitySet Name="Tbl_CodeGroup" EntityType="HealthModel.Tbl_CodeGroup" />
@@ -919,6 +923,10 @@
             <End Role="Tbl_Form" EntitySet="Tbl_Form" />
             <End Role="Tbl_Question" EntitySet="Tbl_Question" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_Student" Association="HealthModel.FK_Tbl_FormAnswer_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" Association="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
             <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
             <End Role="Tbl_FormAnswerResponse" EntitySet="Tbl_FormAnswerResponse" />
@@ -959,7 +967,7 @@
             <End Role="Tbl_Turn" EntitySet="Tbl_Turn" />
             <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -971,16 +979,6 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Tbl_Branch">
           <Key>
             <PropertyRef Name="Branch_ID" />
@@ -1078,6 +1076,7 @@
           <Property Name="FA_FormID" Type="Int32" Nullable="false" />
           <Property Name="FA_IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tbl_Form" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_From" FromRole="Tbl_FormAnswer" ToRole="Tbl_Form" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_Student" FromRole="Tbl_FormAnswer" ToRole="Tbl_Student" />
           <NavigationProperty Name="Tbl_FormAnswerResponse" Relationship="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" FromRole="Tbl_FormAnswer" ToRole="Tbl_FormAnswerResponse" />
         </EntityType>
         <EntityType Name="Tbl_FormAnswerResponse">
@@ -1186,8 +1185,8 @@
           <Property Name="Role_Guid" Type="Guid" Nullable="false" />
           <Property Name="Role_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Role_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Role_Level" Type="Int32" Nullable="false" />
           <Property Name="Role_IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Role_Level" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tbl_Login" Relationship="HealthModel.FK_Tbl_Login_Tbl_Role" FromRole="Tbl_Role" ToRole="Tbl_Login" />
         </EntityType>
         <EntityType Name="Tbl_Student">
@@ -1205,6 +1204,7 @@
           <Property Name="Student_Info" Type="Boolean" Nullable="false" />
           <Property Name="Student_HealthInfo" Type="Boolean" Nullable="false" />
           <Property Name="Student_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_FormAnswer" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_FormAnswer" />
           <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_Student" ToRole="Tbl_StudentInfo" />
           <NavigationProperty Name="Tbl_StudentHealthInformation" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_StudentHealthInformation" />
           <NavigationProperty Name="Tbl_TakeTurn" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_TakeTurn" />
@@ -1523,6 +1523,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_FormAnswer_Tbl_Student">
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_FormAnswer" Role="Tbl_FormAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
           <End Type="HealthModel.Tbl_FormAnswer" Role="Tbl_FormAnswer" Multiplicity="1" />
           <End Type="HealthModel.Tbl_FormAnswerResponse" Role="Tbl_FormAnswerResponse" Multiplicity="*" />
@@ -1673,17 +1685,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="HealthModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="HealthModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="HealthModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Branch">
             <EntityTypeMapping TypeName="HealthModel.Tbl_Branch">
               <MappingFragment StoreEntitySet="Tbl_Branch">
@@ -1862,8 +1863,8 @@
           <EntitySetMapping Name="Tbl_Role">
             <EntityTypeMapping TypeName="HealthModel.Tbl_Role">
               <MappingFragment StoreEntitySet="Tbl_Role">
-                <ScalarProperty Name="Role_IsDelete" ColumnName="Role_IsDelete" />
                 <ScalarProperty Name="Role_Level" ColumnName="Role_Level" />
+                <ScalarProperty Name="Role_IsDelete" ColumnName="Role_IsDelete" />
                 <ScalarProperty Name="Role_Display" ColumnName="Role_Display" />
                 <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
                 <ScalarProperty Name="Role_Guid" ColumnName="Role_Guid" />
@@ -1976,7 +1977,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

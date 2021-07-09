@@ -202,6 +202,7 @@
     <Content Include="Models\Domian\WTIAU-Health.edmx.diagram">
       <DependentUpon>WTIAU-Health.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Reports\Excel\Empty.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\Domian\WTIAU-Health.Context.tt">
@@ -1278,9 +1279,6 @@
     <Compile Include="Models\Domian\sp_helpdiagrams_Result.cs">
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Domian\sysdiagram.cs">
-      <DependentUpon>WTIAU-Health.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Domian\Tbl_Branch.cs">
       <DependentUpon>WTIAU-Health.tt</DependentUpon>
     </Compile>
@@ -1375,6 +1373,7 @@
     <Compile Include="Models\Repository\Rep_UserRole.cs" />
     <Compile Include="Models\ViewModels\Model_DashBoardInfo.cs" />
     <Compile Include="Models\ViewModels\Model_DropDown.cs" />
+    <Compile Include="Models\ViewModels\Model_FormExport.cs" />
     <Compile Include="Models\ViewModels\Model_ResponseEdit.cs" />
     <Compile Include="Models\ViewModels\Model_RoleList.cs" />
     <Compile Include="Models\ViewModels\Model_StudentDetails.cs" />
@@ -1492,6 +1491,7 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Student\ImportStudentFromExcel.cshtml" />
     <Content Include="Views\Response\ResponseEdit.cshtml" />
+    <Content Include="Views\Student\Excel_Form.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1553,6 +1553,8 @@
           <DevelopmentServerPort>7314</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:7314/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:7314/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -1598,5 +1600,5 @@
     </ItemGroup>
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
-</Target>
+  </Target>
 </Project>

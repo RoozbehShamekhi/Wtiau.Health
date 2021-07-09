@@ -17,6 +17,7 @@ namespace Wtiau.Health.Web.Models.Domian
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tbl_Student()
         {
+            this.Tbl_FormAnswer = new HashSet<Tbl_FormAnswer>();
             this.Tbl_StudentHealthInformation = new HashSet<Tbl_StudentHealthInformation>();
             this.Tbl_TakeTurn = new HashSet<Tbl_TakeTurn>();
         }
@@ -33,6 +34,8 @@ namespace Wtiau.Health.Web.Models.Domian
         public bool Student_HealthInfo { get; set; }
         public bool Student_IsDelete { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_FormAnswer> Tbl_FormAnswer { get; set; }
         public virtual Tbl_StudentInfo Tbl_StudentInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_StudentHealthInformation> Tbl_StudentHealthInformation { get; set; }

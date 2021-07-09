@@ -6,77 +6,84 @@
 }
 
 
-    <div class="panel panel-body panel-default navigation">
+<div class="panel panel-body panel-default navigation">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
-            </ol>
-        </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
 
-        @*<div class="pull-left">
+    @*<div class="pull-left">
             <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
         </div>*@
 
-        <div class="dropdown pull-right" style="margin:0px 5px;">
+    <div class="dropdown pull-right" style="margin:0px 5px;">
 
-            <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
-                <i class="glyphicon glyphicon-option-vertical navigation-btn-icon"></i>
-            </a>
+        <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
+            <i class="glyphicon glyphicon-option-vertical navigation-btn-icon"></i>
+        </a>
 
-            <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
+        <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
 
-                <li>
-                    <a href="@Url.Action("Excel_AllStudents", "Student")">
-                        <i class="glyphicon glyphicon-cloud-download"></i>
-                        تمام دانشجویان
-                    </a>
-                </li>
+            <li>
+                <a href="@Url.Action("Excel_AllStudents", "Student")">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    تمام دانشجویان
+                </a>
+            </li>
 
-                <li>
-                    <a href="@Url.Action("Excel_NotRegisterStudents", "Student")">
-                        <i class="glyphicon glyphicon-cloud-download"></i>
-                        دانشجویان ثبت نام نکرده
-                    </a>
-                </li>
+            <li>
+                <a href="@Url.Action("Excel_NotRegisterStudents", "Student")">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    دانشجویان ثبت نام نکرده
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="Form_Export()">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    فرم ها
+                </a>
+            </li>
 
-            </ul>
 
-        </div>
+        </ul>
 
-        <div class="dropdown pull-right" style="margin:0px 5px;">
+    </div>
 
-            <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
-                <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
-            </a>
+    <div class="dropdown pull-right" style="margin:0px 5px;">
 
-            <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
+        <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
 
-                <li>
-                    <a href="javascript:void(0)" onclick="Create()">
-                        <i class="glyphicon glyphicon-education"></i>
-                        افزودن تکی
-                    </a>
-                </li>
+        <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
 
-                <li>
-                    <a href="javascript:void(0)" onclick="Import()">
-                        <i class="glyphicon glyphicon-import"></i>
-                        افزودن گروهی
-                    </a>
-                </li>
+            <li>
+                <a href="javascript:void(0)" onclick="Create()">
+                    <i class="glyphicon glyphicon-education"></i>
+                    افزودن تکی
+                </a>
+            </li>
 
-            </ul>
+            <li>
+                <a href="javascript:void(0)" onclick="Import()">
+                    <i class="glyphicon glyphicon-import"></i>
+                    افزودن گروهی
+                </a>
+            </li>
 
-        </div>
+        </ul>
 
-        @*<div class="pull-right" style="margin:0px 5px;" data-toggle='tooltip' data-placement='auto' title='افزودن دانشجو'>
+    </div>
+
+    @*<div class="pull-right" style="margin:0px 5px;" data-toggle='tooltip' data-placement='auto' title='افزودن دانشجو'>
             <a href="javascript:void(0)" onclick="Create()">
                 <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
             </a>
         </div>*@
 
-    </div>
+</div>
 
 <div class="panel panel-default">
 
@@ -144,10 +151,22 @@
                 if (!result.startsWith("<!DOCTYPE html>")) {
                     $('#myModal').modal('show');
                     $('#myModalLabel').html('حذف دانشجو');
-                    $('#myModalBody').html(result);   
+                    $('#myModalBody').html(result);
                 } else {
-                    toastr.error("اطلاعات هویتی دانشجوی مورد نظر در سامانه ثبت نشده است.");              
+                    toastr.error("اطلاعات هویتی دانشجوی مورد نظر در سامانه ثبت نشده است.");
                 }
+            });
+        }
+
+        function Form_Export() {
+            $.ajax({
+                url: "/Student/Excel_Form/",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن دانشجو');
+                $('#myModalBody').html(result);
             });
         }
 

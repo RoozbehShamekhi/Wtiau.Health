@@ -5,22 +5,19 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<div class="panel panel-body panel-default navigation">
+    <div class="panel panel-body panel-default navigation">
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Setting")" data-toggle="tooltip" data-placement="auto" title="تنظیمات">تنظیمات</a></li>
-            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
-        </ol>
-    </nav>
+        <div class="pull-left">
+            <h4 class="navigation-title"><b>لیست آزمون های حضوری ثبت نام شده</b></h4>
+        </div>
 
-    <div class="pull-right">
-        <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن کاربر'>
-            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
-        </a>
+        <div class="pull-right">
+            <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن کاربر'>
+                <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+            </a>
+        </div>
+
     </div>
-
-</div>
 
 <div class="panel panel-default">
 

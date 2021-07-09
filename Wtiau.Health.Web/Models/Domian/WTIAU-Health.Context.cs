@@ -27,7 +27,6 @@ namespace Wtiau.Health.Web.Models.Domian
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tbl_Branch> Tbl_Branch { get; set; }
         public virtual DbSet<Tbl_Code> Tbl_Code { get; set; }
         public virtual DbSet<Tbl_CodeGroup> Tbl_CodeGroup { get; set; }

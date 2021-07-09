@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Wtiau.Health.Web.Models.Domian;
@@ -565,7 +566,7 @@ namespace Wtiau.Health.Web.Controllers
             if (file != null && file.ContentLength > 0)
                 try
                 {
-                    string path = Path.Combine(Server.MapPath("~/Images"),Path.GetFileName(file.FileName));
+                    string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
                     file.SaveAs(path);
                 }
                 catch
@@ -680,6 +681,108 @@ namespace Wtiau.Health.Web.Controllers
             _Excel.Close();
 
             return File(SaveAsPath, "*", string.Format("{0}.xlsx", "دانشجویان ثبت نام نشده"));
+        }
+
+        [HttpGet]
+        public ActionResult Excel_Form()
+        {
+            return PartialView();
+        }
+
+
+        public FileResult Excel_Form(Model_FormExport model)
+        {
+            List<List<string>> studentResponse = new List<List<string>>();
+
+            var form = db.Tbl_Form.Where(a => a.Form_ID == model.ID).SingleOrDefault();
+
+            List<Tbl_Student> students = new List<Tbl_Student>();
+
+            if (form.Form_Display == "Form1")
+            {
+                students = db.Tbl_Student.Where(a => a.Student_Form1 == true).OrderBy(a => a.Student_Code).ToList();
+
+            }
+            else
+            {
+                students = db.Tbl_Student.Where(a => a.Student_Form2 == true).OrderBy(a => a.Student_Code).ToList();
+
+            }
+
+            string path = Path.Combine(Server.MapPath("~/Content/Reports/Excel/"), "Empty.xlsx");
+            Microsoft_Excel _Excel = new Microsoft_Excel(path);
+            _Excel.Open(1);
+            int i = 0;
+
+            _Excel.WriteToCell(i, 0, "شماره دانشجویی");
+            _Excel.WriteToCell(i, 1, "کدملی");
+            _Excel.WriteToCell(i, 2, "نام");
+            _Excel.WriteToCell(i, 3, "نام خانوادگی");
+
+            int d = form.Tbl_Question.Where(a => a.Question_IsDelete == false).Count();
+
+            for (int k = 1; k <= d; k++)
+            {
+                _Excel.WriteToCell(i, k + 3, k.ToString());
+            }
+
+            i++;
+ 
+
+            foreach (var item in students)
+            {
+
+                _Excel.WriteToCell(i, 0, item.Student_Code);
+                _Excel.WriteToCell(i, 1, item.Student_NationalCode);
+                _Excel.WriteToCell(i, 2, item.Student_SIID.HasValue ? item.Tbl_StudentInfo.SI_Name : "نا معلوم");
+                _Excel.WriteToCell(i, 3, item.Student_SIID.HasValue ? item.Tbl_StudentInfo.SI_Family : "نا معلوم");
+
+                List<string> Response = new List<string>();
+
+                var formQ = item.Tbl_FormAnswer.Where(a => a.FA_FormID == form.Form_ID).ToList();
+
+
+                foreach (var q in formQ)
+                {
+                    string s = "";
+                    var g = q.Tbl_FormAnswerResponse;
+                    int x = g.Count;
+                    foreach (var p in g)
+                    {
+                        s += p.Tbl_Response.Response_Title;
+                        if (x > 1)
+                        {
+                            s += ",";
+                        }
+                        x--;
+                    }
+
+
+                    Response.Add(s);
+                }
+
+                for (int j = 0; j < Response.Count; j++)
+                {
+
+                    _Excel.WriteToCell(i, j + 4, Response[j]);
+                }
+
+                //studentResponse.Add(Response);
+
+
+                i++;
+
+            }
+
+
+
+            string SaveAsPath = Path.Combine(Server.MapPath("~/App_Data/Excel/"), string.Format("{0}.xlsx", Guid.NewGuid()));
+
+            _Excel.SaveAs(SaveAsPath);
+
+            _Excel.Close();
+
+            return File(SaveAsPath, "*", string.Format("{0}.xlsx", form.Form_Name));
         }
 
         #endregion

@@ -106,5 +106,18 @@ namespace Wtiau.Health.Web.Models.Repository
 
             return list.AsEnumerable();
         }
+
+        public IEnumerable<SelectListItem> Get_AllForm()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+
+            foreach (var item in db.Tbl_Form.Where(a => a.Form_IsDelete == false))
+            {
+                list.Add(new SelectListItem() { Value = item.Form_ID.ToString(), Text = item.Form_Name });
+            }
+
+            return list.AsEnumerable();
+        }
     }
 }
